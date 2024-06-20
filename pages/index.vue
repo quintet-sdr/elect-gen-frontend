@@ -1,4 +1,3 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-navigateTo(localePath('/statistics'))
-</script>
+<template>
+  <NuxtLink to="/statistics">Move next</NuxtLink>
+</template>
