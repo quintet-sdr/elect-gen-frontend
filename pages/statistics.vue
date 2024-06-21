@@ -36,10 +36,14 @@ const fileExtensions = ['xlsx', 'csv'] as const
     </div>
 
     <div
-      class="border-primary flex h-90 w-160 flex-col items-center justify-center rounded-3xl border-4 border-dashed"
+      class="border-primary flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed"
     >
       <h2 class="text-2xl font-semibold">Upload a priority table</h2>
-      <div></div>
+      <div class="flex flex-row gap-16">
+        <Icon name="fa6-solid:file-csv" class="size-24" />
+        <Icon name="fa6-solid:table" class="size-24" />
+        <Icon name="fa6-solid:file-excel" class="size-24" />
+      </div>
       <UButton color="gray" variant="solid">{{ $t('statistics.browse') }}</UButton>
     </div>
   </main>
