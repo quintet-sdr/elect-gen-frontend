@@ -6,8 +6,13 @@ export default {
         'Currently, {count} student ({percent}) | ' + 'Currently, {count} students ({percent})',
       line2: 'submitted their form | submitted their forms'
     },
-    download: 'Download submissions',
-    fill: 'Fill in the form',
-    browse: 'Browse files'
+    button: {
+      download: 'Download submissions',
+      fill: 'Fill in the form'
+    },
+    form: {
+      heading: 'Upload a priority table',
+      button: 'Browse files'
+    }
   }
 }

@@ -29,22 +29,22 @@ const fileExtensions = ['xlsx', 'csv'] as const
 
     <div class="flex flex-col items-center">
       <div class="flex flex-row">
-        <UButton>{{ $t('statistics.download') }}</UButton>
+        <UButton>{{ $t('statistics.button.download') }}</UButton>
         <USelectMenu v-model="selected" variant="none" :options="fileExtensions" />
       </div>
-      <UButton variant="link">{{ $t('statistics.fill') }}</UButton>
+      <UButton variant="link">{{ $t('statistics.button.fill') }}</UButton>
     </div>
 
     <div
       class="border-primary flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed"
     >
-      <h2 class="text-2xl font-semibold">Upload a priority table</h2>
+      <h2 class="text-2xl font-semibold">{{ $t('statistics.form.heading') }}</h2>
       <div class="flex flex-row gap-16">
         <Icon name="fa6-solid:file-csv" class="size-24" />
         <Icon name="fa6-solid:table" class="size-24" />
         <Icon name="fa6-solid:file-excel" class="size-24" />
       </div>
-      <UButton color="gray" variant="solid">{{ $t('statistics.browse') }}</UButton>
+      <UButton color="gray" variant="solid">{{ $t('statistics.form.button') }}</UButton>
     </div>
   </main>
 </template>
