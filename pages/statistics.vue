@@ -35,6 +35,12 @@ const fileExtensions = ['xlsx', 'csv'] as const
       <UButton variant="link">{{ $t('statistics.fill') }}</UButton>
     </div>
 
-    <div class="border-primary-500 flex h-90 w-160 border-4 border-dashed"></div>
+    <div
+      class="border-primary flex h-90 w-160 flex-col items-center justify-center rounded-3xl border-4 border-dashed"
+    >
+      <h2 class="text-2xl font-semibold">Upload a priority table</h2>
+      <div></div>
+      <UButton color="gray" variant="solid">{{ $t('statistics.browse') }}</UButton>
+    </div>
   </main>
 </template>

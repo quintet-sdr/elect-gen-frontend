@@ -7,6 +7,7 @@ export default {
       line2: 'submitted their form | submitted their forms'
     },
     download: 'Download submissions',
-    fill: 'Fill in the form'
+    fill: 'Fill in the form',
+    browse: 'Browse files'
   }
 }
