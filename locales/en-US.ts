@@ -2,8 +2,7 @@ export default {
   appName: 'Elect.Gen',
   statistics: {
     submitted: {
-      line1:
-        'Currently, {count} student ({percent}) | ' + 'Currently, {count} students ({percent})',
+      line1: 'For now, {count} student ({percent}) | ' + 'Currently, {count} students ({percent})',
       line2: 'submitted their form | submitted their forms'
     },
     button: {
@@ -11,8 +10,7 @@ export default {
       fill: 'Fill in the form'
     },
     form: {
-      heading: 'Upload a priority table',
-      button: 'Browse files'
+      heading: 'Upload a priority table'
     }
   }
 }
