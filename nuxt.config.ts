@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt'
   ],
   googleFonts: {
     families: { Montserrat: { wght: '100..900' } }
@@ -21,6 +22,6 @@ export default defineNuxtConfig({
     vueI18n: '~/i18n.config.ts'
   },
   icon: {
-    customCollections: [{ prefix: 'local', dir: './assets/icons' }]
+    customCollections: [{ prefix: 'local', dir: '~/assets/icons' }]
   }
 })

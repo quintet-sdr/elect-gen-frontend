@@ -1,23 +1,33 @@
 <script lang="ts" setup>
 import * as mathjs from 'mathjs'
 
+function clickById(id: string): void {
+  document.getElementById(id)!.click()
+}
+
+function focusById(id: string): void {
+  document.getElementById(id)!.focus()
+}
+
 function random(min: number, max: number): number {
   return min + Math.floor(Math.random() * (max - min + 1))
 }
 
-const totalStudents = 321
-
-function updateCount() {
-  submittedCount.value = random(0, totalStudents)
+function updateCount(): void {
+  if (submittedCount.value === 0) {
+    submittedCount.value = 1
+    return
+  }
+  submittedCount.value = Math.min(submittedCount.value + random(1, 35), totalStudents.value)
 }
 
-const submittedCount: Ref<number> = ref(0)
-updateCount()
+const store = useStore()
 
-const email = ref('a.potyomckin@innopolis.ru')
+const totalStudents = ref(350)
+const submittedCount = ref(0)
 
 const submittedPercent = computed(() => {
-  return mathjs.round((100 * submittedCount.value) / totalStudents, 1)
+  return mathjs.round((100 * submittedCount.value) / totalStudents.value, 1)
 })
 
 const fileExtensions = ['xlsx', 'csv'] as const
@@ -28,14 +38,16 @@ const selected = ref(fileExtensions[0])
   <div>
     <header class="my-6 flex flex-row justify-between">
       <Icon class="size-6" name="local:innopolis-university" />
-      <UDropdown>{{ email }}</UDropdown>
+      <UDropdown>{{ store.email }}</UDropdown>
     </header>
 
-    <main class="flex flex-col items-center">
+    <main class="flex flex-col items-center gap-4">
       <h1 class="primary">{{ $t('appName') }}</h1>
 
-      <div class="flex flex-row items-center gap-4">
-        <span class="text-center">
+      <div class="grid grid-cols-3">
+        <div></div>
+
+        <span class="min-w-64 justify-self-center text-center" @click="clickById('update')">
           <i18n-t :plural="submittedCount" keypath="statistics.submitted.line1">
             <template #count>
               <b class="font-semibold">{{ submittedCount }}</b>
@@ -47,15 +59,24 @@ const selected = ref(fileExtensions[0])
           <br />
           <i18n-t :plural="submittedCount" keypath="statistics.submitted.line2" />
         </span>
-        <UButton @click="submittedCount.value = updateCount()" color="gray" variant="ghost">
+
+        <UButton
+          class="justify-self-start"
+          id="update"
+          @click="submittedCount.value = updateCount()"
+          color="gray"
+          variant="ghost"
+        >
           <Icon class="size-5" name="fa6-solid:rotate" />
         </UButton>
       </div>
 
       <div class="flex flex-col items-center">
-        <div class="flex flex-row">
+        <div class="grid grid-cols-3">
+          <div></div>
           <UButton>{{ $t('statistics.button.download') }}</UButton>
           <USelectMenu
+            class="justify-self-start"
             v-model="selected"
             :arrow="{ placement: 'left-top' }"
             :options="fileExtensions"
@@ -64,10 +85,14 @@ const selected = ref(fileExtensions[0])
             variant="none"
           />
         </div>
+
         <UButton to="/form" variant="link">{{ $t('statistics.button.fill') }}</UButton>
       </div>
+
       <UButton
         class="border-primary flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed"
+        @click="clickById('browse')"
+        @focus="focusById('browse')"
         variant="ghost"
       >
         <h2 class="text-2xl font-semibold">{{ $t('statistics.form.heading') }}</h2>
@@ -76,7 +101,7 @@ const selected = ref(fileExtensions[0])
           <Icon class="size-24" name="fa6-solid:table" />
           <Icon class="size-24" name="fa6-solid:file-excel" />
         </div>
-        <UInput color="gray" type="file" />
+        <UInput id="browse" :ui="{ base: 'hover:cursor-pointer' }" color="gray" type="file" />
       </UButton>
     </main>
   </div>
