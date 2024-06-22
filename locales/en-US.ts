@@ -2,7 +2,7 @@ export default {
   appName: 'Elect.Gen',
   statistics: {
     submitted: {
-      line1: 'For now, {count} student ({percent}) | ' + 'Currently, {count} students ({percent})',
+      line1: 'For now, {count} student ({percent}) | ' + 'For now, {count} students ({percent})',
       line2: 'submitted their form | submitted their forms'
     },
     button: {
