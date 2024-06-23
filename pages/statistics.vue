@@ -33,7 +33,7 @@ const submittedPercent = computed(() => {
   return mathjs.round((100 * submittedCount.value) / totalStudents.value, 1)
 })
 
-const fileExtensions = ['xlsx', 'csv'] as const
+const fileExtensions = ['xlsx', 'csv']
 const selected = ref(fileExtensions[0])
 </script>
 
@@ -64,12 +64,7 @@ const selected = ref(fileExtensions[0])
           <i18n-t :plural="submittedCount" keypath="statistics.submitted.line2" />
         </span>
 
-        <UButton
-          class="justify-self-start"
-          id="update"
-          @click="submittedCount.value = updateCount()"
-          variant="ghost"
-        >
+        <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
           <Icon class="size-5 text-gray-500" name="fa6-solid:rotate" />
         </UButton>
       </div>
