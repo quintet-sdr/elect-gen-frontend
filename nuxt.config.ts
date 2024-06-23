@@ -22,6 +22,6 @@ export default defineNuxtConfig({
     vueI18n: '~/i18n.config.ts'
   },
   icon: {
-    customCollections: [{ prefix: 'local', dir: '~/assets/icons' }]
+    customCollections: [{ prefix: 'local', dir: './assets/icons' }]
   }
 })
