@@ -22,6 +22,9 @@ function updateCount(): void {
 }
 
 const store = useStore()
+const { t } = useI18n({ useScope: 'local' })
+
+const signOut = [[{ label: t('statistics.account.signOut') }]]
 
 const totalStudents = ref(350)
 const submittedCount = ref(0)
@@ -38,14 +41,15 @@ const selected = ref(fileExtensions[0])
   <div>
     <header class="my-6 flex flex-row justify-between">
       <Icon class="size-6" name="local:innopolis-university" />
-      <UDropdown>{{ store.email }}</UDropdown>
+
+      <UDropdown :items="signOut" mode="hover">{{ store.email }}</UDropdown>
     </header>
 
     <main class="flex flex-col items-center gap-4">
       <h1 class="primary">{{ $t('appName') }}</h1>
 
       <div class="grid grid-cols-3">
-        <div></div>
+        <div />
 
         <span class="min-w-64 justify-self-center text-center" @click="clickById('update')">
           <i18n-t :plural="submittedCount" keypath="statistics.submitted.line1">
@@ -64,24 +68,25 @@ const selected = ref(fileExtensions[0])
           class="justify-self-start"
           id="update"
           @click="submittedCount.value = updateCount()"
-          color="gray"
           variant="ghost"
         >
-          <Icon class="size-5" name="fa6-solid:rotate" />
+          <Icon class="size-5 text-gray-500" name="fa6-solid:rotate" />
         </UButton>
       </div>
 
       <div class="flex flex-col items-center">
         <div class="grid grid-cols-3">
-          <div></div>
-          <UButton>{{ $t('statistics.button.download') }}</UButton>
+          <div />
+
+          <UButton :label="$t('statistics.button.download')" />
+
           <USelectMenu
-            class="justify-self-start"
+            class="justify-self-start text-gray-500"
             v-model="selected"
             :arrow="{ placement: 'left-top' }"
             :options="fileExtensions"
+            :ui="{ base: 'hover:cursor-pointer' }"
             default="xlsx"
-            mode="hover"
             variant="none"
           />
         </div>
@@ -96,7 +101,7 @@ const selected = ref(fileExtensions[0])
         variant="ghost"
       >
         <h2 class="text-2xl font-semibold">{{ $t('statistics.form.heading') }}</h2>
-        <div class="flex flex-row gap-16">
+        <div class="flex flex-row gap-16 text-gray-300">
           <Icon class="size-24" name="fa6-solid:file-csv" />
           <Icon class="size-24" name="fa6-solid:table" />
           <Icon class="size-24" name="fa6-solid:file-excel" />
