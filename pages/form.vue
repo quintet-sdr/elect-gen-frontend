@@ -19,9 +19,13 @@ const dragOptions = () => ({ animation: 200 })
 </script>
 
 <template>
-  <draggable v-bind="dragOptions" :list="electives">
+  <draggable
+    class="flex h-48 w-320 flex-row flex-wrap gap-3 overflow-scroll rounded-3xl border-2 border-solid p-6"
+    v-bind="dragOptions"
+    :list="electives"
+  >
     <template #item="{ element }">
-      <div>{{ element }}</div>
+      <Elective :name="element" description="test" />
     </template>
   </draggable>
 </template>
