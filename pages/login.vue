@@ -58,8 +58,8 @@ const togglePasswordVisibility = () => {
       </svg>
     </a>
 
-    <div class="flex flex-col justify-around items-center p-8 rounded-3xl h-96 bg-lightgray">
-      <h2 class="text-3xl font-semibold">Sign in</h2>
+    <div class="flex flex-col justify-around items-center p-8 rounded-3xl h-96 bg-white">
+      <h2 class="text-3xl font-semibold text-black">Sign in</h2>
       <input type="email" placeholder="Email" name="email-form"
              class="rounded-2xl bg-zinc-200 w-80 p-4 placeholder:font-semibold text-lg font-semibold text-black"
              autocomplete="email"/>
