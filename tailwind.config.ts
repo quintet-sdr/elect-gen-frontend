@@ -7,10 +7,10 @@ export default {
         '320': '80rem'
       },
       colors: {
-        'inno-green': '#40BA21',
-        'lightgray': '#F0F3F7',
-        'gray': '#999FAF',
-        'darkblue': '#12152A'
+        'color-inno-green': '#40BA21',
+        'color-lightgray': '#F0F3F7',
+        'color-gray': '#999FAF',
+        'color-darkblue': '#12152A'
       }
     }
   }

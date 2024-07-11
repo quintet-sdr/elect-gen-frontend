@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import {ref} from 'vue';
+import {useRouter} from 'vue-router';
 
 const showPassword = ref(false);
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
+
+const router = useRouter()
+
+function navigateToStatistics() {
+  router.push('/statistics')
+}
 </script>
 
 <template>
-  <main class="flex flex-col justify-around items-center w-full min-h-svh bg-lightgray dark:bg-darkblue">
-    <a href="#" class="w-40 h-20">
+  <main class="flex flex-col justify-around items-center w-full min-h-svh">
+    <a href="https://innopolis.university/" class="w-40 h-20">
       <svg
         width="150"
         height="80"
@@ -72,7 +79,12 @@ const togglePasswordVisibility = () => {
         {{ showPassword ? 'show' : 'hide' }}
         </span>
       </button>
-      <UButton class="text-lg rounded-xl py-2.5 px-6 bg-inno-green">Log in</UButton>
+      <UButton
+        class="text-lg rounded-xl py-2.5 px-6"
+        @click="navigateToStatistics"
+      >
+        Log in
+      </UButton>
     </div>
   </main>
 </template>
