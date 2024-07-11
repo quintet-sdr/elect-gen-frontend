@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-import * as mathjs from 'mathjs'
+import * as mathjs from 'mathjs';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function signOutAndNavigate() {
+  router.push('/login');
+}
 
 function clickById(id: string): void {
   document.getElementById(id)!.click()
@@ -42,7 +49,7 @@ const selected = ref(fileExtensions[0])
     <header class="my-6 flex flex-row justify-between">
       <Icon class="size-6" name="local:innopolis-university" />
 
-      <UDropdown :items="signOut" mode="hover">{{ store.email }}</UDropdown>
+      <UDropdown :items="signOut" mode="hover" @click="signOutAndNavigate">{{ store.email }}</UDropdown>
     </header>
 
     <main class="flex flex-col items-center gap-4">
