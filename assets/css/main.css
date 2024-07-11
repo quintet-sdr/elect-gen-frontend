@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply mx-auto max-w-320;
+  @apply mx-auto max-w-320 bg-white dark:bg-darkblue;
 }
 
 h1.primary {
