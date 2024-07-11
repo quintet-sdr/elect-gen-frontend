@@ -13,3 +13,7 @@ body {
 h1.primary {
   @apply text-7xl font-bold;
 }
+
+.u-button {
+  @apply bg-color-inno-green;
+}
