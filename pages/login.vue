@@ -3,6 +3,7 @@ import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 
 const showPassword = ref(false);
+const email = ref('');
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
@@ -11,7 +12,11 @@ const togglePasswordVisibility = () => {
 const router = useRouter()
 
 function navigateToStatistics() {
-  router.push('/statistics')
+  if (email.value === 'a.potyomcking@innopolis.ru') {
+    router.push('/statistics')
+  } else {
+    console.log("invalid");
+  }
 }
 </script>
 
@@ -69,7 +74,7 @@ function navigateToStatistics() {
       <h2 class="text-3xl font-semibold text-black">Sign in</h2>
       <input type="email" placeholder="Email" name="email-form"
              class="rounded-2xl bg-zinc-200 w-80 p-4 placeholder:font-semibold text-lg font-semibold text-black"
-             autocomplete="email"/>
+             autocomplete="email" v-model="email"/>
       <input :type="showPassword ? 'text' : 'password'" name="password-from" placeholder="Password"
              class="rounded-2xl bg-zinc-200 w-80 p-4 placeholder:font-semibold text-lg font-semibold text-black"
              autocomplete="password"/>
