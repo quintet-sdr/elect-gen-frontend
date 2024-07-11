@@ -1,5 +1,5 @@
 export default defineAppConfig({
   ui: {
-    primary: 'color-inno-green',
+    // primary: 'color-inno-green',
   }
 })
