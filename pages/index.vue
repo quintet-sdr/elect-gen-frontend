@@ -5,5 +5,5 @@ await callOnce(async () => {
 })
 
 const localePath = useLocalePath()
-navigateTo(localePath('/statistics'))
+navigateTo(localePath('/login'))
 </script>
