@@ -12,7 +12,7 @@ const togglePasswordVisibility = () => {
 const router = useRouter()
 
 function navigateToStatistics() {
-  if (email.value === 'a.potyomcking@innopolis.ru') {
+  if (email.value === 'a.potyomckin@innopolis.ru') {
     router.push('/statistics')
   } else {
     console.log("invalid");
