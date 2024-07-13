@@ -46,11 +46,7 @@ const selected = ref(fileExtensions[0])
 
 <template>
   <div>
-    <header class="my-6 flex flex-row justify-between">
-      <Icon class="size-6" name="local:innopolis-university" />
-
-      <UDropdown :items="signOut" mode="hover" @click="signOutAndNavigate">{{ store.email }}</UDropdown>
-    </header>
+    <Header/>
 
     <main class="flex flex-col items-center gap-4">
       <h1 class="primary">{{ $t('appName') }}</h1>
