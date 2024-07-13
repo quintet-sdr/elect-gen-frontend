@@ -1,12 +1,5 @@
 <script lang="ts" setup>
 import * as mathjs from 'mathjs';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-function signOutAndNavigate() {
-  router.push('/login');
-}
 
 function clickById(id: string): void {
   document.getElementById(id)!.click()
@@ -27,11 +20,6 @@ function updateCount(): void {
   }
   submittedCount.value = Math.min(submittedCount.value + random(1, 35), totalStudents.value)
 }
-
-const store = useStore()
-const { t } = useI18n({ useScope: 'local' })
-
-const signOut = [[{ label: t('statistics.account.signOut') }]]
 
 const totalStudents = ref(350)
 const submittedCount = ref(0)
