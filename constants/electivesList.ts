@@ -10,4 +10,4 @@ export const electives = reactive([
     'Introduction to Robotics Operating System: Basics, Motion, and Vision',
     'Lambda-Calculus, Algebra, Machinery and Logic for Formal Program Semantics',
     'Real-Time Scheduling Theory'
-  ])
+])
