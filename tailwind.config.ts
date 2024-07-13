@@ -11,10 +11,6 @@ export default {
         'color-lightgray': '#F0F3F7',
         'color-gray': '#999FAF',
         'color-darkblue': '#12152A',
-        green: {
-          100 : '#40BA21',
-        }
-        
       }
     }
   }
