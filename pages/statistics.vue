@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import * as mathjs from 'mathjs';
+import * as mathjs from 'mathjs'
 
 function clickById(id: string): void {
   document.getElementById(id)!.click()
@@ -34,7 +34,7 @@ const selected = ref(fileExtensions[0])
 
 <template>
   <div>
-    <Header/>
+    <Header />
 
     <main class="flex flex-col items-center gap-4">
       <h1 class="primary">{{ $t('appName') }}</h1>

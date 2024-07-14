@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
-import { electives } from '~/constants/electivesList.js';
+import { electives } from '~/constants/electivesList.js'
 
 const dragOptions = () => ({ animation: 200 })
 </script>
@@ -17,6 +17,4 @@ const dragOptions = () => ({ animation: 200 })
   </draggable>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

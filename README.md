@@ -39,7 +39,6 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
-
 ## Build With
 
 For Web interface developing we use these technologies:
@@ -60,8 +59,8 @@ For Web interface developing we use these technologies:
 
 ## Authors
 
-* [Anastasia Varfolomeeva](https://github.com/acecution)
-* [Arsen Galiev](https://github.com/projacktor)
-* [Asqar Arslanov](https://github.com/asqarslanov)
-* [Ilya-Linh Nguen](https://github.com/RFProg)
-* [Sarmat Lutfullin](https://github.com/1sarmatt)
+- [Anastasia Varfolomeeva](https://github.com/acecution)
+- [Arsen Galiev](https://github.com/projacktor)
+- [Asqar Arslanov](https://github.com/asqarslanov)
+- [Ilya-Linh Nguen](https://github.com/RFProg)
+- [Sarmat Lutfullin](https://github.com/1sarmatt)

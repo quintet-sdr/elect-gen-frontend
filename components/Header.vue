@@ -1,26 +1,26 @@
-<script setup lang="ts">
-import { useRouter } from 'vue-router';
+<script lang="ts" setup>
+import { useRouter } from 'vue-router'
 
 const store = useStore()
-const {t} = useI18n({useScope: 'local'})
+const { t } = useI18n({ useScope: 'local' })
 
-const signOut = [[{label: t('statistics.account.signOut')}]]
+const signOut = [[{ label: t('statistics.account.signOut') }]]
 
-const router = useRouter();
+const router = useRouter()
 
 function signOutAndNavigate() {
-  router.push('/login');
+  router.push('/login')
 }
 </script>
 
 <template>
   <header class="my-6 flex flex-row justify-between">
-    <Icon class="size-6" name="local:innopolis-university"/>
+    <Icon class="size-6" name="local:innopolis-university" />
 
-    <UDropdown :items="signOut" mode="hover" @click="signOutAndNavigate">{{ store.email }}</UDropdown>
+    <UDropdown :items="signOut" @click="signOutAndNavigate" mode="hover">{{
+      store.email
+    }}</UDropdown>
   </header>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

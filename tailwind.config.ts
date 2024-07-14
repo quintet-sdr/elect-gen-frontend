@@ -10,7 +10,7 @@ export default {
         'color-inno-green': '#40BA21',
         'color-lightgray': '#F0F3F7',
         'color-gray': '#999FAF',
-        'color-darkblue': '#12152A',
+        'color-darkblue': '#12152A'
       },
       width: {
         'width-100': '29rem'
