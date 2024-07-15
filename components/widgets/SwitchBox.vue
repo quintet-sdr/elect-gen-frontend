@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { techElectives, humElectives } from '~/constants/electivesList.js'
 import { ref } from 'vue';
-import Elective from "~/components/shared/Elective.vue";
+import ElectiveButton from "~/components/shared/ElectiveButton.vue";
 
 const currentBlock = ref('block1');
 </script>
@@ -23,15 +23,15 @@ const currentBlock = ref('block1');
       </button>
     </div>
 <!--    рамка только для визуала тестового-->
-    <div class="flex justify-center items-center border-4 border-color-gray rounded-xl py-4 w-full">
+    <div class="flex items-center border-4 border-color-gray rounded-xl py-4 w-full">
       <div v-if="currentBlock === 'block1'" class="text-center">
         <div v-for="elective in techElectives" :key="elective" class="p-3">
-          <Elective :name="elective"/>
+          <ElectiveButton :name="elective"/>
         </div>
       </div>
       <div v-if="currentBlock === 'block2'" class="text-center">
         <div v-for="elective in humElectives" :key="elective" class="p-3">
-          <Elective :name="elective"/>
+          <ElectiveButton :name="elective"/>
         </div>
       </div>
     </div>
