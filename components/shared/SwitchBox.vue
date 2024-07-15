@@ -9,15 +9,15 @@ const currentBlock = ref('block1');
     <div class="mb-4">
       <button
         @click="currentBlock = 'block1'"
-        :class="['px-4 py-2 mx-2 rounded', currentBlock === 'block1' ? 'bg-blue-500 text-white' : 'bg-gray-200']"
+        :class="['px-4 py-2 mx-2 rounded font-semibold', currentBlock === 'block1' ? 'bg-color-gray text-color-darkblue' : 'bg-transparent']"
       >
-        Block 1
+        Tech
       </button>
       <button
         @click="currentBlock = 'block2'"
-        :class="['px-4 py-2 mx-2 rounded', currentBlock === 'block2' ? 'bg-blue-500 text-white' : 'bg-gray-200']"
+        :class="['px-4 py-2 mx-2 rounded font-semibold', currentBlock === 'block2' ? 'bg-color-gray text-color-darkblue' : 'bg-transparent']"
       >
-        Block 2
+        Hum
       </button>
     </div>
     <div class="flex justify-center items-center border border-gray-300 p-4 w-full max-w-md">
