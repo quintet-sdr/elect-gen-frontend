@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Header from "~/components/widgets/Header.vue";
-import SwitchBox from "~/components/shared/SwitchBox.vue";
+import SwitchBox from "~/components/widgets/SwitchBox.vue";
 </script>
 
 <template>
