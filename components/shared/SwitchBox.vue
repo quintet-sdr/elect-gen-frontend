@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { electives } from '~/constants/electivesList.js'
 import { ref } from 'vue';
+import Elective from "~/components/shared/Elective.vue";
 
 const currentBlock = ref('block1');
 </script>
@@ -20,9 +22,14 @@ const currentBlock = ref('block1');
         Hum
       </button>
     </div>
-    <div class="flex justify-center items-center border border-gray-300 p-4 w-full max-w-md">
-      <div v-if="currentBlock === 'block1'" class="text-center">This is Block 1</div>
-      <div v-if="currentBlock === 'block2'" class="text-center">This is Block 2</div>
+<!--    рамка только для визуала тестового-->
+    <div class="flex justify-center items-center border-2 border-color-gray rounded-xl p-4 w-full max-w-md">
+      <div v-if="currentBlock === 'block1'" class="text-center">
+        <div v-for="elective in electives" :key="elective" class="p-3">
+          <Elective :name="elective"/>
+        </div>
+      </div>
+      <div v-if="currentBlock === 'block2'" class="text-center"><Elective name="2222"/></div>
     </div>
   </div>
 </template>
