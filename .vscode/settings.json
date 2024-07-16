@@ -48,5 +48,6 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+  "i18n-ally.localesPaths": ["locales"]
 }
