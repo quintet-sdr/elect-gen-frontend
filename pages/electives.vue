@@ -12,10 +12,10 @@ import ElectiveInput from '~/components/shared/ElectiveInput.vue'
       <div class="flex w-1/2 flex-col items-center">
         <SwitchBox />
       </div>
-      <div class="flex w-1/2 flex-col items-center gap-4">
+      <div class="flex w-1/2 flex-col items-center gap-4 self-start min-h-full">
         <h2 class="text-3xl font-semibold">Options</h2>
-        <div class="flex w-full flex-row items-center justify-around">
-          <div class="flex h-full w-1/2 flex-col items-center gap-4">
+        <div class="flex w-full flex-row items-center justify-around self-stretch min-h-full">
+          <div class="flex h-full w-1/2 flex-col items-center gap-6">
             <ElectiveInput headerName="Course short name" placeholder="Short name" />
             <ElectiveInput
               autocomplete="email"
@@ -32,15 +32,13 @@ import ElectiveInput from '~/components/shared/ElectiveInput.vue'
             />
             <ElectiveInput headerName="Maximum students in group" placeholder="Enter maximum" />
           </div>
-          <div class="flex h-full w-1/2 flex-col items-start justify-around">
+          <div class="flex flex-col self-stretch items-start justify-around w-1/2 min-h-full">
             <h3 class="text-xl font-semibold">Course description</h3>
-            <div class="flex h-full w-full">
-              <textarea
-                class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
-                placeholder="Description"
-                type="text"
-              />
-            </div>
+            <textarea
+              class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
+              placeholder="Description"
+              type="text"
+            />
           </div>
         </div>
       </div>
@@ -48,4 +46,5 @@ import ElectiveInput from '~/components/shared/ElectiveInput.vue'
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

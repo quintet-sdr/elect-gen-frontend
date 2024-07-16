@@ -30,7 +30,7 @@ const currentBlock = ref('block1')
     </div>
     <!--    рамка только для визуала тестового-->
     <div
-      class="flex w-full flex-col items-center justify-center rounded-xl border-4 border-color-gray py-4"
+      class="flex w-full flex-col items-center justify-center"
     >
       <div class="text-center" v-if="currentBlock === 'block1'">
         <div class="p-3" v-for="elective in techElectives" :key="elective">
