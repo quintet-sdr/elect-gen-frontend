@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
-import { electives } from '~/constants/electivesList.js'
+import { techElectives } from '~/constants/electivesList.js'
+import Elective from "~/components/shared/Elective.vue";
 
 const dragOptions = () => ({ animation: 200 })
 </script>
@@ -9,7 +10,7 @@ const dragOptions = () => ({ animation: 200 })
   <draggable
     class="flex h-48 w-320 flex-row flex-wrap gap-3 overflow-scroll rounded-3xl border-2 border-solid p-6"
     v-bind="dragOptions"
-    :list="electives"
+    :list="techElectives"
   >
     <template #item="{ element }">
       <Elective :name="element" description="test" />

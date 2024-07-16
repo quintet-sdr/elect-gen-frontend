@@ -18,6 +18,8 @@ h1.primary {
   @apply bg-color-inno-green;
 }
 
-h2, h3, p {
+h2,
+h3,
+p {
   @apply text-color-darkblue dark:text-white;
 }

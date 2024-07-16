@@ -6,7 +6,7 @@ const props = defineProps<{
 
 <template>
   <button
-    class="flex flex-row flex-wrap items-center gap-2 rounded-xl bg-gray-300 px-3 py-2 text-base font-medium dark:text-color-darkblue active:border border-color-inno-green"
+    class="flex flex-row flex-wrap items-center gap-2 rounded-xl border-color-inno-green bg-gray-300 px-3 py-2 text-base font-medium active:border dark:text-color-darkblue"
   >
     {{ props.name }}
   </button>
