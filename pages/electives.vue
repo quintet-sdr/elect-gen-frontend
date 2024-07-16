@@ -14,8 +14,8 @@ import ElectiveInput from '~/components/shared/ElectiveInput.vue'
       </div>
       <div class="flex w-1/2 flex-col items-center gap-4">
         <h2 class="text-3xl font-semibold">Options</h2>
-        <div class="flex flex-row items-center justify-around">
-          <div class="flex w-1/2 flex-col items-center gap-4">
+        <div class="flex w-full flex-row items-center justify-around">
+          <div class="flex h-full w-1/2 flex-col items-center gap-4">
             <ElectiveInput headerName="Course short name" placeholder="Short name" />
             <ElectiveInput
               autocomplete="email"
@@ -34,11 +34,13 @@ import ElectiveInput from '~/components/shared/ElectiveInput.vue'
           </div>
           <div class="flex h-full w-1/2 flex-col items-start justify-around">
             <h3 class="text-xl font-semibold">Course description</h3>
-            <textarea
-              class="placeholder-p-4 h-full w-90 rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray"
-              placeholder="Description"
-              type="text"
-            />
+            <div class="flex h-full w-full">
+              <textarea
+                class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
+                placeholder="Description"
+                type="text"
+              />
+            </div>
           </div>
         </div>
       </div>
