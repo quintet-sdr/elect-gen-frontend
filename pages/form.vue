@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import draggable from 'vuedraggable'
 import { techElectives } from '~/constants/electivesList.js'
-import Elective from "~/components/shared/Elective.vue";
+import Elective from '~/components/shared/Elective.vue'
 
 const dragOptions = () => ({ animation: 200 })
 </script>
