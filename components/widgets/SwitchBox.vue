@@ -23,7 +23,7 @@ const currentBlock = ref('block1');
       </button>
     </div>
 <!--    рамка только для визуала тестового-->
-    <div class="flex items-center border-4 border-color-gray rounded-xl py-4 w-full">
+    <div class="flex flex-col justify-center items-center border-4 border-color-gray rounded-xl py-4 w-full">
       <div v-if="currentBlock === 'block1'" class="text-center">
         <div v-for="elective in techElectives" :key="elective" class="p-3">
           <ElectiveButton :name="elective"/>
