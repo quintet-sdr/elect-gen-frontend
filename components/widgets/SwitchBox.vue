@@ -1,17 +1,26 @@
 <script lang="ts" setup>
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, defineProps, watch } from 'vue'
 import { techElectives, humElectives } from '~/constants/electivesList.js'
 import ElectiveButton from '~/components/shared/ElectiveButton.vue'
 
-const currentBlock = ref('block1')
+const props = defineProps<{ disabled: boolean }>()
 const emit = defineEmits(['elective-change'])
 
+const currentBlock = ref('block1')
 const activeElective = ref<string | null>(null)
 
 const handleElectiveClick = (elective: string) => {
-  activeElective.value = elective
-  emit('elective-change', elective)
+  if (!props.disabled) {
+    activeElective.value = elective
+    emit('elective-change', elective)
+  }
 }
+
+watch(() => props.disabled, (newVal) => {
+  if (newVal) {
+    activeElective.value = null
+  }
+})
 </script>
 
 <template>
@@ -41,6 +50,7 @@ const handleElectiveClick = (elective: string) => {
         <div class="p-3" v-for="elective in techElectives" :key="elective">
           <ElectiveButton
             :active="elective === activeElective"
+            :disabled="props.disabled"
             :name="elective"
             @click="handleElectiveClick(elective)"
           />
@@ -50,6 +60,7 @@ const handleElectiveClick = (elective: string) => {
         <div class="p-3" v-for="elective in humElectives" :key="elective">
           <ElectiveButton
             :active="elective === activeElective"
+            :disabled="props.disabled"
             :name="elective"
             @click="handleElectiveClick(elective)"
           />

@@ -9,11 +9,11 @@ import ClearedNotification from '~/components/shared/ClearedNotification.vue'
 interface ElectiveData {
   shortName: string
   instructorMail: string
-  minOverall: number
-  maxOverall: number
-  lowGroup: number
-  highGroup: number
-  maxGroup: number
+  minOverall: number | null
+  maxOverall: number | null
+  lowGroup: number | null
+  highGroup: number | null
+  maxGroup: number | null
   description: string
 }
 
@@ -24,17 +24,19 @@ const notificationOkMessage = ref('')
 const notificationClearVisible = ref(false)
 const notificationClearMessage = ref('')
 
+const switchBoxDisabled = ref(false)
+
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
 }
 
 const shortName = ref('')
 const instructorMail = ref('')
-const minOverall = ref()
-const maxOverall = ref()
-const lowGroup = ref()
-const highGroup = ref()
-const maxGroup = ref()
+const minOverall = ref<number | null>(null)
+const maxOverall = ref<number | null>(null)
+const lowGroup = ref<number | null>(null)
+const highGroup = ref<number | null>(null)
+const maxGroup = ref<number | null>(null)
 const description = ref('')
 
 const handleSave = () => {
@@ -51,16 +53,16 @@ const handleSave = () => {
     }
     notificationOkMessage.value = 'Saved successfully'
     notificationOkVisible.value = true
-    currentElective.value = null
+    switchBoxDisabled.value = true
     setTimeout(() => {
       notificationOkVisible.value = false
+      switchBoxDisabled.value = false
     }, 2000)
   }
 }
 
 const handleClear = () => {
   if (currentElective.value) {
-    // Очистка значений полей
     shortName.value = ''
     instructorMail.value = ''
     minOverall.value = null
@@ -83,8 +85,10 @@ const handleClear = () => {
 
     notificationClearMessage.value = 'Cleared'
     notificationClearVisible.value = true
+    switchBoxDisabled.value = true
     setTimeout(() => {
       notificationClearVisible.value = false
+      switchBoxDisabled.value = false
     }, 2000)
   }
 }
@@ -119,7 +123,7 @@ watch(currentElective, (newElective) => {
     <h1 class="primary">Electives</h1>
     <div class="flex w-full flex-row items-center justify-around">
       <div class="flex min-h-full w-1/2 flex-col items-center self-stretch">
-        <SwitchBox @elective-change="handleElectiveChange" />
+        <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange" />
       </div>
       <div class="flex min-h-full w-1/2 flex-col items-center gap-4 self-start">
         <h2 class="text-3xl font-semibold">Options</h2>

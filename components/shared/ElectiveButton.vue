@@ -4,12 +4,15 @@ import { defineProps, defineEmits } from 'vue'
 const props = defineProps<{
   name: string
   active: boolean
+  disabled: boolean
 }>()
 
 const emit = defineEmits(['click'])
 
 const handleClick = () => {
-  emit('click', props.name)
+  if (!props.disabled) {
+    emit('click', props.name)
+  }
 }
 </script>
 
@@ -17,7 +20,8 @@ const handleClick = () => {
   <button
     :class="[
       'flex flex-row flex-wrap items-center gap-2 rounded-xl border-color-inno-green px-3 py-2 text-base font-medium dark:text-color-darkblue',
-      props.active ? 'bg-color-inno-green text-white' : 'bg-gray-300'
+      props.active ? 'bg-color-inno-green text-white' : 'bg-gray-300',
+      props.disabled ? 'opacity-50 cursor-not-allowed' : ''
     ]"
     @click="handleClick"
   >
