@@ -7,7 +7,7 @@ const currentBlock = ref('block1')
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center">
+  <div class="flex w-full flex-col items-center gap-4 min-h-full">
     <div class="mb-4">
       <button
         :class="[
@@ -28,10 +28,7 @@ const currentBlock = ref('block1')
         Hum
       </button>
     </div>
-    <!--    рамка только для визуала тестового-->
-    <div
-      class="flex w-full flex-col items-center justify-center"
-    >
+    <div class="flex w-full flex-col items-center justify-center">
       <div class="text-center" v-if="currentBlock === 'block1'">
         <div class="p-3" v-for="elective in techElectives" :key="elective">
           <ElectiveButton :name="elective" />
