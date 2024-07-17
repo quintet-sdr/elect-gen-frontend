@@ -1,9 +1,14 @@
 <script lang="ts" setup>
-import { techElectives, humElectives } from '~/constants/electivesList.js'
-import { ref } from 'vue'
-import ElectiveButton from '~/components/shared/ElectiveButton.vue'
+import { ref, defineEmits } from 'vue';
+import { techElectives, humElectives } from '~/constants/electivesList.js';
+import ElectiveButton from '~/components/shared/ElectiveButton.vue';
 
-const currentBlock = ref('block1')
+const currentBlock = ref('block1');
+const emit = defineEmits(['elective-change']);
+
+const handleElectiveClick = (elective: string) => {
+  emit('elective-change', elective);
+};
 </script>
 
 <template>
@@ -31,12 +36,12 @@ const currentBlock = ref('block1')
     <div class="flex w-full flex-col items-center justify-center">
       <div class="text-center" v-if="currentBlock === 'block1'">
         <div class="p-3" v-for="elective in techElectives" :key="elective">
-          <ElectiveButton :name="elective" />
+          <ElectiveButton :name="elective" @click="handleElectiveClick(elective)" />
         </div>
       </div>
       <div class="text-center" v-if="currentBlock === 'block2'">
         <div class="p-3" v-for="elective in humElectives" :key="elective">
-          <ElectiveButton :name="elective" />
+          <ElectiveButton :name="elective" @click="handleElectiveClick(elective)" />
         </div>
       </div>
     </div>
