@@ -1,4 +1,3 @@
-под participant должно быть написано его имя
 <script lang="ts" setup>
     import Header from '~/components/widgets/Header.vue';
 </script>
