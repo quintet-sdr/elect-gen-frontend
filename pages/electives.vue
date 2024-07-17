@@ -48,7 +48,7 @@ const handleSave = () => {
     }
     notificationOkMessage.value = 'Saved successfully'
     notificationOkVisible.value = true
-
+    currentElective.value = null
     setTimeout(() => {
       notificationOkVisible.value = false
     }, 2000)

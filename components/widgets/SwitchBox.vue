@@ -6,7 +6,10 @@ import ElectiveButton from '~/components/shared/ElectiveButton.vue'
 const currentBlock = ref('block1')
 const emit = defineEmits(['elective-change'])
 
+const activeElective = ref<string | null>(null)
+
 const handleElectiveClick = (elective: string) => {
+  activeElective.value = elective
   emit('elective-change', elective)
 }
 </script>
@@ -36,12 +39,20 @@ const handleElectiveClick = (elective: string) => {
     <div class="flex w-full flex-col items-center justify-center">
       <div class="text-center" v-if="currentBlock === 'block1'">
         <div class="p-3" v-for="elective in techElectives" :key="elective">
-          <ElectiveButton :name="elective" @click="handleElectiveClick(elective)" />
+          <ElectiveButton
+            :active="elective === activeElective"
+            :name="elective"
+            @click="handleElectiveClick(elective)"
+          />
         </div>
       </div>
       <div class="text-center" v-if="currentBlock === 'block2'">
         <div class="p-3" v-for="elective in humElectives" :key="elective">
-          <ElectiveButton :name="elective" @click="handleElectiveClick(elective)" />
+          <ElectiveButton
+            :active="elective === activeElective"
+            :name="elective"
+            @click="handleElectiveClick(elective)"
+          />
         </div>
       </div>
     </div>
