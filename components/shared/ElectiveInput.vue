@@ -6,7 +6,7 @@ interface Props {
   placeholder?: string;
   type?: string;
   autocomplete?: string;
-  modelValue: string | number; // поддержка для v-model
+  modelValue: string | number;
 }
 
 const props = defineProps<Props>();
@@ -20,7 +20,19 @@ watch(() => props.modelValue, (newValue) => {
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
-  value.value = target.value;
+  let inputValue = target.value;
+
+  if (props.type === 'number') {
+    inputValue = inputValue.replace(/[^0-9]/g, '');
+    const numericValue = parseInt(inputValue, 10);
+    if (!isNaN(numericValue) && numericValue > 0) {
+      value.value = numericValue;
+    } else {
+      value.value = '';
+    }
+  } else {
+    value.value = inputValue;
+  }
   emit('update:modelValue', value.value);
 };
 </script>
