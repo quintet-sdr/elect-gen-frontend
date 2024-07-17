@@ -25,11 +25,11 @@ const handleElectiveChange = (elective: string) => {
 
 const shortName = ref('');
 const instructorMail = ref('');
-const minOverall = ref<number | null>(null);
-const maxOverall = ref<number | null>(null);
-const lowGroup = ref<number | null>(null);
-const highGroup = ref<number | null>(null);
-const maxGroup = ref<number | null>(null);
+const minOverall = ref();
+const maxOverall = ref();
+const lowGroup = ref();
+const highGroup = ref();
+const maxGroup = ref();
 const description = ref('');
 
 const handleSave = () => {
@@ -61,11 +61,11 @@ watch(currentElective, (newElective) => {
   } else {
     shortName.value = '';
     instructorMail.value = '';
-    minOverall.value = null;
-    maxOverall.value = null;
-    lowGroup.value = null;
-    highGroup.value = null;
-    maxGroup.value = null;
+    minOverall.value = 0;
+    maxOverall.value = 0;
+    lowGroup.value = 0;
+    highGroup.value = 0;
+    maxGroup.value = 0;
     description.value = '';
   }
 });
