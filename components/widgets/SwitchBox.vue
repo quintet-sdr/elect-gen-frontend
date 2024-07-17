@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import { ref, defineEmits } from 'vue';
-import { techElectives, humElectives } from '~/constants/electivesList.js';
-import ElectiveButton from '~/components/shared/ElectiveButton.vue';
+import { ref, defineEmits } from 'vue'
+import { techElectives, humElectives } from '~/constants/electivesList.js'
+import ElectiveButton from '~/components/shared/ElectiveButton.vue'
 
-const currentBlock = ref('block1');
-const emit = defineEmits(['elective-change']);
+const currentBlock = ref('block1')
+const emit = defineEmits(['elective-change'])
 
 const handleElectiveClick = (elective: string) => {
-  emit('elective-change', elective);
-};
+  emit('elective-change', elective)
+}
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center gap-4 min-h-full">
+  <div class="flex min-h-full w-full flex-col items-center gap-4">
     <div class="mb-4">
       <button
         :class="[

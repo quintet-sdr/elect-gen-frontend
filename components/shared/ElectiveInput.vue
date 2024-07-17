@@ -1,40 +1,43 @@
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, watch } from 'vue';
+import { ref, defineProps, defineEmits, watch } from 'vue'
 
 interface Props {
-  headerName: string;
-  placeholder?: string;
-  type?: string;
-  autocomplete?: string;
-  modelValue: string | number;
+  headerName: string
+  placeholder?: string
+  type?: string
+  autocomplete?: string
+  modelValue: string | number
 }
 
-const props = defineProps<Props>();
-const emit = defineEmits(['update:modelValue']);
+const props = defineProps<Props>()
+const emit = defineEmits(['update:modelValue'])
 
-const value = ref(props.modelValue);
+const value = ref(props.modelValue)
 
-watch(() => props.modelValue, (newValue) => {
-  value.value = newValue;
-});
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    value.value = newValue
+  }
+)
 
 const handleInput = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  let inputValue = target.value;
+  const target = event.target as HTMLInputElement
+  let inputValue = target.value
 
   if (props.type === 'number') {
-    inputValue = inputValue.replace(/[^0-9]/g, '');
-    const numericValue = parseInt(inputValue, 10);
+    inputValue = inputValue.replace(/[^0-9]/g, '')
+    const numericValue = parseInt(inputValue, 10)
     if (!isNaN(numericValue) && numericValue > 0) {
-      value.value = numericValue;
+      value.value = numericValue
     } else {
-      value.value = '';
+      value.value = ''
     }
   } else {
-    value.value = inputValue;
+    value.value = inputValue
   }
-  emit('update:modelValue', value.value);
-};
+  emit('update:modelValue', value.value)
+}
 </script>
 
 <template>

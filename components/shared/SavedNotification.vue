@@ -1,24 +1,26 @@
-<script setup lang="ts">
-import { defineProps } from 'vue';
+<script lang="ts" setup>
+import { defineProps } from 'vue'
 
 const props = defineProps<{
-  message: string;
-  visible: boolean;
-}>();
-
-
+  message: string
+  visible: boolean
+}>()
 </script>
 
 <template>
   <transition name="fade">
-    <div v-if="props.visible" class="bg-green-400 text-color-darkblue p-5 rounded-xl absolute z-10 bottom-4">
-    <p class="text-color-darkblue font-semibold">{{ props.message }}</p>
-  </div>
+    <div
+      class="absolute bottom-4 z-10 rounded-xl bg-green-400 p-5 text-color-darkblue"
+      v-if="props.visible"
+    >
+      <p class="font-semibold text-color-darkblue">{{ props.message }}</p>
+    </div>
   </transition>
 </template>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
