@@ -4,6 +4,7 @@ import Header from '~/components/widgets/Header.vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/ElectiveInput.vue'
 import SavedNotification from '~/components/shared/SavedNotification.vue'
+import ClearedNotification from '~/components/shared/ClearedNotification.vue'
 
 interface ElectiveData {
   shortName: string
@@ -20,6 +21,8 @@ const currentElective = ref<string | null>(null)
 const electiveData = ref<{ [key: string]: ElectiveData }>({})
 const notificationOkVisible = ref(false)
 const notificationOkMessage = ref('')
+const notificationClearVisible = ref(false)
+const notificationClearMessage = ref('')
 
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
@@ -51,6 +54,37 @@ const handleSave = () => {
     currentElective.value = null
     setTimeout(() => {
       notificationOkVisible.value = false
+    }, 2000)
+  }
+}
+
+const handleClear = () => {
+  if (currentElective.value) {
+    // Очистка значений полей
+    shortName.value = ''
+    instructorMail.value = ''
+    minOverall.value = null
+    maxOverall.value = null
+    lowGroup.value = null
+    highGroup.value = null
+    maxGroup.value = null
+    description.value = ''
+
+    electiveData.value[currentElective.value] = {
+      shortName: '',
+      instructorMail: '',
+      minOverall: 0,
+      maxOverall: 0,
+      lowGroup: 0,
+      highGroup: 0,
+      maxGroup: 0,
+      description: ''
+    }
+
+    notificationClearMessage.value = 'Cleared'
+    notificationClearVisible.value = true
+    setTimeout(() => {
+      notificationClearVisible.value = false
     }, 2000)
   }
 }
@@ -144,11 +178,23 @@ watch(currentElective, (newElective) => {
             />
           </div>
         </div>
-        <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" @click="handleSave">
-          Save changes
-        </UButton>
+        <div class="flex flex-row items-center gap-4">
+          <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" @click="handleSave">
+            Save changes
+          </UButton>
+          <button
+            class="rounded-xl border border-color-darkblue bg-transparent px-6 py-2.5 text-lg hover:opacity-75 dark:border-color-lightgray"
+            @click="handleClear"
+          >
+            Clear fields
+          </button>
+        </div>
       </div>
       <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible" />
+      <ClearedNotification
+        :message="notificationClearMessage"
+        :visible="notificationClearVisible"
+      />
     </div>
   </main>
 </template>
