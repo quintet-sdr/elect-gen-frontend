@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import Header from '~/components/widgets/Header.vue';
 import SwitchBox from '~/components/widgets/SwitchBox.vue';
 import ElectiveInput from '~/components/shared/ElectiveInput.vue';
+import SavedNotification from "~/components/shared/SavedNotification.vue";
 
 interface ElectiveData {
   shortName: string;
@@ -16,8 +17,9 @@ interface ElectiveData {
 }
 
 const currentElective = ref<string | null>(null);
-
 const electiveData = ref<{ [key: string]: ElectiveData }>({});
+const notificationOkVisible = ref(false);
+const notificationOkMessage = ref('');
 
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective;
@@ -44,6 +46,12 @@ const handleSave = () => {
       maxGroup: maxGroup.value,
       description: description.value,
     };
+    notificationOkMessage.value = 'Saved successfully';
+    notificationOkVisible.value = true;
+
+    setTimeout(() => {
+      notificationOkVisible.value = false;
+    }, 2000)
   }
 };
 
@@ -114,6 +122,7 @@ watch(currentElective, (newElective) => {
           Save changes
         </UButton>
       </div>
+      <SavedNotification :visible="notificationOkVisible" :message="notificationOkMessage" />
     </div>
   </main>
 </template>
