@@ -135,7 +135,7 @@ watch(currentElective, (newElective) => {
       </div>
       <div class="flex min-h-full w-1/2 flex-col items-center gap-4 self-start">
         <h2 class="text-3xl font-semibold">Options</h2>
-        <div class="flex min-h-full w-full flex-row items-center gap-8 self-stretch">
+        <div class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
           <div class="flex h-full w-1/2 flex-col items-center gap-6">
             <ElectiveInput
               v-model="courseName"
