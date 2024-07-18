@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {ref, watch} from 'vue'
+import { ref, watch } from 'vue'
 import Header from '~/components/widgets/Header.vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
@@ -125,12 +125,12 @@ watch(currentElective, (newElective) => {
 </script>
 
 <template>
-  <Header/>
+  <Header />
   <main class="flex flex-col items-center gap-12">
     <h1 class="primary">Electives</h1>
     <div class="flex w-full flex-row items-center justify-around">
       <div class="flex min-h-full w-1/2 flex-col items-center self-stretch">
-        <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange"/>
+        <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange" />
       </div>
       <div class="flex min-h-full w-1/2 flex-col items-center gap-4 self-start">
         <h2 class="text-3xl font-semibold">Options</h2>
@@ -206,9 +206,7 @@ watch(currentElective, (newElective) => {
           </button>
         </div>
       </div>
-      <SavedNotification
-        :message="notificationOkMessage"
-        :visible="notificationOkVisible"/>
+      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible" />
       <ClearedNotification
         :message="notificationClearMessage"
         :visible="notificationClearVisible"

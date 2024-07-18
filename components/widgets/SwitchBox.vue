@@ -16,11 +16,14 @@ const handleElectiveClick = (elective: string) => {
   }
 }
 
-watch(() => props.disabled, (newVal) => {
-  if (newVal) {
-    activeElective.value = null
+watch(
+  () => props.disabled,
+  (newVal) => {
+    if (newVal) {
+      activeElective.value = null
+    }
   }
-})
+)
 </script>
 
 <template>
