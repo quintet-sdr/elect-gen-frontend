@@ -28,18 +28,16 @@ import Header from '~/components/widgets/Header.vue';
 </script>
 
 <template>
-    <main>
-        <Header />
-        <div class="flex flex-col items-center justify-center min-h-screen">
-            <h1 class="primary text-2xl text-color-darkblue dark:color-lightgray font-semibold mb-4">We're all done!</h1>
-            <div class="bg-black text-white w-full max-w-4xl h-[32rem] overflow-auto p-4 mb-4">
-                <pre>{{ formattedJson }}</pre>
-            </div>
-            <p class="text-xl font-bold text-color-darkblue dark:color-lightgray mb-4">If the download has not started click on the button</p>
-            <button @click="downloadJson" class="bg-green-500 text-white py-2 px-4 rounded-xl hover:bg-green-700">
-                Download table
-            </button>
+    <Header />
+    <main class="flex flex-col items-center justify-center min-h-screen">
+        <h1 class="primary text-2xl text-color-darkblue dark:color-lightgray font-semibold mb-4">We're all done!</h1>
+        <div class="bg-black text-white w-full max-w-4xl h-[32rem] overflow-auto p-4 mb-4">
+            <pre>{{ formattedJson }}</pre>
         </div>
+        <p class="text-xl font-bold text-color-darkblue dark:color-lightgray mb-4">If the download has not started click on the button</p>
+        <button @click="downloadJson" class="bg-green-500 text-white py-2 px-4 rounded-xl hover:bg-green-700">
+            Download table
+        </button>
     </main>
 </template>
 
