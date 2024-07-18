@@ -180,7 +180,7 @@ watch(currentElective, (newElective) => {
             />
             <ElectiveInput
               v-model="maxGroup"
-              headerName="Maximum students in group"
+              headerName="Maximum students in course"
               placeholder="Enter maximum"
               type="number"
             />
