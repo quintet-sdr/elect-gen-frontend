@@ -28,8 +28,8 @@ const notificationClearMessage = ref('')
 const switchBoxDisabled = ref(false)
 
 const handleElectiveChange = (elective: string) => {
-  currentElective.value = elective;
-  courseName.value = elective;
+  currentElective.value = elective
+  courseName.value = elective
 }
 
 const courseName = ref('')
@@ -129,7 +129,7 @@ watch(currentElective, (newElective) => {
   <Header />
   <main class="flex flex-col items-center gap-12">
     <h1 class="primary">Electives</h1>
-    <div class="flex w-full flex-row items-center justify-around">
+    <div class="flex w-full flex-row items-center justify-around gap-8">
       <div class="flex min-h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange" />
       </div>
