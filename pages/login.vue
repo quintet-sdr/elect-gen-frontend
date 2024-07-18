@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Logo from "~/components/shared/Logo/Logo.vue";
+import Logo from '~/components/shared/Logo/Logo.vue'
 
 const showPassword = ref(false)
 const email = ref('')
@@ -24,11 +24,11 @@ function navigateToStatistics() {
 <template>
   <main class="flex min-h-svh w-full flex-col items-center justify-around">
     <a class="h-20 w-40" href="https://innopolis.university/">
-      <Logo/>
+      <Logo />
     </a>
 
     <div class="flex h-96 flex-col items-center justify-around rounded-3xl bg-white p-8">
-      <h2 class="text-3xl font-semibold text-black">Sign in</h2>
+      <h2 class="text-3xl font-semibold text-color-darkblue">Sign in</h2>
       <input
         class="w-80 rounded-2xl bg-zinc-200 p-4 text-lg font-semibold text-black placeholder:font-semibold"
         v-model="email"
