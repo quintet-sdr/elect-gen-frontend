@@ -35,7 +35,8 @@ import Header from '~/components/widgets/Header.vue';
             <pre>{{ formattedJson }}</pre>
         </div>
         <p class="text-xl font-bold text-color-darkblue dark:text-color-lightgray mb-4">If the download has not started click on the button</p>
-        <button @click="downloadJson" class="bg-color-inno-green text-color-lightgray py-2 px-4 rounded-xl hover:opacity-75">
+        <p class="text-xl font-bold dark:text-color-lightgray mb-4">If the download has not started click on the button</p>
+        <button @click="downloadJson" class="bg-green-500 text-white py-2 px-4 rounded-xl hover:bg-green-700">
             Download table
         </button>
     </main>
