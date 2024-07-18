@@ -9,7 +9,7 @@
         <div class="flex h-full w-1/2 flex-col items-start justify-around gap-4">
             <h2 class="text-3xl font-semibold">Course Description</h2>
             <div
-            class="scrollable placeholder-p-4 h-80 w-full rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray px-4 py-4"
+            class="overflow-y-scroll placeholder-p-4 h-80 w-full rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray px-4 py-4"
             >
                 <!-- an example -->
                 <p>
@@ -45,7 +45,7 @@
             <div class="flex w-1/2 flex-col items-start justify-around gap-4">
                 <h3 class="text-xl font-semibold">Prerequisites</h3>
                 <div
-                class="scrollable placeholder-p-4 h-40 w-full rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray px-4 py-4"
+                class="overflow-y-scroll placeholder-p-4 h-40 w-full rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray px-4 py-4"
                 >
                     <!-- an example -->
                     Knowledge in any general-purpose programming language (Java, C++,
@@ -55,7 +55,7 @@
             <div class="flex w-1/2 flex-col items-start justify-around gap-4">
                 <h3 class="text-xl font-semibold">Duration</h3>
                 <div
-                class="scrollable placeholder-p-4 h-40 w-full rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray px-4 py-4"
+                class="overflow-y-scroll placeholder-p-4 h-40 w-full rounded-3xl bg-color-lightgray text-color-darkblue placeholder-color-gray px-4 py-4"
                 >
                     <!-- an example -->
                     01.06 - 01.08
@@ -65,10 +65,6 @@
     </main>
 </template>
 
-<style scoped>
-.scrollable {
-  overflow-y: scroll;
-}
-</style>
+<style scoped></style>
 
   
