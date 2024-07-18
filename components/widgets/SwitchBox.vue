@@ -32,7 +32,7 @@ watch(
       <button
         :class="[
           'mx-2 rounded px-4 py-2 font-semibold',
-          currentBlock === 'block1' ? 'bg-color-gray text-color-darkblue' : 'bg-transparent'
+          currentBlock === 'block1' ? 'bg-color-inno-green text-color-lightgray' : 'bg-transparent'
         ]"
         @click="currentBlock = 'block1'"
       >
@@ -41,7 +41,7 @@ watch(
       <button
         :class="[
           'mx-2 rounded px-4 py-2 font-semibold',
-          currentBlock === 'block2' ? 'bg-color-gray text-color-darkblue' : 'bg-transparent'
+          currentBlock === 'block2' ? 'bg-color-inno-green text-color-lightgray' : 'bg-transparent'
         ]"
         @click="currentBlock = 'block2'"
       >

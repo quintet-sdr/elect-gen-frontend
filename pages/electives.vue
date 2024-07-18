@@ -129,7 +129,7 @@ watch(currentElective, (newElective) => {
   <Header />
   <main class="flex flex-col items-center gap-12">
     <h1 class="primary">Electives</h1>
-    <div class="flex w-full h-auto flex-row items-center justify-around gap-8">
+    <div class="flex h-auto w-full flex-row items-center justify-around gap-8">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange" />
       </div>
@@ -196,9 +196,7 @@ watch(currentElective, (newElective) => {
           </div>
         </div>
         <div class="flex flex-row items-center gap-4">
-          <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg"
-                   @click="handleSave"
-          >
+          <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" @click="handleSave">
             Save changes
           </UButton>
           <button
