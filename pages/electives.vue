@@ -7,6 +7,7 @@ import SavedNotification from '~/components/shared/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/ClearedNotification.vue'
 
 interface ElectiveData {
+  courseName: string
   shortName: string
   instructorMail: string
   minOverall: number | null
@@ -30,6 +31,7 @@ const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
 }
 
+const courseName = ref('')
 const shortName = ref('')
 const instructorMail = ref('')
 const minOverall = ref<number | null>(null)
@@ -42,6 +44,7 @@ const description = ref('')
 const handleSave = () => {
   if (currentElective.value) {
     electiveData.value[currentElective.value] = {
+      courseName: courseName.value,
       shortName: shortName.value,
       instructorMail: instructorMail.value,
       minOverall: minOverall.value,
@@ -63,6 +66,7 @@ const handleSave = () => {
 
 const handleClear = () => {
   if (currentElective.value) {
+    courseName.value = ''
     shortName.value = ''
     instructorMail.value = ''
     minOverall.value = null
@@ -73,6 +77,7 @@ const handleClear = () => {
     description.value = ''
 
     electiveData.value[currentElective.value] = {
+      courseName: '',
       shortName: '',
       instructorMail: '',
       minOverall: 0,
@@ -96,6 +101,7 @@ const handleClear = () => {
 watch(currentElective, (newElective) => {
   if (newElective && electiveData.value[newElective]) {
     const data = electiveData.value[newElective]
+    courseName.value = data.courseName
     shortName.value = data.shortName
     instructorMail.value = data.instructorMail
     minOverall.value = data.minOverall
@@ -105,6 +111,7 @@ watch(currentElective, (newElective) => {
     maxGroup.value = data.maxGroup
     description.value = data.description
   } else {
+    courseName.value = ''
     shortName.value = ''
     instructorMail.value = ''
     minOverall.value = null
@@ -129,6 +136,11 @@ watch(currentElective, (newElective) => {
         <h2 class="text-3xl font-semibold">Options</h2>
         <div class="flex min-h-full w-full flex-row items-center gap-8 self-stretch">
           <div class="flex h-full w-1/2 flex-col items-center gap-6">
+            <ElectiveInput
+              v-model="courseName"
+              headerName="Course full name"
+              placeholder="Full name"
+            />
             <ElectiveInput
               v-model="shortName"
               headerName="Course short name"
