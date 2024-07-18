@@ -61,7 +61,7 @@ watch(
           />
         </div>
         <button
-          class="flex w-90 items-center justify-center rounded-2xl bg-gray-300 text-2xl font-semibold border-2 hover:border-color-inno-green text-color-darkblue"
+          class="flex w-90 items-center justify-center rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
         >
           +
         </button>
@@ -78,7 +78,7 @@ watch(
           />
         </div>
         <button
-          class="flex w-90 items-center justify-center rounded-2xl bg-gray-300 text-2xl font-semibold border-2 hover:border-color-inno-green text-color-darkblue"
+          class="flex w-90 items-center justify-center rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
         >
           +
         </button>
