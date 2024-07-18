@@ -2,7 +2,7 @@
 import {ref, watch} from 'vue'
 import Header from '~/components/widgets/Header.vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
-import ElectiveInput from '~/components/shared/ElectiveInput.vue'
+import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
 import SavedNotification from '~/components/shared/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/ClearedNotification.vue'
 

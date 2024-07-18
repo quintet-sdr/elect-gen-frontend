@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, defineEmits, defineProps, watch } from 'vue'
 import { techElectives, humElectives } from '~/constants/electivesList.js'
-import ElectiveButton from '~/components/shared/ElectiveButton.vue'
+import ElectiveButton from '~/components/shared/Elective/ElectiveButton.vue'
 
 const props = defineProps<{ disabled: boolean }>()
 const emit = defineEmits(['elective-change'])
