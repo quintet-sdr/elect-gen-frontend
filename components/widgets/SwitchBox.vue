@@ -49,25 +49,35 @@ watch(
       </button>
     </div>
     <div class="flex w-full flex-col items-center justify-center">
-      <div class="text-center" v-if="currentBlock === 'block1'">
-        <div class="p-3" v-for="elective in techElectives" :key="elective">
+      <div class="text-center flex flex-col gap-8 items-center" v-if="currentBlock === 'block1'">
+        <div class="flex flex-col justify-around items-center gap-4">
           <ElectiveButton
+            v-for="elective in techElectives"
+            :key="elective"
             :active="elective === activeElective"
             :disabled="props.disabled"
             :name="elective"
             @click="handleElectiveClick(elective)"
           />
         </div>
+        <button class="flex justify-center items-center bg-gray-300 w-90 rounded-2xl text-2xl font-semibold dark:text-color-darkblue">
+          +
+        </button>
       </div>
-      <div class="text-center" v-if="currentBlock === 'block2'">
-        <div class="p-3" v-for="elective in humElectives" :key="elective">
+      <div class="text-center flex flex-col gap-8 items-center" v-if="currentBlock === 'block2'">
+        <div class="flex flex-col justify-around items-center gap-4">
           <ElectiveButton
+            v-for="elective in humElectives"
+            :key="elective"
             :active="elective === activeElective"
             :disabled="props.disabled"
             :name="elective"
             @click="handleElectiveClick(elective)"
           />
         </div>
+        <button class="flex justify-center items-center bg-gray-300 w-90 rounded-2xl text-2xl font-semibold dark:text-color-darkblue">
+          +
+        </button>
       </div>
     </div>
   </div>

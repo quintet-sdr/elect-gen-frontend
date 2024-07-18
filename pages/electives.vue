@@ -28,7 +28,8 @@ const notificationClearMessage = ref('')
 const switchBoxDisabled = ref(false)
 
 const handleElectiveChange = (elective: string) => {
-  currentElective.value = elective
+  currentElective.value = elective;
+  courseName.value = elective;
 }
 
 const courseName = ref('')
