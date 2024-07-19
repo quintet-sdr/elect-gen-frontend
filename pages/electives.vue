@@ -34,7 +34,7 @@ const handleElectiveChange = (elective: string) => {
 
 const courseName = ref('')
 const shortName = ref('')
-const instructorMail = ref('')
+const instructorName = ref('')
 const minOverall = ref<number | null>(null)
 const maxOverall = ref<number | null>(null)
 const lowGroup = ref<number | null>(null)
@@ -47,7 +47,7 @@ const handleSave = () => {
     electiveData.value[currentElective.value] = {
       courseName: courseName.value,
       shortName: shortName.value,
-      instructorMail: instructorMail.value,
+      instructorMail: instructorName.value,
       minOverall: minOverall.value,
       maxOverall: maxOverall.value,
       lowGroup: lowGroup.value,
@@ -69,7 +69,7 @@ const handleClear = () => {
   if (currentElective.value) {
     courseName.value = ''
     shortName.value = ''
-    instructorMail.value = ''
+    instructorName.value = ''
     minOverall.value = null
     maxOverall.value = null
     lowGroup.value = null
@@ -104,7 +104,7 @@ watch(currentElective, (newElective) => {
     const data = electiveData.value[newElective]
     courseName.value = data.courseName
     shortName.value = data.shortName
-    instructorMail.value = data.instructorMail
+    instructorName.value = data.instructorMail
     minOverall.value = data.minOverall
     maxOverall.value = data.maxOverall
     lowGroup.value = data.lowGroup
@@ -114,7 +114,7 @@ watch(currentElective, (newElective) => {
   } else {
     courseName.value = ''
     shortName.value = ''
-    instructorMail.value = ''
+    instructorName.value = ''
     minOverall.value = null
     maxOverall.value = null
     lowGroup.value = null
@@ -148,11 +148,10 @@ watch(currentElective, (newElective) => {
               placeholder="Short name"
             />
             <ElectiveInput
-              v-model="instructorMail"
+              v-model="instructorName"
               autocomplete="email"
-              headerName="Instructor’s mail"
-              placeholder="Instructor’s mail"
-              type="email"
+              headerName="Instructor’s name"
+              placeholder="Instructor’s name"
             />
             <ElectiveInput
               v-model="minOverall"
