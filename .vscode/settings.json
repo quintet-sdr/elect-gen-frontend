@@ -1,7 +1,11 @@
 {
-  // Enable the ESlint flat config support
-  // (remove this if your ESLint extension above v3.0.5)
-  "eslint.experimental.useFlatConfig": true,
+  "[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
 
   // Disable the default formatter, use eslint instead
   "prettier.enable": true,
@@ -49,5 +53,8 @@
     "pcss",
     "postcss"
   ],
-  "i18n-ally.localesPaths": ["locales"]
+
+  "i18n-ally.localesPaths": ["locales"],
+
+  "tailwindCSS.includeLanguages": { "vue": "vue" }
 }
