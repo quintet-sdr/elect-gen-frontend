@@ -13,7 +13,7 @@ let techElectives = reactive([
   'Introduction to Mechanical Engineering',
   'Introduction to Robotics Operating System: Basics, Motion, and Vision',
   'Lambda-Calculus, Algebra, Machinery and Logic for Formal Program Semantics',
-  'Real-Time Scheduling Theory',
+  'Real-Time Scheduling Theory'
 ])
 
 let humElectives = reactive([
@@ -30,46 +30,59 @@ let humElectives = reactive([
   'Design Thinking for IT-specialist'
 ])
 
-const props = defineProps<{ disabled: boolean }>();
-const emit = defineEmits(['elective-change']);
+const props = defineProps<{ disabled: boolean }>()
+const emit = defineEmits(['elective-change'])
 
-const currentBlock = ref('block1');
-const activeElective = ref<string | null>(null);
+const currentBlock = ref('block1')
+const activeElective = ref<string | null>(null)
 
-const newElectiveName = ref('');
-const newElectiveEditing = ref(false);
+const newElectiveName = ref('')
+const newElectiveEditing = ref(false)
+
+const deletingMode = ref(false)
 
 const handleElectiveClick = (elective: string) => {
-  if (!props.disabled) {
+  if (deletingMode.value) {
+    deleteElective(elective)
+  } else if (!props.disabled) {
     activeElective.value = elective
     emit('elective-change', elective)
   }
 }
 
 const startEditingNewElective = () => {
-  newElectiveEditing.value = true;
+  newElectiveEditing.value = true
 }
 
 const addNewElective = () => {
   if (newElectiveName.value.trim() !== '') {
     if (currentBlock.value === 'block1') {
-      techElectives.push(newElectiveName.value.trim());
+      techElectives.push(newElectiveName.value.trim())
     } else if (currentBlock.value === 'block2') {
-      humElectives.push(newElectiveName.value.trim());
+      humElectives.push(newElectiveName.value.trim())
     }
-    newElectiveName.value = '';
-    newElectiveEditing.value = false;
+    newElectiveName.value = ''
+    newElectiveEditing.value = false
   }
 }
 
 const handleBlur = () => {
-  addNewElective();
+  addNewElective()
 }
 
 const handleKeyup = (event: KeyboardEvent) => {
   if (event.key === 'Enter') {
-    addNewElective();
+    addNewElective()
   }
+}
+
+const deleteElective = (elective: string) => {
+  if (currentBlock.value === 'block1') {
+    techElectives = techElectives.filter((e) => e !== elective)
+  } else if (currentBlock.value === 'block2') {
+    humElectives = humElectives.filter((e) => e !== elective)
+  }
+  deletingMode.value = false
 }
 
 watch(
@@ -104,7 +117,7 @@ watch(
         Hum
       </button>
     </div>
-    <div class="flex w-full h-full flex-col items-center justify-center">
+    <div class="flex h-full w-full flex-col items-center justify-center">
       <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block1'">
         <div class="flex flex-col items-center justify-around gap-4">
           <ElectiveButton
@@ -115,23 +128,6 @@ watch(
             :name="elective"
             @click="handleElectiveClick(elective)"
           />
-        </div>
-        <div class="flex w-90 items-center justify-center rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green">
-          <template v-if="newElectiveEditing">
-            <input
-              v-model="newElectiveName"
-              @blur="handleBlur"
-              @keyup="handleKeyup"
-              class="bg-transparent border-none focus:outline-none w-full text-center"
-              placeholder="Enter course name"
-            />
-          </template>
-          <template v-else>
-            <button class="w-full"
-              @click="startEditingNewElective">
-              +
-            </button>
-          </template>
         </div>
       </div>
       <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block2'">
@@ -145,23 +141,34 @@ watch(
             @click="handleElectiveClick(elective)"
           />
         </div>
-        <div class="flex w-90 items-center justify-center rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green">
-          <template v-if="newElectiveEditing">
-            <input
-              v-model="newElectiveName"
-              @blur="handleBlur"
-              @keyup="handleKeyup"
-              class="bg-transparent border-none focus:outline-none w-full text-center"
-              placeholder="Enter course name"
-            />
-          </template>
-          <template v-else>
-            <button @click="startEditingNewElective">
-              +
-            </button>
-          </template>
-        </div>
       </div>
+    </div>
+    <div class="sticky mt-0.5 flex w-90 flex-col items-center justify-center gap-4">
+      <div>
+        <template v-if="newElectiveEditing">
+          <input
+            class="w-72 rounded-2xl border-2 bg-gray-300 text-center text-2xl font-semibold text-color-darkblue hover:border-color-inno-green focus:outline-none"
+            v-model="newElectiveName"
+            @blur="handleBlur"
+            @keyup="handleKeyup"
+            placeholder="Enter course name"
+          />
+        </template>
+        <template v-else>
+          <button
+            class="w-72 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
+            @click="startEditingNewElective"
+          >
+            +
+          </button>
+        </template>
+      </div>
+      <button
+        class="w-72 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
+        @click="deletingMode = !deletingMode"
+      >
+        {{ deletingMode ? 'Cancel' : '-' }}
+      </button>
     </div>
   </div>
 </template>
