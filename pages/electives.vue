@@ -233,9 +233,9 @@ watch(currentElective, (newElective) => {
           </div>
           </div>
           <div class="flex flex-row items-center gap-4">
-            <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" type="submit">
+            <button class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg hover:opacity-75" type="submit">
               Save changes
-            </UButton>
+            </button>
             <button
               class="rounded-xl border border-color-darkblue bg-transparent px-6 py-2.5 text-lg hover:opacity-75 dark:border-color-lightgray"
               @click="handleClear"
