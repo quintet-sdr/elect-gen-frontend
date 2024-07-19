@@ -31,22 +31,22 @@ function navigateToPage() {
 </script>
 
 <template>
-  <header class="my-6 flex flex-row justify-between">
+  <header class="my-6 flex justify-between">
     <div
-      class="icon-container"
+      class="flex items-center justify-center w-10 h-10 rounded-full transition duration-300 cursor-pointer hover:bg-opacity-10 hover:bg-inno-green"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
       @click="navigateToPage"
     >
       <Icon
         v-if="!isHovered"
-        class="size-6"
+        class="w-6 h-6"
         name="local:innopolis-university"
       />
       <img
         v-else
         src="/assets/icons/arrow-left-main.svg"
-        class="size-6 icon-hovered"
+        class="w-6 h-6 transform scale-160 filter-icon"
         alt="Arrow"
       />
     </div>
@@ -57,30 +57,16 @@ function navigateToPage() {
   </header>
 </template>
 
-
 <style scoped>
-.size-6 {
-  width: 24px;
-  height: 24px;
+.filter-icon {
+  filter: invert(47%) sepia(65%) saturate(276%) hue-rotate(111deg) brightness(92%) contrast(92%);
 }
 
-.icon-hovered {
-  filter: invert(47%) sepia(65%) saturate(276%) hue-rotate(111deg) brightness(92%) contrast(92%);
+.scale-160 {
   transform: scale(1.6); 
 }
 
-.icon-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-  cursor: pointer; 
-}
-
-.icon-container:hover {
+.hover\:bg-inno-green:hover {
   background-color: rgba(0, 191, 174, 0.1); /* Light tint of color-inno-green for the hover effect */
 }
 </style>
