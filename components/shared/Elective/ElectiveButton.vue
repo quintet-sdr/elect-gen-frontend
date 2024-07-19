@@ -19,7 +19,7 @@ const handleClick = () => {
 <template>
   <button
     :class="[
-      'flex max-w-72 flex-row items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-base font-medium text-color-darkblue hover:border-color-inno-green',
+      'flex min-w-72 max-w-72 flex-row items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-base font-medium text-color-darkblue hover:border-color-inno-green',
       props.active
         ? 'bg-color-inno-green text-color-lightgray dark:text-color-lightgray'
         : 'bg-gray-300',
