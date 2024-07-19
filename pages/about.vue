@@ -7,7 +7,12 @@ import Header from '~/components/widgets/Header.vue'
   <main>
     <div class="relative h-full w-full pl-5 pt-20">
       <div class="absolute mt-[10rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/ebortsov" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/ebortsov"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="evgenii-photo" src="~/assets/images/avatar1.jpg" />
           </div>
@@ -16,7 +21,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[90rem] mt-[10rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/acecution" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/acecution"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="anastasia-photo" src="~/assets/images/avatar2.jpg" />
           </div>
@@ -25,7 +35,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[45rem] mt-[10rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/lanebo1" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/lanebo1"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="kirill-photo" src="~/assets/images/avatar3.jpg" />
           </div>
@@ -34,7 +49,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[25rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/Pickpusha" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/Pickpusha"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="ilya-linh-sdr-photo" src="~/assets/images/avatar4.jpg" />
           </div>
@@ -43,7 +63,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[65rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/newspec" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/newspec"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="maxim-photo" src="~/assets/images/avatar5.png" />
           </div>
@@ -52,7 +77,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[25rem] mt-[25rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/projacktor" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/projacktor"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="arsen-photo" src="~/assets/images/avatar6.jpg" />
           </div>
@@ -61,7 +91,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[65rem] mt-[25rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/asqarslanov" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/asqarslanov"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="asqar-photo" src="~/assets/images/avatar7.jpg" />
           </div>
@@ -70,7 +105,12 @@ import Header from '~/components/widgets/Header.vue'
         </a>
       </div>
       <div class="absolute ml-[45rem] mt-[35rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a href="https://github.com/1sarmatt" rel="noopener noreferrer" target="_blank">
+        <a
+          class="transition duration-200 ease-in-out hover:text-green-500"
+          href="https://github.com/1sarmatt"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
             <img class="rounded-full" alt="sarmat-photo" src="~/assets/images/avatar8.jpg" />
           </div>
