@@ -3,6 +3,7 @@ import { ref, defineProps, defineEmits, watch } from 'vue'
 
 interface Props {
   headerName: string
+  id: string
   placeholder?: string
   type?: string
   autocomplete?: string
@@ -42,9 +43,10 @@ const handleInput = (event: Event) => {
 
 <template>
   <div class="flex flex-col items-start justify-around">
-    <h3 class="text-xl font-semibold">{{ props.headerName }}</h3>
+    <label :for="props.id" class="text-xl font-semibold">{{ props.headerName }}</label>
     <input
       class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
+      :id="props.id"
       :autocomplete="props.autocomplete"
       :placeholder="props.placeholder"
       :type="props.type"

@@ -138,46 +138,54 @@ watch(currentElective, (newElective) => {
         <form class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
           <div class="flex h-full w-1/2 flex-col items-center gap-6">
             <ElectiveInput
+              id="full-name"
               v-model="courseName"
               headerName="Course full name"
               placeholder="Full name"
             />
             <ElectiveInput
+              id="short-name"
               v-model="shortName"
               headerName="Course short name"
               placeholder="Short name"
             />
             <ElectiveInput
+              id="instructor-name"
               v-model="instructorName"
               autocomplete="email"
               headerName="Instructor’s name"
               placeholder="Instructor’s name"
             />
             <ElectiveInput
+              id="min-overall"
               v-model="minOverall"
               headerName="Minimum overall students"
               placeholder="Min overall"
               type="number"
             />
             <ElectiveInput
+              id="max-overall"
               v-model="maxOverall"
               headerName="Maximum overall students"
               placeholder="Max overall"
               type="number"
             />
             <ElectiveInput
+              id="low-group"
               v-model="lowGroup"
               headerName="Lower number students in group"
               placeholder="Low in group"
               type="number"
             />
             <ElectiveInput
+              id="high-group"
               v-model="highGroup"
               headerName="Higher number students in group"
               placeholder="High in group"
               type="number"
             />
             <ElectiveInput
+              id="max-group"
               v-model="maxGroup"
               headerName="Maximum students in course"
               placeholder="Enter maximum"
@@ -185,8 +193,9 @@ watch(currentElective, (newElective) => {
             />
           </div>
           <div class="flex min-h-full w-1/2 flex-col items-start justify-around self-stretch">
-            <h3 class="text-xl font-semibold">Course description</h3>
+            <label for="description" class="text-xl font-semibold">Course description</label>
             <textarea
+              id="description"
               class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
               v-model="description"
               placeholder="Description"
