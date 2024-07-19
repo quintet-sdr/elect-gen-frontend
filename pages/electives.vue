@@ -16,6 +16,7 @@ interface ElectiveData {
   highGroup: number | null
   maxGroup: number | null
   description: string
+  courseLevel: string
 }
 
 const currentElective = ref<string | null>(null)
@@ -41,6 +42,7 @@ const lowGroup = ref<number | null>(null)
 const highGroup = ref<number | null>(null)
 const maxGroup = ref<number | null>(null)
 const description = ref('')
+const courseLevel = ref('')
 
 const handleSave = () => {
   if (currentElective.value) {
@@ -53,7 +55,8 @@ const handleSave = () => {
       lowGroup: lowGroup.value,
       highGroup: highGroup.value,
       maxGroup: maxGroup.value,
-      description: description.value
+      description: description.value,
+      courseLevel: courseLevel.value
     }
     notificationOkMessage.value = 'Saved successfully'
     notificationOkVisible.value = true
@@ -76,6 +79,7 @@ const handleClear = () => {
     highGroup.value = null
     maxGroup.value = null
     description.value = ''
+    courseLevel.value = ''
 
     electiveData.value[currentElective.value] = {
       courseName: '',
@@ -86,7 +90,8 @@ const handleClear = () => {
       lowGroup: 0,
       highGroup: 0,
       maxGroup: 0,
-      description: ''
+      description: '',
+      courseLevel: ''
     }
 
     notificationClearMessage.value = 'Cleared'
@@ -111,6 +116,7 @@ watch(currentElective, (newElective) => {
     highGroup.value = data.highGroup
     maxGroup.value = data.maxGroup
     description.value = data.description
+    courseLevel.value = data.courseLevel
   } else {
     courseName.value = ''
     shortName.value = ''
@@ -121,6 +127,7 @@ watch(currentElective, (newElective) => {
     highGroup.value = null
     maxGroup.value = null
     description.value = ''
+    courseLevel.value = ''
   }
 })
 </script>
@@ -149,6 +156,21 @@ watch(currentElective, (newElective) => {
               headerName="Course short name"
               placeholder="Short name"
             />
+
+            <div class="flex flex-col items-start justify-around">
+              <label for="course-level" class="text-xl font-semibold">Course level</label>
+              <select
+                id="course-level"
+                v-model="courseLevel"
+                class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
+              >
+                <option value="" disabled>Select course level</option>
+                <option value="First year bachelors">First year bachelors</option>
+                <option value="Second year bachelors">Second year bachelors</option>
+                <option value="First and Second year bachelors">First and Second year bachelors</option>
+              </select>
+            </div>
+
             <ElectiveInput
               id="instructor-name"
               v-model="instructorName"
