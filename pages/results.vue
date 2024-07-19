@@ -2,7 +2,7 @@
 фона
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, defineExpose, ref } from 'vue'
 import Header from '~/components/widgets/Header.vue'
 
 interface JsonData {
@@ -11,23 +11,28 @@ interface JsonData {
   course_codename: string
 }
 
-const jsonData = {
+const jsonData = ref<JsonData>({
   student_email: 'i.nguen@innopolis.university',
   id: 1,
   course_codename: 'Front-end Web Development'
-} as JsonData
+})
 
-const formattedJson = computed(() => JSON.stringify(jsonData, null, 2))
+const formattedJson = computed(() => JSON.stringify(jsonData.value, null, 2))
+
+const downloadUrl = ref('')
+const downloadAnchorRef = ref<HTMLAnchorElement | null>(null)
 
 function downloadJson(): void {
-  const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(jsonData))
-  const downloadAnchorNode = document.createElement('a')
-  downloadAnchorNode.setAttribute('href', dataStr)
-  downloadAnchorNode.setAttribute('download', 'data.json')
-  document.body.appendChild(downloadAnchorNode)
-  downloadAnchorNode.click()
-  downloadAnchorNode.remove()
+  downloadUrl.value =
+    'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(jsonData.value))
+  if (downloadAnchorRef.value) {
+    downloadAnchorRef.value.click()
+  }
 }
+
+defineExpose({
+  downloadJson
+})
 </script>
 
 <template>
@@ -46,7 +51,6 @@ function downloadJson(): void {
     >
       Download table
     </button>
+    <a :href="downloadUrl" download="data.json" ref="downloadAnchorRef" style="display: none"></a>
   </main>
 </template>
-
-<style scoped></style>
