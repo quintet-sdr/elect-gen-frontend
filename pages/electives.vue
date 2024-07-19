@@ -134,16 +134,17 @@ watch(currentElective, (newElective) => {
 
 <template>
   <Header />
-  <main class="flex flex-col items-center gap-12">
+  <main class="flex flex-col items-center gap-12 max-w-full">
     <h1 class="primary">Electives</h1>
     <div class="flex h-auto w-full flex-row items-center justify-around gap-8">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange" />
       </div>
-      <div class="flex min-h-full w-1/2 flex-col items-center gap-4 self-start">
+      <div class="flex min-h-full w-1/2 flex-col items-center self-start">
         <h2 class="text-3xl font-semibold">Options</h2>
-        <form class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
-          <div class="flex h-full w-1/2 flex-col items-center gap-6">
+        <form @submit.prevent="handleSave" class="flex min-h-full w-full flex-col items-center gap-4 self-stretch">
+          <div class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
+            <div class="flex h-full w-1/2 flex-col items-center gap-6">
             <ElectiveInput
               id="full-name"
               v-model="courseName"
@@ -220,7 +221,7 @@ watch(currentElective, (newElective) => {
               type="number"
             />
           </div>
-          <div class="flex min-h-full w-1/2 flex-col items-start justify-around self-stretch">
+            <div class="flex min-h-full w-1/2 flex-col items-start justify-around self-stretch">
             <label class="text-xl font-semibold" for="description">Course description</label>
             <textarea
               class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
@@ -230,18 +231,19 @@ watch(currentElective, (newElective) => {
               type="text"
             />
           </div>
+          </div>
+          <div class="flex flex-row items-center gap-4">
+            <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" type="submit">
+              Save changes
+            </UButton>
+            <button
+              class="rounded-xl border border-color-darkblue bg-transparent px-6 py-2.5 text-lg hover:opacity-75 dark:border-color-lightgray"
+              @click="handleClear"
+            >
+              Clear fields
+            </button>
+          </div>
         </form>
-        <div class="flex flex-row items-center gap-4">
-          <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" @click="handleSave">
-            Save changes
-          </UButton>
-          <button
-            class="rounded-xl border border-color-darkblue bg-transparent px-6 py-2.5 text-lg hover:opacity-75 dark:border-color-lightgray"
-            @click="handleClear"
-          >
-            Clear fields
-          </button>
-        </div>
       </div>
       <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible" />
       <ClearedNotification
