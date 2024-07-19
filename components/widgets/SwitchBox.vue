@@ -147,7 +147,7 @@ watch(
       <div>
         <template v-if="newElectiveEditing">
           <input
-            class="w-72 rounded-2xl border-2 bg-gray-300 text-center text-2xl font-semibold text-color-darkblue hover:border-color-inno-green focus:outline-none"
+            class="w-72 rounded-2xl border-2 bg-gray-300 text-center text-color-darkblue hover:border-color-inno-green focus:outline-none"
             v-model="newElectiveName"
             @blur="handleBlur"
             @keyup="handleKeyup"
