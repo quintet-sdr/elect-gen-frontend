@@ -118,7 +118,7 @@ watch(
       </button>
     </div>
     <div
-      class="flex h-full max-h-[56rem] w-5/12 flex-col items-center justify-center overflow-y-scroll"
+      class="flex h-full max-h-[56rem] w-3/5 flex-col items-center justify-center overflow-y-scroll"
     >
       <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block1'">
         <div class="flex flex-col items-center justify-around gap-4">
@@ -148,8 +148,8 @@ watch(
     <div class="sticky mt-0.5 flex max-w-90 flex-col items-center justify-center gap-4">
       <div>
         <template v-if="newElectiveEditing">
-          <input
-            class="w-72 rounded-2xl border-2 bg-gray-300 text-center text-color-darkblue hover:border-color-inno-green focus:outline-none"
+          <textarea
+            class="w-96 rounded-2xl border-2 bg-gray-300 text-center text-color-darkblue hover:border-color-inno-green focus:outline-none resize-none"
             v-model="newElectiveName"
             @blur="handleBlur"
             @keyup="handleKeyup"
@@ -158,7 +158,7 @@ watch(
         </template>
         <template v-else>
           <button
-            class="w-72 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
+            class="w-96 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
             @click="startEditingNewElective"
           >
             +
@@ -166,7 +166,7 @@ watch(
         </template>
       </div>
       <button
-        class="w-72 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
+        class="w-96 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
         @click="deletingMode = !deletingMode"
       >
         {{ deletingMode ? 'Cancel' : '-' }}
