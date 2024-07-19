@@ -1,30 +1,3 @@
-<template>
-  <header class="my-6 flex flex-row justify-between">
-    <div
-      class="icon-container"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-      @click="navigateToPage"
-    >
-      <Icon
-        v-if="!isHovered"
-        class="size-6"
-        name="local:innopolis-university"
-      />
-      <img
-        v-else
-        src="/assets/icons/arrow-left-main.svg"
-        class="size-6 icon-hovered"
-        alt="Arrow"
-      />
-    </div>
-
-    <UDropdown :items="signOut" @click="signOutAndNavigate" mode="hover">
-      {{ store.email }}
-    </UDropdown>
-  </header>
-</template>
-
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
 
@@ -56,6 +29,34 @@ function navigateToPage() {
   router.push('/statistics') 
 }
 </script>
+
+<template>
+  <header class="my-6 flex flex-row justify-between">
+    <div
+      class="icon-container"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @click="navigateToPage"
+    >
+      <Icon
+        v-if="!isHovered"
+        class="size-6"
+        name="local:innopolis-university"
+      />
+      <img
+        v-else
+        src="/assets/icons/arrow-left-main.svg"
+        class="size-6 icon-hovered"
+        alt="Arrow"
+      />
+    </div>
+
+    <UDropdown :items="signOut" @click="signOutAndNavigate" mode="hover">
+      {{ store.email }}
+    </UDropdown>
+  </header>
+</template>
+
 
 <style scoped>
 .size-6 {
