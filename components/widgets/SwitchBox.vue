@@ -31,7 +31,7 @@ let humElectives = reactive([
 ])
 
 const props = defineProps<{ disabled: boolean }>()
-const emit = defineEmits(['elective-change'])
+const emit = defineEmits(['elective-change', 'toggle-delete-mode'])
 
 const currentBlock = ref('block1')
 const activeElective = ref<string | null>(null)
@@ -83,6 +83,7 @@ const deleteElective = (elective: string) => {
     humElectives = humElectives.filter((e) => e !== elective)
   }
   deletingMode.value = false
+  emit('toggle-delete-mode', deletingMode.value)
 }
 
 watch(
@@ -93,6 +94,11 @@ watch(
     }
   }
 )
+
+const toggleDeleteMode = () => {
+  deletingMode.value = !deletingMode.value
+  emit('toggle-delete-mode', deletingMode.value)
+}
 </script>
 
 <template>
@@ -118,9 +124,12 @@ watch(
       </button>
     </div>
     <div
-      class="flex h-full max-h-[56rem] w-3/5 flex-col items-center justify-center overflow-y-scroll"
+      class="flex h-full max-h-[52rem] w-3/5 flex-col items-center justify-center overflow-y-scroll"
     >
-      <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block1'">
+      <div
+        class="flex flex-col items-center justify-center gap-8 text-center"
+        v-if="currentBlock === 'block1'"
+      >
         <div class="flex flex-col items-center justify-around gap-4">
           <ElectiveButton
             v-for="elective in techElectives"
@@ -132,7 +141,10 @@ watch(
           />
         </div>
       </div>
-      <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block2'">
+      <div
+        class="flex flex-col items-center justify-center gap-8 text-center"
+        v-if="currentBlock === 'block2'"
+      >
         <div class="flex flex-col items-center justify-around gap-4">
           <ElectiveButton
             v-for="elective in humElectives"
@@ -145,11 +157,11 @@ watch(
         </div>
       </div>
     </div>
-    <div class="sticky mt-0.5 flex max-w-90 flex-col items-center justify-center gap-4">
+    <div class="sticky flex max-w-90 flex-col items-center justify-center gap-4">
       <div>
         <template v-if="newElectiveEditing">
           <textarea
-            class="w-96 rounded-2xl border-2 bg-gray-300 text-center text-color-darkblue hover:border-color-inno-green focus:outline-none resize-none"
+            class="w-96 resize-none rounded-2xl border-2 bg-gray-300 text-center text-color-darkblue hover:border-color-inno-green focus:outline-none"
             v-model="newElectiveName"
             @blur="handleBlur"
             @keyup="handleKeyup"
@@ -167,7 +179,7 @@ watch(
       </div>
       <button
         class="w-96 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
-        @click="deletingMode = !deletingMode"
+        @click="toggleDeleteMode"
       >
         {{ deletingMode ? 'Cancel' : '-' }}
       </button>

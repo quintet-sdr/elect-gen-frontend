@@ -25,6 +25,7 @@ const notificationOkVisible = ref(false)
 const notificationOkMessage = ref('')
 const notificationClearVisible = ref(false)
 const notificationClearMessage = ref('')
+const notificationDeleteVisible = ref(false)
 
 const switchBoxDisabled = ref(false)
 
@@ -104,6 +105,11 @@ const handleClear = () => {
   }
 }
 
+// Обработчик для переключения режима удаления
+const handleToggleDeleteMode = (isDeleting: boolean) => {
+  notificationDeleteVisible.value = isDeleting
+}
+
 watch(currentElective, (newElective) => {
   if (newElective && electiveData.value[newElective]) {
     const data = electiveData.value[newElective]
@@ -134,106 +140,114 @@ watch(currentElective, (newElective) => {
 
 <template>
   <Header />
-  <main class="flex flex-col items-center gap-12 max-w-full">
+  <main class="flex max-w-full flex-col items-center gap-12">
     <h1 class="primary">Electives</h1>
     <div class="flex h-auto w-full flex-row items-center justify-around gap-8">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
-        <SwitchBox :disabled="switchBoxDisabled" @elective-change="handleElectiveChange" />
+        <SwitchBox
+          :disabled="switchBoxDisabled"
+          @elective-change="handleElectiveChange"
+          @toggle-delete-mode="handleToggleDeleteMode"
+        />
       </div>
       <div class="flex min-h-full w-1/2 flex-col items-center self-start">
         <h2 class="text-3xl font-semibold">Options</h2>
-        <form @submit.prevent="handleSave" class="flex min-h-full w-full flex-col items-center gap-4 self-stretch">
+        <form
+          class="flex min-h-full w-full flex-col items-center gap-4 self-stretch"
+          @submit.prevent="handleSave"
+        >
           <div class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
             <div class="flex h-full w-1/2 flex-col items-center gap-6">
-            <ElectiveInput
-              id="full-name"
-              v-model="courseName"
-              headerName="Course full name"
-              placeholder="Full name"
-            />
-            <ElectiveInput
-              id="short-name"
-              v-model="shortName"
-              headerName="Course short name"
-              placeholder="Short name"
-            />
-
-            <div class="flex flex-col items-start justify-around">
-              <label class="text-xl font-semibold" for="course-level">Course level</label>
-              <select
-                class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
-                id="course-level"
-                v-model="courseLevel"
-              >
-                <option class="bg-color-lightgray" disabled value="">Select course level</option>
-                <option class="bg-color-lightgray" value="First year bachelors">
-                  First year bachelors
-                </option>
-                <option class="bg-color-lightgray" value="Second year bachelors">
-                  Second year bachelors
-                </option>
-                <option class="bg-color-lightgray" value="First and Second year bachelors">
-                  First and Second year bachelors
-                </option>
-              </select>
+              <ElectiveInput
+                id="full-name"
+                v-model="courseName"
+                headerName="Course full name"
+                placeholder="Full name"
+              />
+              <ElectiveInput
+                id="short-name"
+                v-model="shortName"
+                headerName="Course short name"
+                placeholder="Short name"
+              />
+              <div class="flex flex-col items-start justify-around">
+                <label class="text-xl font-semibold" for="course-level">Course level</label>
+                <select
+                  class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
+                  id="course-level"
+                  v-model="courseLevel"
+                >
+                  <option class="bg-color-lightgray" disabled value="">Select course level</option>
+                  <option class="bg-color-lightgray" value="First year bachelors">
+                    First year bachelors
+                  </option>
+                  <option class="bg-color-lightgray" value="Second year bachelors">
+                    Second year bachelors
+                  </option>
+                  <option class="bg-color-lightgray" value="First and Second year bachelors">
+                    First and Second year bachelors
+                  </option>
+                </select>
+              </div>
+              <ElectiveInput
+                id="instructor-name"
+                v-model="instructorName"
+                autocomplete="email"
+                headerName="Instructor’s name"
+                placeholder="Instructor’s name"
+              />
+              <ElectiveInput
+                id="min-overall"
+                v-model="minOverall"
+                headerName="Minimum overall students"
+                placeholder="Min overall"
+                type="number"
+              />
+              <ElectiveInput
+                id="max-overall"
+                v-model="maxOverall"
+                headerName="Maximum overall students"
+                placeholder="Max overall"
+                type="number"
+              />
+              <ElectiveInput
+                id="low-group"
+                v-model="lowGroup"
+                headerName="Lower number students in group"
+                placeholder="Low in group"
+                type="number"
+              />
+              <ElectiveInput
+                id="high-group"
+                v-model="highGroup"
+                headerName="Higher number students in group"
+                placeholder="High in group"
+                type="number"
+              />
+              <ElectiveInput
+                id="max-group"
+                v-model="maxGroup"
+                headerName="Maximum students in course"
+                placeholder="Enter maximum"
+                type="number"
+              />
             </div>
-
-            <ElectiveInput
-              id="instructor-name"
-              v-model="instructorName"
-              autocomplete="email"
-              headerName="Instructor’s name"
-              placeholder="Instructor’s name"
-            />
-            <ElectiveInput
-              id="min-overall"
-              v-model="minOverall"
-              headerName="Minimum overall students"
-              placeholder="Min overall"
-              type="number"
-            />
-            <ElectiveInput
-              id="max-overall"
-              v-model="maxOverall"
-              headerName="Maximum overall students"
-              placeholder="Max overall"
-              type="number"
-            />
-            <ElectiveInput
-              id="low-group"
-              v-model="lowGroup"
-              headerName="Lower number students in group"
-              placeholder="Low in group"
-              type="number"
-            />
-            <ElectiveInput
-              id="high-group"
-              v-model="highGroup"
-              headerName="Higher number students in group"
-              placeholder="High in group"
-              type="number"
-            />
-            <ElectiveInput
-              id="max-group"
-              v-model="maxGroup"
-              headerName="Maximum students in course"
-              placeholder="Enter maximum"
-              type="number"
-            />
-          </div>
             <div class="flex min-h-full w-1/2 flex-col items-start justify-around self-stretch">
-            <label class="text-xl font-semibold" for="description">Course description</label>
-            <textarea
-              class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
-              id="description"
-              v-model="description"
-              placeholder="Description"
-              type="text"
-            />
-          </div>
+              <label class="text-xl font-semibold" for="description">Course description</label>
+              <textarea
+                class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
+                id="description"
+                v-model="description"
+                placeholder="Description"
+                type="text"
+              />
+            </div>
           </div>
           <div class="flex flex-row items-center gap-4">
-            <button class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg hover:opacity-75" type="submit">
+            <button
+              class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg hover:opacity-75"
+              type="submit"
+            >
               Save changes
             </button>
             <button
@@ -249,6 +263,10 @@ watch(currentElective, (newElective) => {
       <ClearedNotification
         :message="notificationClearMessage"
         :visible="notificationClearVisible"
+      />
+      <ClearedNotification
+        :message="'Delete mode active. Click to the elective you want delete'"
+        :visible="notificationDeleteVisible"
       />
     </div>
   </main>
