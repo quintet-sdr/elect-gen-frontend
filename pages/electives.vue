@@ -135,7 +135,7 @@ watch(currentElective, (newElective) => {
       </div>
       <div class="flex min-h-full w-1/2 flex-col items-center gap-4 self-start">
         <h2 class="text-3xl font-semibold">Options</h2>
-        <div class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
+        <form class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
           <div class="flex h-full w-1/2 flex-col items-center gap-6">
             <ElectiveInput
               v-model="courseName"
@@ -193,7 +193,7 @@ watch(currentElective, (newElective) => {
               type="text"
             />
           </div>
-        </div>
+        </form>
         <div class="flex flex-row items-center gap-4">
           <UButton class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg" @click="handleSave">
             Save changes
