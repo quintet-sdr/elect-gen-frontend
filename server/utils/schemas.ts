@@ -20,8 +20,8 @@ export interface Course {
 export interface Student {
   email: string
   gpa: number
-  courseGroups: CourseGroup[]
-  completedCorses: CourseCodename[]
+  course_groups: CourseGroup[]
+  completed_corses: CourseCodename[]
   priority_1: CourseCodename
   priority_2: CourseCodename
   priority_3: CourseCodename
