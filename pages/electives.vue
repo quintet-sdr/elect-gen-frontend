@@ -158,16 +158,22 @@ watch(currentElective, (newElective) => {
             />
 
             <div class="flex flex-col items-start justify-around">
-              <label for="course-level" class="text-xl font-semibold">Course level</label>
+              <label class="text-xl font-semibold" for="course-level">Course level</label>
               <select
+                class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
                 id="course-level"
                 v-model="courseLevel"
-                class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
               >
-                <option class="bg-color-lightgray" value="" disabled>Select course level</option>
-                <option class="bg-color-lightgray" value="First year bachelors">First year bachelors</option>
-                <option class="bg-color-lightgray" value="Second year bachelors">Second year bachelors</option>
-                <option class="bg-color-lightgray" value="First and Second year bachelors">First and Second year bachelors</option>
+                <option class="bg-color-lightgray" disabled value="">Select course level</option>
+                <option class="bg-color-lightgray" value="First year bachelors">
+                  First year bachelors
+                </option>
+                <option class="bg-color-lightgray" value="Second year bachelors">
+                  Second year bachelors
+                </option>
+                <option class="bg-color-lightgray" value="First and Second year bachelors">
+                  First and Second year bachelors
+                </option>
               </select>
             </div>
 
@@ -215,10 +221,10 @@ watch(currentElective, (newElective) => {
             />
           </div>
           <div class="flex min-h-full w-1/2 flex-col items-start justify-around self-stretch">
-            <label for="description" class="text-xl font-semibold">Course description</label>
+            <label class="text-xl font-semibold" for="description">Course description</label>
             <textarea
-              id="description"
               class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
+              id="description"
               v-model="description"
               placeholder="Description"
               type="text"

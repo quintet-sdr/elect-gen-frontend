@@ -43,11 +43,11 @@ const handleInput = (event: Event) => {
 
 <template>
   <div class="flex flex-col items-start justify-around">
-    <label :for="props.id" class="text-xl font-semibold">{{ props.headerName }}</label>
+    <label class="text-xl font-semibold" :for="props.id">{{ props.headerName }}</label>
     <input
       class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
-      :id="props.id"
       :autocomplete="props.autocomplete"
+      :id="props.id"
       :placeholder="props.placeholder"
       :type="props.type"
       :value="value"

@@ -117,7 +117,9 @@ watch(
         Hum
       </button>
     </div>
-    <div class="flex h-full max-h-[55rem] overflow-y-scroll w-5/12 flex-col items-center justify-center">
+    <div
+      class="flex h-full max-h-[56rem] w-5/12 flex-col items-center justify-center overflow-y-scroll"
+    >
       <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block1'">
         <div class="flex flex-col items-center justify-around gap-4">
           <ElectiveButton
@@ -143,7 +145,7 @@ watch(
         </div>
       </div>
     </div>
-    <div class="sticky mt-0.5 flex w-90 flex-col items-center justify-center gap-4">
+    <div class="sticky mt-0.5 flex max-w-90 flex-col items-center justify-center gap-4">
       <div>
         <template v-if="newElectiveEditing">
           <input
