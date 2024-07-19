@@ -117,7 +117,7 @@ watch(
         Hum
       </button>
     </div>
-    <div class="flex h-full w-full flex-col items-center justify-center">
+    <div class="flex h-full max-h-[55rem] overflow-y-scroll w-5/12 flex-col items-center justify-center">
       <div class="flex flex-col items-center gap-8 text-center" v-if="currentBlock === 'block1'">
         <div class="flex flex-col items-center justify-around gap-4">
           <ElectiveButton

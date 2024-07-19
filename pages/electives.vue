@@ -164,10 +164,10 @@ watch(currentElective, (newElective) => {
                 v-model="courseLevel"
                 class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
               >
-                <option value="" disabled>Select course level</option>
-                <option value="First year bachelors">First year bachelors</option>
-                <option value="Second year bachelors">Second year bachelors</option>
-                <option value="First and Second year bachelors">First and Second year bachelors</option>
+                <option class="bg-color-lightgray" value="" disabled>Select course level</option>
+                <option class="bg-color-lightgray" value="First year bachelors">First year bachelors</option>
+                <option class="bg-color-lightgray" value="Second year bachelors">Second year bachelors</option>
+                <option class="bg-color-lightgray" value="First and Second year bachelors">First and Second year bachelors</option>
               </select>
             </div>
 
