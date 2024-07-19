@@ -1,6 +1,11 @@
+export type CourseCodename = string
+export type CourseGroup = string
+
 export interface Course {
-  codename: string
+  id: number
+  codename: CourseCodename
   type: 'hum' | 'tech'
+  groups: CourseGroup[]
   full_name: string
   short_name: string
   description: string
@@ -15,11 +20,13 @@ export interface Course {
 export interface Student {
   email: string
   gpa: number
-  priority_1: string
-  priority_2: string
-  priority_3: string
-  priority_4: string
-  priority_5: string
+  courseGroups: CourseGroup[]
+  completedCorses: CourseCodename[]
+  priority_1: CourseCodename
+  priority_2: CourseCodename
+  priority_3: CourseCodename
+  priority_4: CourseCodename
+  priority_5: CourseCodename
 }
 
 export default {}
