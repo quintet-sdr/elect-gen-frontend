@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 const store = useStore()
 const { t } = useI18n({ useScope: 'local' })
@@ -26,28 +26,24 @@ function handleMouseLeave() {
 
 // Function to navigate to a specific page
 function navigateToPage() {
-  router.push('/statistics') 
+  router.push('/statistics')
 }
 </script>
 
 <template>
   <header class="my-6 flex justify-between">
     <div
-      class="flex items-center justify-center w-10 h-10 rounded-full transition duration-300 cursor-pointer hover:bg-opacity-10 hover:bg-inno-green"
+      class="hover:bg-inno-green flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition duration-300 hover:bg-opacity-10"
+      @click="navigateToPage"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
-      @click="navigateToPage"
     >
-      <Icon
-        v-if="!isHovered"
-        class="w-6 h-6"
-        name="local:innopolis-university"
-      />
+      <Icon class="h-6 w-6" v-if="!isHovered" name="local:innopolis-university" />
       <img
+        class="scale-160 filter-icon h-6 w-6 transform"
         v-else
-        src="/assets/icons/arrow-left-main.svg"
-        class="w-6 h-6 transform scale-160 filter-icon"
         alt="Arrow"
+        src="/assets/icons/arrow-left-main.svg"
       />
     </div>
 
@@ -63,10 +59,15 @@ function navigateToPage() {
 }
 
 .scale-160 {
-  transform: scale(1.6); 
+  transform: scale(1.6);
 }
 
 .hover\:bg-inno-green:hover {
-  background-color: rgba(0, 191, 174, 0.1); /* Light tint of color-inno-green for the hover effect */
+  background-color: rgba(
+    0,
+    191,
+    174,
+    0.1
+  ); /* Light tint of color-inno-green for the hover effect */
 }
 </style>

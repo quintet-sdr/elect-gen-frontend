@@ -124,7 +124,7 @@ const toggleDeleteMode = () => {
       </button>
     </div>
     <div
-      class="flex h-full max-h-[52rem] w-3/5 flex-col items-center justify-center overflow-y-scroll"
+      class="hide-scrollbar flex h-full max-h-[52rem] w-3/5 flex-col items-center justify-center overflow-y-scroll"
     >
       <div
         class="flex flex-col items-center justify-center gap-8 text-center"
@@ -187,4 +187,13 @@ const toggleDeleteMode = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+</style>
