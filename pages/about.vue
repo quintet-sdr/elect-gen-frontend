@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Member from '~/components/shared/Member.vue'
 import Header from '~/components/widgets/Header.vue'
 </script>
 
@@ -7,116 +8,76 @@ import Header from '~/components/widgets/Header.vue'
   <main>
     <div class="relative h-full w-full pl-5 pt-20">
       <div class="absolute mt-[10rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/ebortsov"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="evgenii-photo" src="~/assets/images/avatar1.jpg" />
-          </div>
-          <p class="text-center font-bold">Evgenii Bortsov</p>
-          <p class="text-center">UX/UI Designer</p>
-        </a>
+        <Member
+          alt="evgenii-photo"
+          image="~/assets/images/avatar1.jpg"
+          link="https://github.com/ebortsov"
+          name="Evgenii Bortsov"
+          role="UX/UI Designer"
+        />
       </div>
       <div class="absolute ml-[90rem] mt-[10rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/acecution"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="anastasia-photo" src="~/assets/images/avatar2.jpg" />
-          </div>
-          <p class="text-center font-bold">Anastasia Varfolomeeva</p>
-          <p class="text-center">Front-end</p>
-        </a>
+        <Member
+          alt="anastasia-photo"
+          image="~/assets/images/avatar2.jpg"
+          link="https://github.com/acecution"
+          name="Anastasia Varfolomeeva"
+          role="Front-end"
+        />
       </div>
       <div class="absolute ml-[45rem] mt-[10rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/lanebo1"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="kirill-photo" src="~/assets/images/avatar3.jpg" />
-          </div>
-          <p class="text-center font-bold">Kirill Efimovich</p>
-          <p class="text-center">Algorithm Developer</p>
-        </a>
+        <Member
+          alt="kirill-photo"
+          image="~/assets/images/avatar3.jpg"
+          link="https://github.com/lanebo1"
+          name="Kirill Efimovich"
+          role="Algorithm Developer"
+        />
       </div>
       <div class="absolute ml-[25rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/Pickpusha"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="ilya-linh-sdr-photo" src="~/assets/images/avatar4.jpg" />
-          </div>
-          <p class="text-center font-bold">Ilya-Linh Nguen</p>
-          <p class="text-center">DevOps</p>
-        </a>
+        <Member
+          alt="ilya-linh-sdr-photo"
+          image="~/assets/images/avatar4.jpg"
+          link="https://github.com/Pickpusha"
+          name="Ilya-Linh Nguen"
+          role="DevOps"
+        />
       </div>
       <div class="absolute ml-[65rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/newspec"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="maxim-photo" src="~/assets/images/avatar5.png" />
-          </div>
-          <p class="text-center font-bold">Maxim Malov</p>
-          <p class="text-center">Algorithm Developer</p>
-        </a>
+        <Member
+          alt="maxim-photo"
+          image="~/assets/images/avatar5.png"
+          link="https://github.com/newspec"
+          name="Maxim Malov"
+          role="Algorithm Developer"
+        />
       </div>
       <div class="absolute ml-[25rem] mt-[25rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/projacktor"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="arsen-photo" src="~/assets/images/avatar6.jpg" />
-          </div>
-          <p class="text-center font-bold">Arsen Galiev</p>
-          <p class="text-center">Full-stack</p>
-        </a>
+        <Member
+          alt="arsen-photo"
+          image="~/assets/images/avatar6.jpg"
+          link="https://github.com/projacktor"
+          name="Arsen Galiev"
+          role="Full-stack"
+        />
       </div>
       <div class="absolute ml-[65rem] mt-[25rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/asqarslanov"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="asqar-photo" src="~/assets/images/avatar7.jpg" />
-          </div>
-          <p class="text-center font-bold">Asqar Arslanov</p>
-          <p class="text-center">Full-stack</p>
-        </a>
+        <Member
+          alt="asqar-photo"
+          image="~/assets/images/avatar7.jpg"
+          link="https://github.com/asqarslanov"
+          name="Asqar Arslanov"
+          role="Full-stack"
+        />
       </div>
       <div class="absolute ml-[45rem] mt-[35rem] h-[8vw] w-[8vw] flex-col items-center">
-        <a
-          class="transition duration-200 ease-in-out hover:text-green-500"
-          href="https://github.com/1sarmatt"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
-            <img class="rounded-full" alt="sarmat-photo" src="~/assets/images/avatar8.jpg" />
-          </div>
-          <p class="text-center font-bold">Sarmat Lutfullin</p>
-          <p class="text-center">Front-end</p>
-        </a>
+        <Member
+          alt="sarmat-photo"
+          image="~/assets/images/avatar8.jpg"
+          link="https://github.com/1sarmatt"
+          name="Sarmat Lutfullin"
+          role="Front-end"
+        />
       </div>
     </div>
   </main>
