@@ -169,7 +169,7 @@ watch(currentElective, (newElective) => {
                 headerName="Course short name"
                 placeholder="Short name"
               />
-              <div class="flex flex-col items-center justify-around">
+              <div class="flex flex-col items-start justify-around">
                 <label class="text-xl font-semibold" for="course-level">Course level</label>
                 <select
                   class="h-14 w-90 rounded-3xl bg-color-surface px-3.5 text-color-dark placeholder:text-gray-100"
