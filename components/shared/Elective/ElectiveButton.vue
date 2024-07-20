@@ -19,10 +19,10 @@ const handleClick = () => {
 <template>
   <button
     :class="[
-      'flex w-96 flex-row items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-base font-medium text-color-darkblue hover:border-color-inno-green',
+      'flex w-96 flex-row items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-base font-medium text-color-dark hover:border-color-accent',
       props.active
-        ? 'bg-color-inno-green text-color-lightgray dark:text-color-lightgray'
-        : 'bg-gray-300',
+        ? 'bg-color-accent text-color-base'
+        : 'bg-color-overlay dark:bg-color-surface',
       props.disabled ? 'cursor-not-allowed opacity-50' : ''
     ]"
     @click="handleClick"

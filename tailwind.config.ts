@@ -10,6 +10,7 @@ export default <Partial<Config>>{
       colors: {
         'color-accent': 'rgb(var(--color-accent) / <alpha-value>)',
         'color-text': 'rgb(var(--color-text) / <alpha-value>)',
+        'color-dark': 'rgb(var(--color-dark) / <alpha-value>)',
         'color-overlay': 'rgb(var(--color-overlay) / <alpha-value>)',
         'color-surface': 'rgb(var(--color-surface) / <alpha-value>)',
         'color-base': 'rgb(var(--color-base) / <alpha-value>)'
