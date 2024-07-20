@@ -5,8 +5,8 @@
 @layer base {
   :root {
     --color-accent: 64 186 33;
-    --color-text: 18 12 42;
-    --color-dark: 18 12 42;
+    --color-text: 18 21 42;
+    --color-dark: 18 21 42;
     --color-overlay: 153 159 175;
     --color-surface: 240 243 247;
     --color-base: 255 255 255;
