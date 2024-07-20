@@ -3,8 +3,8 @@ import { ref, watch } from 'vue'
 import Header from '~/components/widgets/Header.vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
-import SavedNotification from '~/components/shared/SavedNotification.vue'
-import ClearedNotification from '~/components/shared/ClearedNotification.vue'
+import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
+import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
 
 interface ElectiveData {
   courseName: string
@@ -139,7 +139,6 @@ watch(currentElective, (newElective) => {
 </script>
 
 <template>
-  <Header />
   <main class="flex max-w-full flex-col items-center gap-12">
     <h1 class="primary">Electives</h1>
     <div class="flex h-auto w-full flex-row items-center justify-around gap-8">
