@@ -54,7 +54,7 @@ const selected = ref(fileExtensions[0])
       </span>
 
       <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
-        <Icon class="text-color-surface size-5" name="fa6-solid:rotate" />
+        <Icon class="size-5 text-color-surface" name="fa6-solid:rotate" />
       </UButton>
     </div>
 
@@ -65,7 +65,7 @@ const selected = ref(fileExtensions[0])
         <UButton :label="$t('statistics.button.download')" />
 
         <USelectMenu
-          class="text-color-surface justify-self-start"
+          class="justify-self-start text-color-surface"
           v-model="selected"
           :arrow="{ placement: 'left-top' }"
           :options="fileExtensions"
@@ -79,7 +79,7 @@ const selected = ref(fileExtensions[0])
     </div>
 
     <UButton
-      class="border-color-accent flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed"
+      class="flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
       @click="clickById('browse')"
       @focus="focusById('browse')"
       variant="ghost"
