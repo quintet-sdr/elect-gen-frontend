@@ -42,11 +42,11 @@ defineExpose({
     <div class="mb-4 w-2/5 rounded-xl bg-black p-4 text-white">
       <pre>{{ formattedJson }}</pre>
     </div>
-    <p class="mb-4 text-xl font-bold text-color-darkblue dark:text-color-lightgray">
+    <p class="text-color-darkblue dark:text-color-lightgray mb-4 text-xl font-bold">
       If the download has not started click on the button
     </p>
     <button
-      class="rounded-xl bg-color-inno-green px-4 py-2 text-white hover:bg-green-700"
+      class="bg-color-inno-green rounded-xl px-4 py-2 text-white hover:bg-green-700"
       @click="downloadJson"
     >
       Download table

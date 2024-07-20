@@ -6,7 +6,7 @@ const props = defineProps<{
 
 <template>
   <article
-    class="order-1 flex w-width-100 flex-row flex-wrap items-center gap-40 rounded-xl bg-gray-300 px-3 py-2 text-base font-medium dark:text-color-darkblue"
+    class="dark:text-color-darkblue order-1 flex w-width-100 flex-row flex-wrap items-center gap-40 rounded-xl bg-gray-300 px-3 py-2 text-base font-medium"
   >
     <span class="truncate-custom">
       {{ props.name }}

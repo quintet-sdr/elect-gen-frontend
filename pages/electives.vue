@@ -4,7 +4,7 @@ import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
 import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
-import Heading from "~/components/shared/Text/Heading.vue";
+import Heading from '~/components/shared/Text/Heading.vue'
 
 interface ElectiveData {
   courseName: string
@@ -140,7 +140,7 @@ watch(currentElective, (newElective) => {
 
 <template>
   <main class="flex min-w-full flex-col items-center gap-12">
-    <Heading text="Electives"/>
+    <Heading text="Electives" />
     <div class="flex h-auto w-full flex-row items-center justify-around">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox
@@ -149,7 +149,7 @@ watch(currentElective, (newElective) => {
           @toggle-delete-mode="handleToggleDeleteMode"
         />
       </div>
-      <div class="flex min-h-full w-1/2 flex-col items-center self-start">
+      <div class="flex min-h-full w-1/2 flex-col items-center gap-8 self-start">
         <h2 class="text-3xl font-semibold">Options</h2>
         <form
           class="flex min-h-full w-full flex-col items-center gap-4 self-stretch"
@@ -234,7 +234,7 @@ watch(currentElective, (newElective) => {
             <div class="flex min-w-90 flex-col items-center justify-around">
               <label class="text-xl font-semibold" for="description">Course description</label>
               <textarea
-                class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-surface p-4 text-color-darkblue placeholder-color-gray"
+                class="placeholder-p-4 text-color-darkblue placeholder-color-gray h-full w-full resize-none rounded-3xl bg-color-surface p-4"
                 id="description"
                 v-model="description"
                 placeholder="Description"
@@ -250,7 +250,7 @@ watch(currentElective, (newElective) => {
               Save changes
             </button>
             <button
-              class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75 "
+              class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75"
               @click="handleClear"
             >
               Clear fields

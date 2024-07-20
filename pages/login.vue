@@ -28,7 +28,7 @@ function navigateToStatistics() {
     </a>
 
     <div class="flex h-96 flex-col items-center justify-around rounded-3xl bg-white p-8">
-      <h2 class="text-3xl font-semibold text-color-darkblue">Sign in</h2>
+      <h2 class="text-color-darkblue text-3xl font-semibold">Sign in</h2>
       <input
         class="w-80 rounded-2xl bg-zinc-200 p-4 text-lg font-semibold text-black placeholder:font-semibold"
         v-model="email"
