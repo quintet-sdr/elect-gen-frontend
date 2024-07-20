@@ -45,7 +45,7 @@ const selected = ref(fileExtensions[0])
         <div />
 
         <span class="min-w-64 justify-self-center text-center" @click="clickById('update')">
-          <i18n-t :plural="submittedCount" keypath="statistics.submitted.line1">
+          <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-1">
             <template #count>
               <b class="font-semibold">{{ submittedCount }}</b>
             </template>
@@ -54,7 +54,7 @@ const selected = ref(fileExtensions[0])
             </template>
           </i18n-t>
           <br />
-          <i18n-t :plural="submittedCount" keypath="statistics.submitted.line2" />
+          <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-2" />
         </span>
 
         <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
