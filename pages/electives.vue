@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import Header from '~/components/widgets/Header.vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
 import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
+import Heading from "~/components/shared/Text/Heading.vue";
 
 interface ElectiveData {
   courseName: string
@@ -140,7 +140,7 @@ watch(currentElective, (newElective) => {
 
 <template>
   <main class="flex max-w-full flex-col items-center gap-12">
-    <h1 class="primary">Electives</h1>
+    <Heading text="Electives"/>
     <div class="flex h-auto w-full flex-row items-center justify-around gap-8">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox
