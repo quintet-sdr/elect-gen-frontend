@@ -1,11 +1,16 @@
 {
   "app-name": "Elect.Gen",
-  "statistics": {
+  "error": {
+    "database": "Database connection failed…"
+  },
+  "header": {
     "account": {
       "sign-out": "Sign out"
-    },
+    }
+  },
+  "distribute": {
     "submitted": {
-      "line-1": "For now, {count} student ({percent}) | For now, {count} students ({percent})",
+      "line-1": "For now, {count} student | For now, {count} students",
       "line-2": "submitted their form | submitted their forms"
     },
     "button": {

@@ -5,7 +5,6 @@ export interface Course {
   id: number
   codename: CourseCodename
   type: 'hum' | 'tech'
-  groups: CourseGroup[]
   full_name: string
   short_name: string
   description: string
@@ -15,18 +14,19 @@ export interface Course {
   low_in_group: number
   high_in_group: number
   max_in_group: number
+  groups: CourseGroup[]
 }
 
 export interface Student {
   email: string
   gpa: number
-  course_groups: CourseGroup[]
-  completed_corses: CourseCodename[]
   priority_1: CourseCodename
   priority_2: CourseCodename
   priority_3: CourseCodename
   priority_4: CourseCodename
   priority_5: CourseCodename
+  course_groups: CourseGroup[]
+  completed: CourseCodename[]
 }
 
 export default {}

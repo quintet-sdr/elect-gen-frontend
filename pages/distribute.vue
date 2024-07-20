@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import * as mathjs from 'mathjs'
-import Heading from '~/components/shared/Text/Heading.vue'
+import Heading from '~/components/shared/Heading.vue'
 
 function clickById(id: string): void {
   document.getElementById(id)!.click()
