@@ -43,7 +43,7 @@ const selected = ref(fileExtensions[0])
         <br />
         <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-2" />
       </span>
-      <span class="min-w-64 text-center" v-else> {{ $t('error.database') }} </span>
+      <span class="min-w-64 text-center" v-else> {{ $t('info.database') }} </span>
 
       <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
         <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />

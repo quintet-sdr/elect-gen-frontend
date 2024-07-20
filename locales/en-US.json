@@ -1,7 +1,7 @@
 {
   "app-name": "Elect.Gen",
-  "error": {
-    "database": "Database connection failed…"
+  "info": {
+    "database": "Connecting to the database…"
   },
   "header": {
     "account": {
