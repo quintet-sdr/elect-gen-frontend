@@ -1,8 +1,8 @@
 {
-  "appName": "Elect.Gen",
+  "app-name": "Elect.Gen",
   "statistics": {
     "account": {
-      "signOut": "Sign out"
+      "sign-out": "Sign out"
     },
     "submitted": {
       "line1": "For now, {count} student ({percent}) | For now, {count} students ({percent})",

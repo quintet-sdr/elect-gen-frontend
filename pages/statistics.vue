@@ -39,7 +39,7 @@ const selected = ref(fileExtensions[0])
     <Header />
 
     <main class="flex flex-col items-center gap-4">
-      <Heading :text="$t('appName')" />
+      <Heading :text="$t('app-name')" />
 
       <div class="grid grid-cols-3">
         <div />

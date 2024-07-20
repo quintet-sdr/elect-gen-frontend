@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 const store = useStore()
 const { t } = useI18n({ useScope: 'local' })
 
-const signOut = [[{ label: t('statistics.account.signOut') }]]
+const signOut = [[{ label: t('statistics.account.sign-out') }]]
 
 const router = useRouter()
 
