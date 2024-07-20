@@ -3,12 +3,12 @@ import Header from '~/components/widgets/Header.vue'
 </script>
 
 <template>
-  <div class="mx-32 flex flex-col">
+  <div class="mx-32 flex flex-col gap-4">
     <Header>
       <slot name="header" />
     </Header>
 
-    <main class="flex w-full flex-col items-center gap-4 pb-16">
+    <main class="flex w-full flex-col items-center gap-6 pb-16">
       <slot />
     </main>
   </div>
