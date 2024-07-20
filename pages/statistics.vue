@@ -34,63 +34,61 @@ const selected = ref(fileExtensions[0])
 </script>
 
 <template>
-  <main class="flex flex-col items-center gap-4">
-    <Heading :text="$t('app-name')" />
+  <Heading :text="$t('app-name')" />
 
+  <div class="grid grid-cols-3">
+    <div />
+
+    <span class="min-w-64 justify-self-center text-center" @click="clickById('update')">
+      <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-1">
+        <template #count>
+          <b class="font-semibold">{{ submittedCount }}</b>
+        </template>
+        <template #percent>
+          <b class="font-semibold">{{ `${submittedPercent}%` }}</b>
+        </template>
+      </i18n-t>
+      <br />
+      <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-2" />
+    </span>
+
+    <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
+      <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
+    </UButton>
+  </div>
+
+  <div class="flex flex-col items-center">
     <div class="grid grid-cols-3">
       <div />
 
-      <span class="min-w-64 justify-self-center text-center" @click="clickById('update')">
-        <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-1">
-          <template #count>
-            <b class="font-semibold">{{ submittedCount }}</b>
-          </template>
-          <template #percent>
-            <b class="font-semibold">{{ `${submittedPercent}%` }}</b>
-          </template>
-        </i18n-t>
-        <br />
-        <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-2" />
-      </span>
+      <UButton :label="$t('statistics.button.download')" />
 
-      <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
-        <Icon class="size-5 text-color-surface" name="fa6-solid:rotate" />
-      </UButton>
+      <USelectMenu
+        class="justify-self-start text-color-overlay"
+        v-model="selected"
+        :arrow="{ placement: 'left-top' }"
+        :options="fileExtensions"
+        :ui="{ base: 'hover:cursor-pointer' }"
+        default="xlsx"
+        variant="none"
+      />
     </div>
 
-    <div class="flex flex-col items-center">
-      <div class="grid grid-cols-3">
-        <div />
+    <UButton to="/form" variant="link">{{ $t('statistics.button.fill') }}</UButton>
+  </div>
 
-        <UButton :label="$t('statistics.button.download')" />
-
-        <USelectMenu
-          class="justify-self-start text-color-surface"
-          v-model="selected"
-          :arrow="{ placement: 'left-top' }"
-          :options="fileExtensions"
-          :ui="{ base: 'hover:cursor-pointer' }"
-          default="xlsx"
-          variant="none"
-        />
-      </div>
-
-      <UButton to="/form" variant="link">{{ $t('statistics.button.fill') }}</UButton>
+  <UButton
+    class="flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
+    @click="clickById('browse')"
+    @focus="focusById('browse')"
+    variant="ghost"
+  >
+    <h2 class="text-2xl font-semibold">{{ $t('statistics.form.heading') }}</h2>
+    <div class="flex flex-row gap-16 text-gray-300">
+      <Icon class="size-24" name="fa6-solid:file-csv" />
+      <Icon class="size-24" name="fa6-solid:table" />
+      <Icon class="size-24" name="fa6-solid:file-excel" />
     </div>
-
-    <UButton
-      class="flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
-      @click="clickById('browse')"
-      @focus="focusById('browse')"
-      variant="ghost"
-    >
-      <h2 class="text-2xl font-semibold">{{ $t('statistics.form.heading') }}</h2>
-      <div class="flex flex-row gap-16 text-gray-300">
-        <Icon class="size-24" name="fa6-solid:file-csv" />
-        <Icon class="size-24" name="fa6-solid:table" />
-        <Icon class="size-24" name="fa6-solid:file-excel" />
-      </div>
-      <UInput id="browse" :ui="{ base: 'hover:cursor-pointer' }" color="gray" type="file" />
-    </UButton>
-  </main>
+    <UInput id="browse" :ui="{ base: 'hover:cursor-pointer' }" color="gray" type="file" />
+  </UButton>
 </template>

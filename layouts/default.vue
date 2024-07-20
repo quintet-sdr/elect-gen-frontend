@@ -6,7 +6,9 @@ import Header from '~/components/widgets/Header.vue'
   <div class="mx-32 flex flex-col">
     <Header />
 
-    <slot />
+    <main class="flex w-full flex-col items-center gap-4 pb-16">
+      <slot />
+    </main>
   </div>
 </template>
 
