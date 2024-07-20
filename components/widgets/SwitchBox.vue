@@ -107,7 +107,7 @@ const toggleDeleteMode = () => {
       <button
         :class="[
           'mx-2 rounded px-4 py-2 font-semibold',
-          currentBlock === 'block1' ? 'bg-color-inno-green text-color-lightgray' : 'bg-transparent'
+          currentBlock === 'block1' ? 'bg-color-accent text-color-base' : 'bg-transparent'
         ]"
         @click="currentBlock = 'block1'"
       >
@@ -116,7 +116,7 @@ const toggleDeleteMode = () => {
       <button
         :class="[
           'mx-2 rounded px-4 py-2 font-semibold',
-          currentBlock === 'block2' ? 'bg-color-inno-green text-color-lightgray' : 'bg-transparent'
+          currentBlock === 'block2' ? 'bg-color-accent text-color-base' : 'bg-transparent'
         ]"
         @click="currentBlock = 'block2'"
       >
@@ -124,7 +124,7 @@ const toggleDeleteMode = () => {
       </button>
     </div>
     <div
-      class="hide-scrollbar flex h-full max-h-[52rem] w-3/4 flex-col items-center justify-center overflow-y-scroll"
+      class="hide-scrollbar flex h-full max-h-[52rem] flex-col items-center justify-center overflow-y-scroll"
     >
       <div
         class="flex flex-col items-center justify-center gap-8 text-center"
@@ -161,7 +161,7 @@ const toggleDeleteMode = () => {
       <div>
         <template v-if="newElectiveEditing">
           <textarea
-            class="w-96 resize-none rounded-2xl border-2 bg-gray-300 text-center text-color-darkblue hover:border-color-inno-green focus:outline-none"
+            class="w-96 resize-none rounded-2xl border-2 bg-color-surface text-center text-color-dark focus:outline-none placeholder:text-gray"
             v-model="newElectiveName"
             @blur="handleBlur"
             @keyup="handleKeyup"
@@ -170,7 +170,7 @@ const toggleDeleteMode = () => {
         </template>
         <template v-else>
           <button
-            class="w-96 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
+            class="w-96 rounded-2xl border-2 bg-color-surface text-2xl font-semibold text-color-dark hover:bg-color-accent"
             @click="startEditingNewElective"
           >
             +
@@ -178,7 +178,7 @@ const toggleDeleteMode = () => {
         </template>
       </div>
       <button
-        class="w-96 rounded-2xl border-2 bg-gray-300 text-2xl font-semibold text-color-darkblue hover:border-color-inno-green"
+        class="w-96 rounded-2xl border-2 bg-color-surface text-2xl font-semibold text-color-dark hover:bg-color-accent"
         @click="toggleDeleteMode"
       >
         {{ deletingMode ? 'Cancel' : '-' }}

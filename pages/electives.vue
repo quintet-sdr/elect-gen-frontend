@@ -139,9 +139,9 @@ watch(currentElective, (newElective) => {
 </script>
 
 <template>
-  <main class="flex max-w-full flex-col items-center gap-12">
+  <main class="flex min-w-full flex-col items-center gap-12">
     <Heading text="Electives"/>
-    <div class="flex h-auto w-full flex-row items-center justify-around gap-8">
+    <div class="flex h-auto w-full flex-row items-center justify-around">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox
           :disabled="switchBoxDisabled"
@@ -155,8 +155,8 @@ watch(currentElective, (newElective) => {
           class="flex min-h-full w-full flex-col items-center gap-4 self-stretch"
           @submit.prevent="handleSave"
         >
-          <div class="flex min-h-full w-full flex-row items-center gap-12 self-stretch">
-            <div class="flex h-full w-1/2 flex-col items-center gap-6">
+          <div class="flex min-h-full w-full flex-col items-center gap-6 self-stretch">
+            <div class="flex flex-col items-center gap-6">
               <ElectiveInput
                 id="full-name"
                 v-model="courseName"
@@ -169,21 +169,21 @@ watch(currentElective, (newElective) => {
                 headerName="Course short name"
                 placeholder="Short name"
               />
-              <div class="flex flex-col items-start justify-around">
+              <div class="flex flex-col items-center justify-around">
                 <label class="text-xl font-semibold" for="course-level">Course level</label>
                 <select
-                  class="h-14 w-90 rounded-3xl bg-color-lightgray px-3.5 text-color-darkblue placeholder-color-gray"
+                  class="h-14 w-90 rounded-3xl bg-color-surface px-3.5 text-color-dark placeholder:text-gray-100"
                   id="course-level"
                   v-model="courseLevel"
                 >
-                  <option class="bg-color-lightgray" disabled value="">Select course level</option>
-                  <option class="bg-color-lightgray" value="First year bachelors">
+                  <option class="bg-color-surface" disabled value="">Select course level</option>
+                  <option class="bg-color-surface" value="First year bachelors">
                     First year bachelors
                   </option>
-                  <option class="bg-color-lightgray" value="Second year bachelors">
+                  <option class="bg-color-surface" value="Second year bachelors">
                     Second year bachelors
                   </option>
-                  <option class="bg-color-lightgray" value="First and Second year bachelors">
+                  <option class="bg-color-surface" value="First and Second year bachelors">
                     First and Second year bachelors
                   </option>
                 </select>
@@ -231,10 +231,10 @@ watch(currentElective, (newElective) => {
                 type="number"
               />
             </div>
-            <div class="flex min-h-full w-1/2 flex-col items-start justify-around self-stretch">
+            <div class="flex min-w-90 flex-col items-center justify-around">
               <label class="text-xl font-semibold" for="description">Course description</label>
               <textarea
-                class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-lightgray p-4 text-color-darkblue placeholder-color-gray"
+                class="placeholder-p-4 h-full w-full resize-none rounded-3xl bg-color-surface p-4 text-color-darkblue placeholder-color-gray"
                 id="description"
                 v-model="description"
                 placeholder="Description"
@@ -244,13 +244,13 @@ watch(currentElective, (newElective) => {
           </div>
           <div class="flex flex-row items-center gap-4">
             <button
-              class="rounded-xl bg-color-inno-green px-6 py-2.5 text-lg hover:opacity-75"
+              class="rounded-xl bg-color-accent px-6 py-2.5 text-lg hover:opacity-75"
               type="submit"
             >
               Save changes
             </button>
             <button
-              class="rounded-xl border border-color-darkblue bg-transparent px-6 py-2.5 text-lg hover:opacity-75 dark:border-color-lightgray"
+              class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75 "
               @click="handleClear"
             >
               Clear fields
