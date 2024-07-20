@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     families: { Montserrat: { wght: '100..900' } }
   },
   i18n: {
-    locales: [{ code: 'en-US', name: 'English', iso: 'en-US', dir: 'ltr', file: 'en-US.ts' }],
+    locales: [{ code: 'en-US', name: 'English', iso: 'en-US', dir: 'ltr', file: 'en-US.json' }],
     langDir: 'locales',
     defaultLocale: 'en-US',
     strategy: 'no_prefix',
