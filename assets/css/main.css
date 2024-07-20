@@ -10,10 +10,6 @@ body {
   @apply mx-32 bg-white dark:bg-color-darkblue;
 }
 
-h1.primary {
-  @apply text-7xl font-bold;
-}
-
 .u-button {
   @apply bg-color-inno-green;
 }

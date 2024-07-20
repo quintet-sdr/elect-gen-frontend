@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import * as mathjs from 'mathjs'
+import Heading from '~/components/shared/Heading.vue'
 import Header from '~/components/widgets/Header.vue'
 
 function clickById(id: string): void {
@@ -38,7 +39,7 @@ const selected = ref(fileExtensions[0])
     <Header />
 
     <main class="flex flex-col items-center gap-4">
-      <h1 class="primary">{{ $t('appName') }}</h1>
+      <Heading :text="$t('appName')" />
 
       <div class="grid grid-cols-3">
         <div />
