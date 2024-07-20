@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Heading from '~/components/shared/Heading.vue'
+import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
 import type { Course } from '~/server/utils/schemas'
 
