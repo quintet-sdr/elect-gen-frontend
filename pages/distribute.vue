@@ -68,7 +68,7 @@ onMounted(() => {
         <br />
         <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-2" />
       </span>
-      <span class="min-w-64 text-center" v-else>
+      <span class="min-w-70 text-center" v-else>
         {{ $t('info.database') }}
       </span>
 
