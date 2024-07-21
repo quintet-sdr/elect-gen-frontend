@@ -143,8 +143,8 @@ watch(currentElective, (newElective) => {
     class="flex min-w-full flex-col items-center gap-12 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
   >
     <Heading text="Electives" />
-    <div class="laptop:flex-row flex h-auto w-full items-center justify-around tablet:flex-col">
-      <div class="laptop:w-1/2 flex h-full flex-col items-center self-stretch tablet:w-full">
+    <div class="flex h-auto w-full items-center justify-around tablet:flex-col laptop:flex-row">
+      <div class="flex h-full flex-col items-center self-stretch tablet:w-full laptop:w-1/2">
         <SwitchBox
           :disabled="switchBoxDisabled"
           @elective-change="handleElectiveChange"
@@ -152,7 +152,7 @@ watch(currentElective, (newElective) => {
         />
       </div>
       <div
-        class="laptop:w-1/2 flex min-h-full flex-col items-center gap-8 self-start tablet:w-full tablet:pt-20"
+        class="flex min-h-full flex-col items-center gap-8 self-start tablet:w-full tablet:pt-10 laptop:w-1/2"
       >
         <h2 class="text-3xl font-semibold">Options</h2>
         <form
@@ -176,7 +176,7 @@ watch(currentElective, (newElective) => {
               <div class="flex flex-col items-start justify-around">
                 <label class="text-xl font-semibold" for="course-level">Course level</label>
                 <select
-                  class="h-14 w-90 rounded-3xl bg-color-surface px-3.5 text-color-dark placeholder:text-gray-100"
+                  class="h-14 rounded-3xl bg-color-surface px-3.5 text-color-dark placeholder:text-gray-100 tablet:w-72 laptop:w-90"
                   id="course-level"
                   v-model="courseLevel"
                 >
@@ -236,7 +236,7 @@ watch(currentElective, (newElective) => {
                 type="number"
               />
             </div>
-            <div class="flex min-w-90 flex-col items-center justify-around">
+            <div class="flex flex-col items-center justify-around tablet:min-w-72 laptop:min-w-90">
               <label class="text-xl font-semibold" for="description">Course description</label>
               <textarea
                 class="placeholder-p-4 placeholder-color-gray h-full w-full resize-none rounded-3xl bg-color-surface p-4 text-color-dark dark:placeholder-color-base"

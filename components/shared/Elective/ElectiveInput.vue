@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, watch } from 'vue'
+import { defineEmits, defineProps, ref, watch } from 'vue'
 
 interface Props {
   headerName: string
@@ -43,9 +43,11 @@ const handleInput = (event: Event) => {
 
 <template>
   <div class="flex flex-col items-start justify-around">
-    <label class="text-xl font-semibold" :for="props.id">{{ props.headerName }}</label>
+    <label class="tablet:text-l font-semibold laptop:text-xl" :for="props.id">{{
+      props.headerName
+    }}</label>
     <input
-      class="placeholder-color-gray-100 h-14 w-90 rounded-3xl bg-color-surface px-3.5 text-color-dark dark:placeholder-color-base"
+      class="placeholder-color-gray-100 h-14 rounded-3xl bg-color-surface px-3.5 text-color-dark tablet:w-72 laptop:w-90 dark:placeholder-color-base"
       :autocomplete="props.autocomplete"
       :id="props.id"
       :placeholder="props.placeholder"

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue'
+import { defineEmits, defineProps } from 'vue'
 
 const props = defineProps<{
   name: string
@@ -19,7 +19,7 @@ const handleClick = () => {
 <template>
   <button
     :class="[
-      'flex w-96 flex-row items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-base font-medium text-color-dark hover:border-color-accent',
+      'tablet:w-45 flex flex-row items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-base font-medium text-color-dark hover:border-color-accent desktop:w-96',
       props.active ? 'bg-color-accent text-color-text' : 'bg-color-surface',
       props.disabled ? 'cursor-not-allowed opacity-50' : ''
     ]"
