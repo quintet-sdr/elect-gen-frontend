@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
-import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
+import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import Heading from '~/components/shared/Text/Heading.vue'
+import SwitchBox from '~/components/widgets/SwitchBox.vue'
 
 interface ElectiveData {
   courseName: string
@@ -139,17 +139,21 @@ watch(currentElective, (newElective) => {
 </script>
 
 <template>
-  <main class="flex min-w-full flex-col items-center gap-12">
+  <main
+    class="flex min-w-full flex-col items-center gap-12 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
+  >
     <Heading text="Electives" />
-    <div class="flex h-auto w-full flex-row items-center justify-around">
-      <div class="flex h-full w-1/2 flex-col items-center self-stretch">
+    <div class="laptop:flex-row flex h-auto w-full items-center justify-around tablet:flex-col">
+      <div class="laptop:w-1/2 flex h-full flex-col items-center self-stretch tablet:w-full">
         <SwitchBox
           :disabled="switchBoxDisabled"
           @elective-change="handleElectiveChange"
           @toggle-delete-mode="handleToggleDeleteMode"
         />
       </div>
-      <div class="flex min-h-full w-1/2 flex-col items-center gap-8 self-start">
+      <div
+        class="laptop:w-1/2 flex min-h-full flex-col items-center gap-8 self-start tablet:w-full tablet:pt-20"
+      >
         <h2 class="text-3xl font-semibold">Options</h2>
         <form
           class="flex min-h-full w-full flex-col items-center gap-4 self-stretch"
@@ -202,10 +206,11 @@ watch(currentElective, (newElective) => {
                 placeholder="Min overall"
                 type="number"
               />
-              <ElectiveInput
+              <ElectiveInputtablet:max-w-screen-tablet
                 id="max-overall"
                 v-model="maxOverall"
                 headerName="Maximum overall students"
+                desktop:max-w-screen-desktop
                 placeholder="Max overall"
                 type="number"
               />
