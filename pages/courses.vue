@@ -36,8 +36,8 @@ const switchBoxDisabled = ref(false)
 
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
-  if (!forms[elective]) {
-    forms[elective] = {
+  if (!form[elective]) {
+    form[elective] = {
       full_name: '',
       short_name: '',
       description: '',
@@ -64,13 +64,27 @@ const description = ref('')
 const groups = ref('')
 
 const handleSave = async () => {
+  if (currentElective.value) {
+    await api.newCourse({
+      codename: form.value.codename!,
+      type: 'tech',
+      full_name: form.value.full_name!,
+      short_name: form.value.short_name!,
+      description: form.value.description!,
+      instructor: form.value.instructor!,
+      min_overall: form.value.min_overall!,
+      max_overall: form.value.max_overall!,
+      low_in_group: form.value.low_in_group!,
+      high_in_group: form.value.high_in_group!,
+      max_in_group: form.value.max_in_group!,
+      groups: form.value.groups!,
+    });
+  }
+
   notificationOkMessage.value = 'Saved successfully'
   notificationOkVisible.value = true
-  switchBoxDisabled.value = true
 
-  if (currentElective.value) {
-    await api.newCourse(form[currentElective.value])
-  }
+  switchBoxDisabled.value = true
 
   setTimeout(() => {
     notificationOkVisible.value = false
@@ -106,10 +120,6 @@ const handleToggleDeleteMode = (isDeleting: boolean) => {
   notificationDeleteVisible.value = isDeleting
 }
 
-const uploadCourses = async () => {
-  api.newCourse(form)
-}
-
 watch(currentElective, (_) => (form.value = {}))
 </script>
 
@@ -135,60 +145,60 @@ watch(currentElective, (_) => (form.value = {}))
           <div class="flex min-h-full w-full flex-col items-center gap-6 self-stretch">
             <div class="flex flex-col items-center gap-6">
               <ElectiveInput
+                id="codename"
+                v-model="form.codename as CourseCodename"
+                headerName="Course codename"
+                placeholder="Codename"
+              />
+              <ElectiveInput
                 id="full-name"
-                v-model="form.full_name"
+                v-model="form.full_name as string"
                 headerName="Course full name"
                 placeholder="Full name"
               />
               <ElectiveInput
-                id="short-name"
-                v-model="form.short_name"
-                headerName="Course short name"
-                placeholder="Short name"
-              />
-              <ElectiveInput
                 id="groups"
-                v-model="form.groups"
+                v-model="form.groups as string[]"
                 headerName="Course groups"
                 placeholder="Groups"
               />
               <ElectiveInput
                 id="instructor-name"
-                v-model="form.instructor"
+                v-model="form.instructor as string"
                 headerName="Instructor’s name"
                 placeholder="Instructor’s name"
               />
               <ElectiveInput
                 id="min-overall"
-                v-model="form.min_overall"
+                v-model="form.min_overall as number"
                 headerName="Minimum overall students"
                 placeholder="Min overall"
                 type="number"
               />
               <ElectiveInput
                 id="max-overall"
-                v-model="form.max_overall"
+                v-model="form.max_overall as number"
                 headerName="Maximum overall students"
                 placeholder="Max overall"
                 type="number"
               />
               <ElectiveInput
                 id="low-group"
-                v-model="form.low_in_group"
+                v-model="form.low_in_group as number"
                 headerName="Lower number students in group"
                 placeholder="Low in group"
                 type="number"
               />
               <ElectiveInput
                 id="high-group"
-                v-model="form.high_in_group"
+                v-model="form.high_in_group as number"
                 headerName="Higher number students in group"
                 placeholder="High in group"
                 type="number"
               />
               <ElectiveInput
                 id="max-group"
-                v-model="form.max_in_group"
+                v-model="form.max_in_group as number"
                 headerName="Maximum students in course"
                 placeholder="Enter maximum"
                 type="number"

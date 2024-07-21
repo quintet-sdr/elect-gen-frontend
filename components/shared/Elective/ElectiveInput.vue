@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref, defineProps, defineEmits, watch } from 'vue'
+import type {CourseCodename} from "~/server/utils/schemas";
 
 interface Props {
   headerName: string
@@ -7,7 +8,7 @@ interface Props {
   placeholder?: string
   type?: string
   autocomplete?: string
-  modelValue: string | number
+  modelValue: string | number | string[] | CourseCodename
 }
 
 const props = defineProps<Props>()
