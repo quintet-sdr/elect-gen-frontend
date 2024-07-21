@@ -180,6 +180,7 @@ onMounted(() => selectTab(0))
           :search-attributes="['full_name', 'short_name']"
           by="id"
           option-attribute="short_name"
+          placeholder="Elective…"
           searchable
         />
       </UFormGroup>
