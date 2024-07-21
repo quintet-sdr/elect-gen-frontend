@@ -19,7 +19,7 @@ function fileHeaders(): Headers {
 }
 
 export async function uploadTable(file: File): Promise<Response> {
-  const url = new URL(api('/upload'))
+  const url = new URL(api('/upload-table'))
   url.search = new URLSearchParams({ name: file.name }).toString()
 
   const body = new FormData()
