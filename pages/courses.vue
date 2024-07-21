@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import {ref, watch} from 'vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
 import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
 import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from "~/server/utils/api"
-import Course from "~/server/utils/schemas"
 
 interface ElectiveData {
   full_name: string
@@ -111,6 +110,43 @@ const handleToggleDeleteMode = (isDeleting: boolean) => {
   notificationDeleteVisible.value = isDeleting
 }
 
+const uploadCourses = async () => {
+  const defineGroups = (s: string) => {
+    if (s === "First year bachelors") {
+      return ['1']
+    } else if (s === "Second year bachelors") {
+      return ['2']
+    } else {
+      return ['1', '2']
+    }
+  }
+  const courses = Object.values(electiveData.value).map(elective => ({
+    return: {
+      id: 0,
+      codename: elective.short_name,
+      type: 'tech',
+      full_name: elective.full_name,
+      short_name: elective.short_name,
+      description: elective.description,
+      instructor: elective.instructor,
+      min_overall: elective.min_overall,
+      max_overall: elective.max_overall,
+      low_in_group: elective.low_in_group,
+      high_in_group: elective.high_in_group,
+      max_in_group: elective.max_in_group,
+      groups: defineGroups(elective.courseLevel)
+    }
+  }))
+
+  for (const course of courses) {
+    try {
+      await api.postCourse(course);
+    } catch (error) {
+      console.error('Failed to upload course:', course, error);
+    }
+  }
+}
+
 watch(currentElective, (newElective) => {
   if (newElective && electiveData.value[newElective]) {
     const data = electiveData.value[newElective]
@@ -141,7 +177,7 @@ watch(currentElective, (newElective) => {
 
 <template>
   <main class="flex min-w-full flex-col items-center gap-12">
-    <Heading text="Electives" />
+    <Heading text="Electives"/>
     <div class="flex h-auto w-full flex-row items-center justify-around">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox
@@ -192,7 +228,6 @@ watch(currentElective, (newElective) => {
               <ElectiveInput
                 id="instructor-name"
                 v-model="instructor"
-                autocomplete="email"
                 headerName="Instructor’s name"
                 placeholder="Instructor’s name"
               />
@@ -243,23 +278,32 @@ watch(currentElective, (newElective) => {
               />
             </div>
           </div>
-          <div class="flex flex-row items-center gap-4">
+          <div class="flex flex-col items-center gap-6">
+            <div class="flex flex-row items-center gap-4">
+              <button
+                class="rounded-xl bg-color-accent px-6 py-2.5 text-lg hover:opacity-75"
+                type="submit"
+              >
+                Save changes
+              </button>
+              <button
+                class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75"
+                @click="handleClear"
+              >
+                Clear fields
+              </button>
+            </div>
             <button
-              class="rounded-xl bg-color-accent px-6 py-2.5 text-lg hover:opacity-75"
+              class="rounded-xl bg-green-400 px-6 py-2.5 text-lg hover:opacity-75"
               type="submit"
+              @click="uploadCourses"
             >
-              Save changes
-            </button>
-            <button
-              class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75"
-              @click="handleClear"
-            >
-              Clear fields
+              Upload courses
             </button>
           </div>
         </form>
       </div>
-      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible" />
+      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible"/>
       <ClearedNotification
         :message="notificationClearMessage"
         :visible="notificationClearVisible"
