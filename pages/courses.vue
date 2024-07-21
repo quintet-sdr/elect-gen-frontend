@@ -71,7 +71,7 @@ const handleSave = async () => {
 
     const type = currentElective.value === 'block1' ? 'tech' : 'hum'
 
-    await api.newCourse({
+    await api.postCourses({
       codename: codename.value,
       type: type,
       full_name: full_name.value,

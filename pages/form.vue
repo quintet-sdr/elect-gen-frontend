@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
-import type { Course } from '~/server/utils/schemas'
+import type { Course, CourseGroup } from '~/server/utils/schemas'
 
 definePageMeta({ layout: false })
 
@@ -137,7 +137,7 @@ const email = ref('')
 const gpa = ref<number>()
 
 async function submit(): Promise<void> {
-  await api.postStudent({
+  await api.postStudents({
     email: `${email.value}@innopolis.university`,
     gpa: gpa.value!,
     priority_1: selected.value[0]!.codename,
@@ -147,6 +147,9 @@ async function submit(): Promise<void> {
     priority_5: selected.value[4]!.codename
   })
 }
+
+const courseGroups = (await api.coursesGroups()).sort((a, b) => a.localeCompare(b))
+const selectedGroup = ref<CourseGroup>()
 
 onMounted(() => selectTab(0))
 
@@ -168,7 +171,7 @@ useHead({
 
     <form class="flex w-72 flex-col items-center gap-4" @submit.prevent="submit">
       <div class="flex w-full flex-col self-start">
-        <UFormGroup label="Email">
+        <UFormGroup label="Email" required>
           <div class="flex flex-row items-center gap-1">
             <UInput
               class="w-48 min-w-48"
@@ -193,33 +196,44 @@ useHead({
         </span>
       </div>
 
-      <UFormGroup class="w-48 self-start" label="GPA">
+      <UFormGroup class="w-48 self-start" label="GPA" required>
         <UInput v-model="gpa" :max="5.0" :min="2.0" placeholder="Number" step="any" type="number" />
       </UFormGroup>
 
-      <div />
-
-      <UFormGroup class="w-full" v-for="i in 5" :label="`Priority ${i}`" required>
+      <UFormGroup class="w-48 self-start" label="Course groups" required>
         <USelectMenu
-          v-model="selected[i - 1]"
-          :options="filteredCourses[i - 1].value"
-          :search-attributes="['full_name', 'short_name']"
-          by="id"
-          option-attribute="short_name"
-          placeholder="Elective…"
+          v-model="selectedGroup"
+          :options="courseGroups"
+          placeholder="Group…"
           searchable
         />
       </UFormGroup>
 
       <div />
 
-      <button
-        class="w-full rounded-lg bg-color-accent py-1.5 font-medium hover:opacity-75 enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay"
-        :disabled="!enabled()"
-        type="submit"
-      >
-        Submit
-      </button>
+      <div class="flex w-full flex-col gap-4" v-if="selectedGroup !== undefined">
+        <UFormGroup class="w-full" v-for="i in 5" :label="`Priority ${i}`" required>
+          <USelectMenu
+            v-model="selected[i - 1]"
+            :options="filteredCourses[i - 1].value"
+            :search-attributes="['full_name', 'short_name']"
+            by="id"
+            option-attribute="short_name"
+            placeholder="Elective…"
+            searchable
+          />
+        </UFormGroup>
+
+        <div />
+
+        <button
+          class="w-full rounded-lg bg-color-accent py-1.5 font-medium hover:opacity-75 enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay"
+          :disabled="!enabled()"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
     </form>
   </NuxtLayout>
 </template>
