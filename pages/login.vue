@@ -20,7 +20,7 @@ function navigateToStatistics() {
   }
 }
 
-definePageMeta( {
+definePageMeta({
   layout: false
 })
 </script>

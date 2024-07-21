@@ -123,9 +123,7 @@ const toggleDeleteMode = () => {
         Hum
       </button>
     </div>
-    <div
-      class="hide-scrollbar flex h-full max-h-[52rem] flex-col items-center justify-center"
-    >
+    <div class="hide-scrollbar flex h-full max-h-[52rem] flex-col items-center justify-center">
       <div
         class="flex flex-col items-center justify-center gap-8 text-center"
         v-if="currentBlock === 'block1'"

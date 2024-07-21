@@ -10,10 +10,10 @@ const props = defineProps<{
 <template>
   <transition name="fade">
     <div
-      class="bg-color-accent text-color-dark absolute bottom-4 z-10 rounded-xl p-5"
+      class="absolute bottom-4 z-10 rounded-xl bg-color-accent p-5 text-color-dark"
       v-if="props.visible"
     >
-      <p class="text-color-text font-semibold">{{ props.message }}</p>
+      <p class="font-semibold text-color-text">{{ props.message }}</p>
     </div>
   </transition>
 </template>

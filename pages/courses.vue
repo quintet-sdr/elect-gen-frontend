@@ -6,7 +6,7 @@ import SavedNotification from '~/components/shared/Notification/SavedNotificatio
 import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
 import type { CourseCodename } from '~/server/utils/schemas'
-import SwitchBox from "~/components/widgets/SwitchBox.vue";
+import SwitchBox from '~/components/widgets/SwitchBox.vue'
 
 interface ElectiveData {
   codename: CourseCodename
