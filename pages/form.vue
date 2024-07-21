@@ -151,8 +151,8 @@ async function submit(): Promise<void> {
 onMounted(() => selectTab(0))
 
 useHead({
-  title: 'Elect.Gen - Student prioritization form',
-  meta: [{ name: 'description', content: 'Fill out the form with your five priorities' }]
+  title: 'Select Electives - Elect.Gen',
+  meta: [{ name: 'description', content: 'Fill out the form with your five priorities.' }]
 })
 </script>
 

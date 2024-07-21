@@ -33,96 +33,9 @@ export async function uploadTable(file: File): Promise<Response> {
 }
 
 export async function getCourses(): Promise<Course[] | undefined> {
-  await fetch(api('/courses/'))
+  return await fetch(api('/courses/'))
     .then((response) => response.json())
     .catch((_) => undefined)
-
-  return [
-    {
-      codename: 'fwd-ar',
-      type: 'hum',
-      groups: [],
-      full_name: 'Front-End Web Development',
-      short_name: 'Front-End',
-      description: 'React, Svelte, Vue, etc...',
-      instructor: 'AbdelRahman',
-      min_overall: 30,
-      max_overall: 100,
-      low_in_group: 10,
-      high_in_group: 20,
-      max_in_group: 30
-    },
-    {
-      codename: 'fwd-ar',
-      type: 'hum',
-      groups: [],
-      full_name: 'Cross-Platform Flutter',
-      short_name: 'Flutter',
-      description: 'React, Svelte, Vue, etc...',
-      instructor: 'AbdelRahman',
-      min_overall: 30,
-      max_overall: 100,
-      low_in_group: 10,
-      high_in_group: 20,
-      max_in_group: 30
-    },
-    {
-      codename: 'fwd-ar',
-      type: 'hum',
-      groups: [],
-      full_name: 'Introduction to 3D Modelling',
-      short_name: '3D Modelling',
-      description: 'React, Svelte, Vue, etc...',
-      instructor: 'AbdelRahman',
-      min_overall: 30,
-      max_overall: 100,
-      low_in_group: 10,
-      high_in_group: 20,
-      max_in_group: 30
-    },
-    {
-      codename: 'fwd-ar',
-      type: 'hum',
-      groups: [],
-      full_name: 'Psychology and Mindfullness',
-      short_name: 'Psychology',
-      description: 'React, Svelte, Vue, etc...',
-      instructor: 'AbdelRahman',
-      min_overall: 30,
-      max_overall: 100,
-      low_in_group: 10,
-      high_in_group: 20,
-      max_in_group: 30
-    },
-    {
-      codename: 'fwd-ar',
-      type: 'hum',
-      groups: [],
-      full_name: 'Real-Time Scheduling and Computing Devices',
-      short_name: 'Real-Time Scheduling',
-      description: 'React, Svelte, Vue, etc...',
-      instructor: 'AbdelRahman',
-      min_overall: 30,
-      max_overall: 100,
-      low_in_group: 10,
-      high_in_group: 20,
-      max_in_group: 30
-    },
-    {
-      codename: 'fwd-ar',
-      type: 'hum',
-      groups: [],
-      full_name: 'Branding and Marketing in IT',
-      short_name: 'Branding in IT',
-      description: 'React, Svelte, Vue, etc...',
-      instructor: 'AbdelRahman',
-      min_overall: 30,
-      max_overall: 100,
-      low_in_group: 10,
-      high_in_group: 20,
-      max_in_group: 30
-    }
-  ]
 }
 
 export async function newCourse(course: Course): Promise<Response> {
