@@ -46,6 +46,13 @@ onMounted(() => {
 
   updateCount()
 })
+
+useHead({
+  title: 'Elect.Gen - Distribution page',
+  meta: [
+    { name: 'description', content: 'Distribution main page' },
+  ]
+})
 </script>
 
 <template>
