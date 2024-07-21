@@ -36,14 +36,14 @@ defineExpose({
 
 <template>
   <main class="flex min-h-screen flex-col items-center justify-center gap-8">
-    <text class="font-bold tablet:text-4xl desktop:text-7xl">We're all done!</text>
-    <div
-      class="desktop:min-w-1/2 mb-4 bg-black p-4 text-white tablet:max-w-screen-tablet tablet:text-wrap tablet:rounded-sm desktop:max-w-screen-desktop desktop:rounded-xl"
-    >
-      <pre>{{ formattedJson }}</pre>
+    <text class="text-center font-bold tablet:text-4xl desktop:text-7xl">We're all done!</text>
+    <div class="hidden laptop:block">
+      <div class="min-w-1/2 mb-4 text-wrap rounded-xl bg-black p-4 text-white">
+        <pre>{{ formattedJson }}</pre>
+      </div>
     </div>
     <p
-      class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold tablet:max-w-screen-tablet desktop:max-w-screen-desktop desktop:text-xl"
+      class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold desktop:text-xl"
     >
       If the download has not started, click on the button
     </p>
