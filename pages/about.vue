@@ -7,14 +7,7 @@ useHead({
   title: 'Elect.Gen - Project contributors',
   meta: [
     { name: 'description', content: 'Here you can view contributors of the project' },
-    { name: 'keywords', content: 'contributors, project, github, nuxt, design, back end, front end, devops' },
-    { name: 'authors', content: 'Anastasia Varfolomeeva, Arsen Galiev, Asqar Arslanov, Ilya-Linh Nguen, Kirill Efimovich, Maksim Malov, Evgenii Bortsov, Sarmat Lutfullin' }
-  ],
-  link: teamMembers.map(member => ({
-    rel: 'author',
-    href: member.link,
-    title: member.name,
-  }))
+  ]
 })
 </script>
 
