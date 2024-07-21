@@ -32,6 +32,14 @@ function downloadJson(): void {
 defineExpose({
   downloadJson
 })
+
+useHead({
+  title: 'Elect.Gen - Algorithm finished',
+  meta: [
+    { name: 'description', content: 'Algorithm finished work, take your distributions!' },
+    { name: 'keywords', content: 'distribution, Excel, algorithms, students distribution'}
+  ]
+})
 </script>
 
 <template>
