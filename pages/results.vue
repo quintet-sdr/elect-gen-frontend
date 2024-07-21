@@ -43,7 +43,7 @@ defineExpose({
       <pre>{{ formattedJson }}</pre>
     </div>
     <p
-      class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 font-bold tablet:max-w-screen-tablet desktop:max-w-screen-desktop desktop:text-xl"
+      class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold tablet:max-w-screen-tablet desktop:max-w-screen-desktop desktop:text-xl"
     >
       If the download has not started, click on the button
     </p>
