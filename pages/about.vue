@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import Member from '~/components/shared/Member.vue'
 import Header from '~/components/widgets/Header.vue'
-import {TEAM_MEMBERS as teamMembers} from "~/constants/teamMembers";
+import { TEAM_MEMBERS as teamMembers } from '~/constants/teamMembers'
 
 useHead({
   title: 'Elect.Gen - Project contributors',
-  meta: [
-    { name: 'description', content: 'Here you can view contributors of the project' },
-  ]
+  meta: [{ name: 'description', content: 'Here you can view contributors of the project' }]
 })
 </script>
 

@@ -18,7 +18,7 @@ function navigateToStatistics() {
   } else if (email.value.includes('@innopolis.university')) {
     router.push('/form')
   } else {
-    alert("Your email is not in the system")
+    alert('Your email is not in the system')
     console.log('invalid')
   }
 }
@@ -29,9 +29,7 @@ definePageMeta({
 
 useHead({
   title: 'Elect.Gen - Log in',
-  meta: [
-    { name: 'description', content: 'Login to the system' },
-  ]
+  meta: [{ name: 'description', content: 'Login to the system' }]
 })
 </script>
 

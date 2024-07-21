@@ -49,9 +49,7 @@ onMounted(() => {
 
 useHead({
   title: 'Elect.Gen - Distribution page',
-  meta: [
-    { name: 'description', content: 'Distribution main page' },
-  ]
+  meta: [{ name: 'description', content: 'Distribution main page' }]
 })
 </script>
 

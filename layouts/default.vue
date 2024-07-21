@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Header from '~/components/widgets/Header.vue'
-import {TEAM_MEMBERS as teamMembers} from "~/constants/teamMembers";
+import { TEAM_MEMBERS as teamMembers } from '~/constants/teamMembers'
 
 const attrs = useAttrs()
 
@@ -8,18 +8,22 @@ const back = attrs.back !== undefined ? (attrs.back as boolean) : true
 
 useHead({
   meta: [
-    {name: 'keywords', content: 'contributors, project, github, nuxt, design, back end, front end, devops, NuxtJS'},
+    {
+      name: 'keywords',
+      content: 'contributors, project, github, nuxt, design, back end, front end, devops, NuxtJS'
+    },
     {
       name: 'authors',
-      content: 'Anastasia Varfolomeeva, Arsen Galiev, Asqar Arslanov, Ilya-Linh Nguen, Kirill Efimovich, Maksim Malov, Evgenii Bortsov, Sarmat Lutfullin'
+      content:
+        'Anastasia Varfolomeeva, Arsen Galiev, Asqar Arslanov, Ilya-Linh Nguen, Kirill Efimovich, Maksim Malov, Evgenii Bortsov, Sarmat Lutfullin'
     }
   ],
-  link: teamMembers.map(member => ({
+  link: teamMembers.map((member) => ({
     rel: 'author',
     href: member.link,
-    title: member.name,
+    title: member.name
   }))
-});
+})
 </script>
 
 <template>
