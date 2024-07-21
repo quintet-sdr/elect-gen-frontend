@@ -72,8 +72,9 @@ const teamMembers = [
 
 <template>
   <Header />
-  <main class="grid grid-rows-4 gap-5">
-    <div class="flex flex-row items-center space-x-72 pl-72">
+  <h1 class="p-1 text-5xl font-semibold">Contributors</h1>
+  <main class="grid grid-cols-2 gap-5">
+    <div class="flex flex-col items-center space-y-8">
       <Member
         :alt="teamMembers[3].alt"
         :image="teamMembers[3].image"
@@ -88,8 +89,6 @@ const teamMembers = [
         :name="teamMembers[4].name"
         :role="teamMembers[4].role"
       />
-    </div>
-    <div class="flex flex-row items-center space-x-72 pl-72">
       <Member
         :alt="teamMembers[0].alt"
         :image="teamMembers[0].image"
@@ -104,15 +103,8 @@ const teamMembers = [
         :name="teamMembers[2].name"
         :role="teamMembers[2].role"
       />
-      <Member
-        :alt="teamMembers[1].alt"
-        :image="teamMembers[1].image"
-        :link="teamMembers[1].link"
-        :name="teamMembers[1].name"
-        :role="teamMembers[1].role"
-      />
     </div>
-    <div class="flex flex-row items-center space-x-72 pl-72">
+    <div class="flex flex-col items-center space-y-8">
       <Member
         :alt="teamMembers[5].alt"
         :image="teamMembers[5].image"
@@ -127,14 +119,19 @@ const teamMembers = [
         :name="teamMembers[6].name"
         :role="teamMembers[6].role"
       />
-    </div>
-    <div class="flex flex-row items-center pl-72">
       <Member
         :alt="teamMembers[7].alt"
         :image="teamMembers[7].image"
         :link="teamMembers[7].link"
         :name="teamMembers[7].name"
         :role="teamMembers[7].role"
+      />
+      <Member
+        :alt="teamMembers[1].alt"
+        :image="teamMembers[1].image"
+        :link="teamMembers[1].link"
+        :name="teamMembers[1].name"
+        :role="teamMembers[1].role"
       />
     </div>
   </main>

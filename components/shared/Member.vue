@@ -5,7 +5,7 @@
     rel="noopener noreferrer"
     target="_blank"
   >
-    <div class="app mb-[10px] h-[7vw] w-[7vw] rounded-full">
+    <div class="h-24 w-24 rounded-full">
       <img class="rounded-full" :alt="alt" :src="image" />
     </div>
     <p class="text-center font-bold">{{ name }}</p>
