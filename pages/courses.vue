@@ -83,7 +83,7 @@ const handleSave = async () => {
       high_in_group: high_in_group.value,
       max_in_group: max_in_group.value,
       description: description.value,
-      groups: groups.value
+      groups: ['']
     })
 
     notificationOkMessage.value = 'Saved successfully'
