@@ -234,7 +234,7 @@ watch(currentElective, (newElective) => {
             <div class="flex min-w-90 flex-col items-center justify-around">
               <label class="text-xl font-semibold" for="description">Course description</label>
               <textarea
-                class="placeholder-p-4 text-color-darkblue placeholder-color-gray h-full w-full resize-none rounded-3xl bg-color-surface p-4"
+                class="placeholder-p-4 text-color-dark placeholder-color-gray dark:placeholder-color-base h-full w-full resize-none rounded-3xl bg-color-surface p-4"
                 id="description"
                 v-model="description"
                 placeholder="Description"

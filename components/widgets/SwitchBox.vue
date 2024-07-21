@@ -161,7 +161,7 @@ const toggleDeleteMode = () => {
       <div>
         <template v-if="newElectiveEditing">
           <textarea
-            class="placeholder:text-gray w-96 resize-none rounded-2xl border-2 bg-color-surface text-center text-color-dark focus:outline-none"
+            class="placeholder:text-gray dark:placeholder-color-base w-96 resize-none rounded-2xl border-2 bg-color-surface text-center text-color-dark focus:outline-none"
             v-model="newElectiveName"
             @blur="handleBlur"
             @keyup="handleKeyup"

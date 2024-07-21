@@ -45,7 +45,7 @@ const handleInput = (event: Event) => {
   <div class="flex flex-col items-start justify-around">
     <label class="text-xl font-semibold" :for="props.id">{{ props.headerName }}</label>
     <input
-      class="text-color-darkblue placeholder-color-gray-100 h-14 w-90 rounded-3xl bg-color-surface px-3.5"
+      class="text-color-dark placeholder-color-gray-100 dark:placeholder-color-base h-14 w-90 rounded-3xl bg-color-surface px-3.5"
       :autocomplete="props.autocomplete"
       :id="props.id"
       :placeholder="props.placeholder"
