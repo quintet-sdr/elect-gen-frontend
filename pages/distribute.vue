@@ -105,7 +105,7 @@ useHead({
     </div>
 
     <UButton
-      class="flex h-90 w-3/5 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
+      class="flex h-90 w-[40rem] flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
       @click="clickById('browse')"
       @focus="focusById('browse')"
       variant="ghost"
