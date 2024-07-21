@@ -1,4 +1,4 @@
-import { Course, Student } from '~/server/utils/schemas'
+import { CourseNoId, StudentPriorities } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
@@ -131,7 +131,7 @@ export async function getCourses(): Promise<Course[] | undefined> {
   ]
 }
 
-export async function newCourse(course: Course): Promise<Response> {
+export async function newCourse(course: CourseNoId): Promise<Response> {
   return await fetch(api('/courses/'), {
     method: 'POST',
     headers: jsonHeaders(),
@@ -147,13 +147,13 @@ export async function editCourse(course: Course): Promise<Response> {
   })
 }
 
-export async function getStudents(): Promise<Student[] | undefined> {
+export async function getStudents(): Promise<StudentPriorities[] | undefined> {
   return await fetch(api('/students/'))
     .then((response) => response.json())
     .catch((_) => undefined)
 }
 
-export async function postStudent(student: Student): Promise<Response> {
+export async function postStudent(student: StudentPriorities): Promise<Response> {
   return await fetch(api('/students/'), {
     method: 'POST',
     headers: jsonHeaders(),
