@@ -21,3 +21,11 @@
     }
   }
 }
+
+button {
+  transition: transform 0.1s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
+}

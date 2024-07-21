@@ -209,7 +209,7 @@ onMounted(() => selectTab(0))
       <div />
 
       <button
-        class="w-full rounded-lg bg-color-accent py-1.5 font-medium enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay"
+        class="w-full rounded-lg bg-color-accent py-1.5 font-medium enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay hover:opacity-75"
         :disabled="!enabled()"
         type="submit"
       >
