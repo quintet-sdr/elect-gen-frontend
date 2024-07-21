@@ -88,3 +88,23 @@ useHead({
     </div>
   </main>
 </template>
+
+<style scoped>
+@media (min-width: 1024px) {
+  .desktop\:w-1\/3 {
+    width: 33.333333%;
+  }
+  .desktop\:w-2\/3 {
+    width: 66.666667%;
+  }
+  .desktop\:flex-row {
+    flex-direction: row;
+  }
+  .desktop\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .desktop\:pt-28 {
+    padding-top: 7rem;
+  }
+}
+</style>
