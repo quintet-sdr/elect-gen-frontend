@@ -20,7 +20,7 @@ function fileHeaders(): Headers {
 
 type ElectiveType = 'tech' | 'hum'
 
-export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup[]> {
+export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup[] | undefined> {
   const url = new URL(api('/courses-groups/'))
   url.search = new URLSearchParams({ elective }).toString()
 
