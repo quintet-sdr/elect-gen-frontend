@@ -4,10 +4,10 @@ import Header from '~/components/widgets/Header.vue'
 
 <template>
   <Header />
-  <main class="flex flex-col items-center gap-12">
-    <h1 class="text-5xl font-semibold">Elective Name</h1>
-    <div class="flex h-full w-1/2 flex-col items-start justify-around gap-4">
-      <h2 class="text-3xl font-semibold">Course Description</h2>
+  <main class="flex flex-col items-center tablet:gap-10 desktop:gap-12">
+    <h1 class="font-semibold tablet:text-4xl desktop:text-5xl">Elective Name</h1>
+    <div class="flex h-full flex-col items-start justify-around gap-4 tablet:w-full desktop:w-1/2">
+      <h2 class="font-semibold tablet:text-xl desktop:text-3xl">Course Description</h2>
       <div
         class="placeholder-p-4 bg-color-lightgray text-color-darkblue placeholder-color-gray h-80 w-full overflow-y-scroll rounded-3xl px-4 py-4"
       >
@@ -38,9 +38,11 @@ import Header from '~/components/widgets/Header.vue'
         </ul>
       </div>
     </div>
-    <div class="flex w-1/2 flex-row items-center gap-8">
-      <div class="flex w-1/2 flex-col items-start justify-around gap-4">
-        <h3 class="text-xl font-semibold">Prerequisites</h3>
+    <div
+      class="flex items-center gap-8 tablet:w-full tablet:flex-col desktop:w-1/2 desktop:flex-row"
+    >
+      <div class="flex flex-col items-start justify-around gap-4 tablet:w-full desktop:w-1/2">
+        <h3 class="tablet:text-l font-semibold desktop:text-xl">Prerequisites</h3>
         <div
           class="placeholder-p-4 bg-color-lightgray text-color-darkblue placeholder-color-gray h-40 w-full overflow-y-scroll rounded-3xl px-4 py-4"
         >
@@ -48,8 +50,8 @@ import Header from '~/components/widgets/Header.vue'
           Knowledge in any general-purpose programming language (Java, C++, Python, …)
         </div>
       </div>
-      <div class="flex w-1/2 flex-col items-start justify-around gap-4">
-        <h3 class="text-xl font-semibold">Duration</h3>
+      <div class="flex flex-col items-start justify-around gap-4 tablet:w-full desktop:w-1/2">
+        <h3 class="tablet:text-l font-semibold desktop:text-xl">Duration</h3>
         <div
           class="placeholder-p-4 bg-color-lightgray text-color-darkblue placeholder-color-gray h-40 w-full overflow-y-scroll rounded-3xl px-4 py-4"
         >
