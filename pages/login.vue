@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Logo from '~/components/shared/Logo/Logo.vue'
-import Heading from '~/components/shared/Text/Heading.vue'
 
 const showPassword = ref(false)
 const email = ref('')
@@ -15,11 +14,15 @@ const router = useRouter()
 
 function navigateToStatistics() {
   if (email.value === 'a.potyomckin@innopolis.ru') {
-    router.push('/statistics')
+    router.push('/distribute')
   } else {
     console.log('invalid')
   }
 }
+
+definePageMeta( {
+  layout: false
+})
 </script>
 
 <template>
