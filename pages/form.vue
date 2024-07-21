@@ -138,7 +138,7 @@ const gpa = ref<number>()
 
 async function submit(): Promise<void> {
   await api.postStudent({
-    email: email.value,
+    email: `${email.value}@innopolis.university`,
     gpa: gpa.value!,
     priority_1: selected.value[0]!.codename,
     priority_2: selected.value[1]!.codename,
@@ -183,7 +183,7 @@ onMounted(() => selectTab(0))
           </div>
         </UFormGroup>
 
-        <span class="text-color-error font-medium" v-if="!validateEmail()">
+        <span class="font-medium text-color-error" v-if="!validateEmail()">
           Enter a valid local-part.
         </span>
       </div>
