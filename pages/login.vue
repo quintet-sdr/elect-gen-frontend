@@ -26,6 +26,13 @@ function navigateToStatistics() {
 definePageMeta({
   layout: false
 })
+
+useHead({
+  title: 'Elect.Gen - Log in',
+  meta: [
+    { name: 'description', content: 'Login to the system' },
+  ]
+})
 </script>
 
 <template>
