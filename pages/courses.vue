@@ -6,6 +6,7 @@ import SavedNotification from '~/components/shared/Notification/SavedNotificatio
 import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
 import type { CourseCodename } from '~/server/utils/schemas'
+import SwitchBox from "~/components/widgets/SwitchBox.vue";
 
 interface ElectiveData {
   codename: CourseCodename
@@ -228,11 +229,10 @@ watch(currentElective, (newElective) => {
                 placeholder="Min overall"
                 type="number"
               />
-              <ElectiveInputtablet:max-w-screen-tablet
+              <ElectiveInput
                 id="max-overall"
                 v-model="max_overall"
                 headerName="Maximum overall students"
-                desktop:max-w-screen-desktop
                 placeholder="Max overall"
                 type="number"
               />
