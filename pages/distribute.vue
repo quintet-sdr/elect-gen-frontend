@@ -17,15 +17,42 @@ async function updateCount(): Promise<void> {
 }
 
 const submittedCount = ref<number | undefined>()
-onMounted(updateCount)
 
 const fileExtensions = ['xlsx', 'csv']
-const selected = ref(fileExtensions[0])
+const extension = ref(fileExtensions[0])
+
+function checkExtension(): boolean {
+  if (filepath.value === undefined) {
+    return false
+  }
+
+  const types: string[] = [
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'text/csv'
+  ] as const
+
+  return types.includes(browseButton.value!.files![0].type)
+}
+
+async function submit(): Promise<void> {
+  await api.uploadTable(browseButton.value!.files![0]).then((response) => response.json())
+}
+
+const filepath = ref<string>()
+const browseButton = ref<HTMLInputElement>()
+
+onMounted(() => {
+  browseButton.value = document.getElementById('browse') as HTMLInputElement
+
+  updateCount()
+})
 </script>
 
 <template>
   <NuxtLayout :back="false" name="default">
     <Heading :level="1" :text="$t('app-name')" />
+
+    {{ filepath }}
 
     <div class="grid grid-cols-3">
       <div />
@@ -58,7 +85,7 @@ const selected = ref(fileExtensions[0])
 
         <USelectMenu
           class="justify-self-start text-color-overlay"
-          v-model="selected"
+          v-model="extension"
           :arrow="{ placement: 'left-top' }"
           :options="fileExtensions"
           :ui="{ base: 'hover:cursor-pointer' }"
@@ -82,7 +109,19 @@ const selected = ref(fileExtensions[0])
         <Icon class="size-24" name="fa6-solid:table" />
         <Icon class="size-24" name="fa6-solid:file-excel" />
       </div>
-      <UInput id="browse" :ui="{ base: 'hover:cursor-pointer' }" color="gray" type="file" />
+
+      <UInput
+        id="browse"
+        v-model="filepath"
+        :ui="{ base: 'hover:cursor-pointer' }"
+        color="gray"
+        type="file"
+      />
     </UButton>
+
+    <UButton v-if="checkExtension()" @click="submit"> {{ $t('distribute.form.proceed') }}</UButton>
+    <span v-else-if="filepath !== undefined">
+      {{ $t('distribute.form.wrong-extension-error') }}
+    </span>
   </NuxtLayout>
 </template>
