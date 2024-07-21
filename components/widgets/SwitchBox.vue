@@ -1,20 +1,43 @@
 <script lang="ts" setup>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, onMounted } from 'vue'
 import ElectiveButton from '~/components/shared/Elective/ElectiveButton.vue'
+import * as api from "~/server/utils/api"
+import type { Course } from '~/server/utils/schemas'
+import Heading from "~/components/shared/Text/Heading.vue"
 
-let techElectives = reactive([
-  'Advanced Programming in C/C++',
-  'Architecture of Computing Devices',
-  'Branding & Marketing in IT industry',
-  'Cross-platform Mobile Development with Flutter',
-  'Front-end Web Development',
-  'Introduction to 3D Modeling',
-  'Introduction to Electronic and Logic Circuits',
-  'Introduction to Mechanical Engineering',
-  'Introduction to Robotics Operating System: Basics, Motion, and Vision',
-  'Lambda-Calculus, Algebra, Machinery and Logic for Formal Program Semantics',
-  'Real-Time Scheduling Theory'
-])
+// Создаем реактивное свойство для курсов
+const COURSES = ref<Course[] | null>(null)
+
+const getCourses = async () => {
+  try {
+    const courses = await api.getCourses()
+    COURSES.value = courses || null
+  } catch (error) {
+    console.error('Failed to fetch courses:', error)
+    COURSES.value = null
+  }
+}
+
+const getCourseByType = (type: 'hum' | 'tech') => {
+  if (COURSES.value) {
+    return COURSES.value.filter(course => course.type === type).map(course => course.full_name)
+  }
+  return []
+}
+
+const initializeElectives = () => {
+  const techCourses = getCourseByType('tech')
+  const humCourses = getCourseByType('hum')
+  techCourses.forEach(course => techElectives.push(course))
+  humCourses.forEach(course => techElectives.push(course))
+}
+
+onMounted(async () => {
+  await getCourses()
+  initializeElectives()
+})
+
+let techElectives = reactive<string[]>([])
 
 let humElectives = reactive([
   'Personal Efficiency skills',
@@ -78,9 +101,15 @@ const handleKeyup = (event: KeyboardEvent) => {
 
 const deleteElective = (elective: string) => {
   if (currentBlock.value === 'block1') {
-    techElectives = techElectives.filter((e) => e !== elective)
+    const index = techElectives.indexOf(elective)
+    if (index > -1) {
+      techElectives.splice(index, 1)
+    }
   } else if (currentBlock.value === 'block2') {
-    humElectives = humElectives.filter((e) => e !== elective)
+    const index = humElectives.indexOf(elective)
+    if (index > -1) {
+      humElectives.splice(index, 1)
+    }
   }
   deletingMode.value = false
   emit('toggle-delete-mode', deletingMode.value)
@@ -129,14 +158,19 @@ const toggleDeleteMode = () => {
         v-if="currentBlock === 'block1'"
       >
         <div class="flex flex-col items-center justify-around gap-4">
-          <ElectiveButton
-            v-for="elective in techElectives"
-            :active="elective === activeElective"
-            :disabled="props.disabled"
-            :key="elective"
-            :name="elective"
-            @click="handleElectiveClick(elective)"
-          />
+          <div v-if="!COURSES">
+            <ElectiveButton
+              v-for="elective in techElectives"
+              :active="elective === activeElective"
+              :disabled="props.disabled"
+              :key="elective"
+              :name="elective"
+              @click="handleElectiveClick(elective)"
+            />
+          </div>
+          <div v-else>
+            <p>Connecting to database...</p>
+          </div>
         </div>
       </div>
       <div
@@ -144,14 +178,19 @@ const toggleDeleteMode = () => {
         v-if="currentBlock === 'block2'"
       >
         <div class="flex flex-col items-center justify-around gap-4">
-          <ElectiveButton
-            v-for="elective in humElectives"
-            :active="elective === activeElective"
-            :disabled="props.disabled"
-            :key="elective"
-            :name="elective"
-            @click="handleElectiveClick(elective)"
-          />
+          <div v-if="!COURSES">
+            <ElectiveButton
+              v-for="elective in humElectives"
+              :active="elective === activeElective"
+              :disabled="props.disabled"
+              :key="elective"
+              :name="elective"
+              @click="handleElectiveClick(elective)"
+            />
+          </div>
+          <div v-else>
+            <p>Connecting to database...</p>
+          </div>
         </div>
       </div>
     </div>
