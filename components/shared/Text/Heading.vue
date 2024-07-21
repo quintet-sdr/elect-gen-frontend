@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <h1 class="text-7xl font-bold" v-if="props.level === 1">
+  <h1 class="font-bold tablet:text-center tablet:text-5xl laptop:text-7xl" v-if="props.level === 1">
     {{ props.text }}
   </h1>
   <h2 class="text-4xl font-bold" v-if="props.level === 2">

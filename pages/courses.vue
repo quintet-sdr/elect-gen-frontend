@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
-import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
+import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import Heading from '~/components/shared/Text/Heading.vue'
-import * as api from "~/server/utils/api"
-import type {CourseCodename} from "~/server/utils/schemas";
+import * as api from '~/server/utils/api'
+import type { CourseCodename } from '~/server/utils/schemas'
 
 interface ElectiveData {
   codename: CourseCodename
@@ -168,18 +167,22 @@ watch(currentElective, (newElective) => {
 </script>
 
 <template>
-  <main class="flex min-w-full flex-col items-center gap-12">
+  <main
+    class="flex min-w-full flex-col items-center gap-12 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
+  >
     <Heading text="Electives" />
-    <div class="flex h-auto w-full flex-row items-center justify-around">
-      <div class="flex h-full w-1/2 flex-col items-center self-stretch">
+    <div class="flex h-auto w-full items-center justify-around tablet:flex-col laptop:flex-row">
+      <div class="flex h-full flex-col items-center self-stretch tablet:w-full laptop:w-1/2">
         <SwitchBox
           :disabled="switchBoxDisabled"
+          @block-change="handleBlockChange"
           @elective-change="handleElectiveChange"
           @toggle-delete-mode="handleToggleDeleteMode"
-          @block-change="handleBlockChange"
         />
       </div>
-      <div class="flex min-h-full w-1/2 flex-col items-center gap-8 self-start">
+      <div
+        class="flex min-h-full flex-col items-center gap-8 self-start tablet:w-full laptop:w-1/2"
+      >
         <h2 class="text-3xl font-semibold">Options</h2>
         <form
           class="flex min-h-full w-full flex-col items-center gap-4 self-stretch"
@@ -207,8 +210,8 @@ watch(currentElective, (newElective) => {
               />
               <ElectiveInput
                 id="group"
-                headerName="Course groups"
                 v-model="groups"
+                headerName="Course groups"
                 placeholder="Codename"
               />
               <ElectiveInput
@@ -225,10 +228,11 @@ watch(currentElective, (newElective) => {
                 placeholder="Min overall"
                 type="number"
               />
-              <ElectiveInput
+              <ElectiveInputtablet:max-w-screen-tablet
                 id="max-overall"
                 v-model="max_overall"
                 headerName="Maximum overall students"
+                desktop:max-w-screen-desktop
                 placeholder="Max overall"
                 type="number"
               />
@@ -254,7 +258,7 @@ watch(currentElective, (newElective) => {
                 type="number"
               />
             </div>
-            <div class="flex min-w-90 flex-col items-center justify-around">
+            <div class="flex flex-col items-center justify-around tablet:min-w-72 laptop:min-w-90">
               <label class="text-xl font-semibold" for="description">Course description</label>
               <textarea
                 class="placeholder-p-4 placeholder-color-gray h-full w-full resize-none rounded-3xl bg-color-surface p-4 text-color-dark dark:placeholder-color-base"

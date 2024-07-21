@@ -5,7 +5,7 @@
     rel="noopener noreferrer"
     target="_blank"
   >
-    <div class="app mb-[10px] h-[8vw] w-[8vw] rounded-full">
+    <div class="h-24 w-24 rounded-full">
       <img class="rounded-full" :alt="alt" :src="image" />
     </div>
     <p class="text-center font-bold">{{ name }}</p>
@@ -13,7 +13,7 @@
   </a>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 defineProps({
   link: {
     type: String,

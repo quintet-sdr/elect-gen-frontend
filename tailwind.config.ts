@@ -25,6 +25,11 @@ export default <Partial<Config>>{
         // FIXME
         'width-100': '29rem'
       }
+    },
+    screens: {
+      tablet: '360px',
+      laptop: '1024px',
+      desktop: '1920px'
     }
   }
 }
