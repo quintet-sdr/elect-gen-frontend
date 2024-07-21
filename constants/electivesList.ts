@@ -1,4 +1,4 @@
-export const techElectives = reactive([
+export const TECH_ELECTIVES = reactive([
   'Advanced Programming in C/C++',
   'Architecture of Computing Devices',
   'Branding & Marketing in IT industry',
@@ -12,7 +12,7 @@ export const techElectives = reactive([
   'Real-Time Scheduling Theory'
 ])
 
-export const humElectives = reactive([
+export const HUM_ELECTIVES = reactive([
   'Personal Efficiency skills',
   'Psychology of IT-specialist',
   'Introduction to Career Development for IT-specialist',

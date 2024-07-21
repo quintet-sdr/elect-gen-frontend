@@ -64,4 +64,4 @@ export const TEAM_MEMBERS = [
     name: 'Sarmat Lutfullin',
     role: 'Front-end'
   }
-]
+] as const
