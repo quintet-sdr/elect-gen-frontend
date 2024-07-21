@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import {ref, watch} from 'vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
 import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import Heading from '~/components/shared/Text/Heading.vue'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
 import * as api from '~/server/utils/api'
+import type {CourseCodename, CourseGroup} from "~/server/utils/schemas";
 
 const form = ref(
   {} as {
@@ -24,7 +25,7 @@ const form = ref(
   }
 )
 
-const currentElective = ref<string | undefined>()
+const currentElective = ref<string | number>('')
 const notificationOkVisible = ref(false)
 const notificationOkMessage = ref('')
 const notificationClearVisible = ref(false)
@@ -35,7 +36,20 @@ const switchBoxDisabled = ref(false)
 
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
-  full_name.value = elective
+  if (!forms[elective]) {
+    forms[elective] = {
+      full_name: '',
+      short_name: '',
+      description: '',
+      instructor: '',
+      min_overall: 0,
+      max_overall: 0,
+      low_in_group: 0,
+      high_in_group: 0,
+      max_in_group: 0,
+      groups: []
+    }
+  }
 }
 
 const full_name = ref('')
@@ -47,57 +61,36 @@ const low_in_group = ref<number | undefined>()
 const high_in_group = ref<number | undefined>()
 const max_in_group = ref<number | undefined>()
 const description = ref('')
-const courseLevel = ref('')
+const groups = ref('')
 
-const handleSave = () => {
+const handleSave = async () => {
+  notificationOkMessage.value = 'Saved successfully'
+  notificationOkVisible.value = true
+  switchBoxDisabled.value = true
+
   if (currentElective.value) {
-    electiveData.value[currentElective.value] = {
-      full_name: full_name.value,
-      short_name: short_name.value,
-      instructor: instructor.value,
-      min_overall: min_overall.value,
-      max_overall: max_overall.value,
-      low_in_group: low_in_group.value,
-      high_in_group: high_in_group.value,
-      max_in_group: max_in_group.value,
-      description: description.value,
-      courseLevel: courseLevel.value
-    }
-    notificationOkMessage.value = 'Saved successfully'
-    notificationOkVisible.value = true
-    switchBoxDisabled.value = true
-    setTimeout(() => {
-      notificationOkVisible.value = false
-      switchBoxDisabled.value = false
-    }, 2000)
+    await api.newCourse(form[currentElective.value])
   }
+
+  setTimeout(() => {
+    notificationOkVisible.value = false
+    switchBoxDisabled.value = false
+  }, 2000)
 }
+
 
 const handleClear = () => {
   if (currentElective.value) {
     full_name.value = ''
     short_name.value = ''
     instructor.value = ''
-    min_overall.value = null
-    max_overall.value = null
-    low_in_group.value = null
-    high_in_group.value = null
-    max_in_group.value = null
+    min_overall.value = 0
+    max_overall.value = 0
+    low_in_group.value = 0
+    high_in_group.value = 0
+    max_in_group.value = 0
     description.value = ''
-    courseLevel.value = ''
-
-    electiveData.value[currentElective.value] = {
-      full_name: '',
-      short_name: '',
-      instructor: '',
-      min_overall: 0,
-      max_overall: 0,
-      low_in_group: 0,
-      high_in_group: 0,
-      max_in_group: 0,
-      description: '',
-      courseLevel: ''
-    }
+    groups.value = ''
 
     notificationClearMessage.value = 'Cleared'
     notificationClearVisible.value = true
@@ -115,29 +108,6 @@ const handleToggleDeleteMode = (isDeleting: boolean) => {
 
 const uploadCourses = async () => {
   api.newCourse(form)
-
-  const courses = computed(() => ({
-    codename: electiveData.value.short_name,
-    type: 'tech',
-    full_name: electiveData.value.full_name,
-    short_name: electiveData.value.short_name,
-    description: electiveData.value.description,
-    instructor: electiveData.value.instructor,
-    min_overall: electiveData.value.min_overall,
-    max_overall: electiveData.value.max_overall,
-    low_in_group: electiveData.value.low_in_group,
-    high_in_group: electiveData.value.high_in_group,
-    max_in_group: electiveData.value.max_in_group,
-    groups: defineGroups(electiveData.value.courseLevel)
-  }))
-
-  for (const course of courses) {
-    try {
-      await api.newCourse(course)
-    } catch (error) {
-      console.error('Failed to upload course:', course, error)
-    }
-  }
 }
 
 watch(currentElective, (_) => (form.value = {}))
@@ -147,7 +117,7 @@ watch(currentElective, (_) => (form.value = {}))
   <main class="flex min-w-full flex-col items-center gap-12">
     {{ form }}
 
-    <Heading text="Electives" />
+    <Heading text="Electives"/>
     <div class="flex h-auto w-full flex-row items-center justify-around">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox
@@ -179,7 +149,7 @@ watch(currentElective, (_) => (form.value = {}))
               <ElectiveInput
                 id="groups"
                 v-model="form.groups"
-                headerName="Course grous"
+                headerName="Course groups"
                 placeholder="Groups"
               />
               <ElectiveInput
@@ -229,38 +199,29 @@ watch(currentElective, (_) => (form.value = {}))
               <textarea
                 class="placeholder-p-4 placeholder-color-gray h-full w-full resize-none rounded-3xl bg-color-surface p-4 text-color-dark dark:placeholder-color-base"
                 id="description"
-                v-model="description"
+                v-model="form.description"
                 placeholder="Description"
                 type="text"
               />
             </div>
           </div>
-          <div class="flex flex-col items-center gap-6">
-            <div class="flex flex-row items-center gap-4">
-              <button
-                class="rounded-xl bg-color-accent px-6 py-2.5 text-lg hover:opacity-75"
-                type="submit"
-              >
-                Save changes
-              </button>
-              <button
-                class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75"
-                @click="handleClear"
-              >
-                Clear fields
-              </button>
-            </div>
+          <div class="flex flex-row items-center gap-4">
             <button
-              class="rounded-xl bg-green-400 px-6 py-2.5 text-lg hover:opacity-75"
-              @click="uploadCourses"
+              class="rounded-xl bg-color-accent px-6 py-2.5 text-lg hover:opacity-75"
               type="submit"
             >
-              Upload courses
+              Save changes
+            </button>
+            <button
+              class="rounded-xl border border-color-text bg-transparent px-6 py-2.5 text-lg hover:opacity-75"
+              @click="handleClear"
+            >
+              Clear fields
             </button>
           </div>
         </form>
       </div>
-      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible" />
+      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible"/>
       <ClearedNotification
         :message="notificationClearMessage"
         :visible="notificationClearVisible"

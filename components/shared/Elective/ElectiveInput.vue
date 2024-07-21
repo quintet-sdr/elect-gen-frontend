@@ -7,7 +7,7 @@ interface Props {
   placeholder?: string
   type?: string
   autocomplete?: string
-  modelValue: string | number | null
+  modelValue: string | number
 }
 
 const props = defineProps<Props>()
