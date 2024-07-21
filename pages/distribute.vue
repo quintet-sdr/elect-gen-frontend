@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import * as mathjs from 'mathjs'
 import Heading from '~/components/shared/Text/Heading.vue'
+import * as api from '~/server/utils/api'
+
+definePageMeta({ layout: false })
 
 function clickById(id: string): void {
   document.getElementById(id)!.click()
@@ -10,85 +12,116 @@ function focusById(id: string): void {
   document.getElementById(id)!.focus()
 }
 
-function random(min: number, max: number): number {
-  return min + Math.floor(Math.random() * (max - min + 1))
+async function updateCount(): Promise<void> {
+  submittedCount.value = (await api.getStudents())?.length
 }
 
-function updateCount(): void {
-  if (submittedCount.value === 0) {
-    submittedCount.value = 1
-    return
-  }
-  submittedCount.value = Math.min(submittedCount.value + random(1, 35), totalStudents.value)
-}
-
-const totalStudents = ref(350)
-const submittedCount = ref(0)
-
-const submittedPercent = computed(() => {
-  return mathjs.round((100 * submittedCount.value) / totalStudents.value, 1)
-})
+const submittedCount = ref<number | undefined>()
 
 const fileExtensions = ['xlsx', 'csv']
-const selected = ref(fileExtensions[0])
+const extension = ref(fileExtensions[0])
+
+function checkExtension(): boolean {
+  if (filepath.value === undefined) {
+    return false
+  }
+
+  const types: string[] = [
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'text/csv'
+  ] as const
+
+  return types.includes(browseButton.value!.files![0].type)
+}
+
+async function submit(): Promise<void> {
+  await api.uploadTable(browseButton.value!.files![0]).then((response) => response.json())
+}
+
+const filepath = ref<string>()
+const browseButton = ref<HTMLInputElement>()
+
+onMounted(() => {
+  browseButton.value = document.getElementById('browse') as HTMLInputElement
+
+  updateCount()
+})
 </script>
 
 <template>
-  <Heading :text="$t('app-name')" />
+  <NuxtLayout :back="false" name="default">
+    <Heading :level="1" :text="$t('app-name')" />
 
-  <div class="grid grid-cols-3">
-    <div />
+    {{ filepath }}
 
-    <span class="min-w-64 justify-self-center text-center" @click="clickById('update')">
-      <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-1">
-        <template #count>
-          <b class="font-semibold">{{ submittedCount }}</b>
-        </template>
-        <template #percent>
-          <b class="font-semibold">{{ `${submittedPercent}%` }}</b>
-        </template>
-      </i18n-t>
-      <br />
-      <i18n-t :plural="submittedCount" keypath="statistics.submitted.line-2" />
-    </span>
-
-    <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
-      <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
-    </UButton>
-  </div>
-
-  <div class="flex flex-col items-center">
     <div class="grid grid-cols-3">
       <div />
 
-      <UButton :label="$t('statistics.button.download')" />
+      <span
+        class="min-w-64 justify-self-center text-center"
+        v-if="submittedCount !== undefined"
+        @click="clickById('update')"
+      >
+        <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-1">
+          <template #count>
+            <b class="font-semibold">{{ submittedCount }}</b>
+          </template>
+        </i18n-t>
+        <br />
+        <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-2" />
+      </span>
+      <span class="min-w-64 text-center" v-else> {{ $t('info.database') }} </span>
 
-      <USelectMenu
-        class="justify-self-start text-color-overlay"
-        v-model="selected"
-        :arrow="{ placement: 'left-top' }"
-        :options="fileExtensions"
+      <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
+        <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
+      </UButton>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="grid grid-cols-3">
+        <div />
+
+        <UButton :label="$t('distribute.button.download')" />
+
+        <USelectMenu
+          class="justify-self-start text-color-overlay"
+          v-model="extension"
+          :arrow="{ placement: 'left-top' }"
+          :options="fileExtensions"
+          :ui="{ base: 'hover:cursor-pointer' }"
+          default="xlsx"
+          variant="none"
+        />
+      </div>
+
+      <UButton to="/form" variant="link">{{ $t('distribute.button.fill') }}</UButton>
+    </div>
+
+    <UButton
+      class="flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
+      @click="clickById('browse')"
+      @focus="focusById('browse')"
+      variant="ghost"
+    >
+      <h2 class="text-2xl font-semibold">{{ $t('distribute.form.heading') }}</h2>
+      <div class="flex flex-row gap-16 text-gray-300">
+        <Icon class="size-24" name="fa6-solid:file-csv" />
+        <Icon class="size-24" name="fa6-solid:table" />
+        <Icon class="size-24" name="fa6-solid:file-excel" />
+      </div>
+
+      <UInput
+        id="browse"
+        v-model="filepath"
         :ui="{ base: 'hover:cursor-pointer' }"
-        default="xlsx"
-        variant="none"
+        color="gray"
+        type="file"
       />
-    </div>
+    </UButton>
 
-    <UButton to="/form" variant="link">{{ $t('statistics.button.fill') }}</UButton>
-  </div>
-
-  <UButton
-    class="flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
-    @click="clickById('browse')"
-    @focus="focusById('browse')"
-    variant="ghost"
-  >
-    <h2 class="text-2xl font-semibold">{{ $t('statistics.form.heading') }}</h2>
-    <div class="flex flex-row gap-16 text-gray-300">
-      <Icon class="size-24" name="fa6-solid:file-csv" />
-      <Icon class="size-24" name="fa6-solid:table" />
-      <Icon class="size-24" name="fa6-solid:file-excel" />
-    </div>
-    <UInput id="browse" :ui="{ base: 'hover:cursor-pointer' }" color="gray" type="file" />
-  </UButton>
+    <UButton v-if="checkExtension()" @click="submit"> {{ $t('distribute.form.proceed') }}</UButton>
+    <span v-else-if="filepath !== undefined">
+      {{ $t('distribute.form.wrong-extension-error') }}
+    </span>
+  </NuxtLayout>
 </template>

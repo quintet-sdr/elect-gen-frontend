@@ -1,7 +1,7 @@
 {
   "app-name": "Elect.Gen",
-  "error": {
-    "database": "Database connection failed…"
+  "info": {
+    "database": "Connecting to the database…"
   },
   "header": {
     "account": {
@@ -14,11 +14,13 @@
       "line-2": "submitted their form | submitted their forms"
     },
     "button": {
-      "download": "Download submissions",
+      "download": "Download the current configuration",
       "fill": "Fill in the form"
     },
     "form": {
-      "heading": "Upload a priority table"
+      "heading": "Upload a configuration spreadsheet",
+      "wrong-extension-error": "You should choose a spreadsheet file (csv/xlsx).",
+      "proceed": "Distribute"
     }
   }
 }

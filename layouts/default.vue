@@ -3,7 +3,7 @@ import Header from '~/components/widgets/Header.vue'
 
 const attrs = useAttrs()
 
-const back = attrs.back as boolean
+const back = attrs.back !== undefined ? (attrs.back as boolean) : true
 </script>
 
 <template>
