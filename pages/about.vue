@@ -73,7 +73,7 @@ const teamMembers = [
 <template>
   <Header />
   <h1 class="p-1 text-5xl font-semibold">Contributors</h1>
-  <main class="grid grid-cols-2 gap-5">
+  <main class="tablet:gap-40 desktop:gap-5 grid grid-cols-2">
     <div class="flex flex-col items-center space-y-8">
       <Member
         :alt="teamMembers[3].alt"
@@ -104,7 +104,7 @@ const teamMembers = [
         :role="teamMembers[2].role"
       />
     </div>
-    <div class="flex flex-col items-center space-y-8">
+    <div class="tablet:pt-28 flex flex-col items-center space-y-8">
       <Member
         :alt="teamMembers[5].alt"
         :image="teamMembers[5].image"
