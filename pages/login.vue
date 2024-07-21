@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Logo from '~/components/shared/Logo/Logo.vue'
-import Heading from "~/components/shared/Text/Heading.vue";
+import Heading from '~/components/shared/Text/Heading.vue'
 
 const showPassword = ref(false)
 const email = ref('')
