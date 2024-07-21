@@ -25,8 +25,9 @@ export interface Student {
   priority_3: CourseCodename
   priority_4: CourseCodename
   priority_5: CourseCodename
-  course_groups: CourseGroup[]
+  group: CourseGroup[]
   completed: CourseCodename[]
+  available: CourseCodename[]
 }
 
 export default {}
