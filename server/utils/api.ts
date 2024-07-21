@@ -1,4 +1,4 @@
-import { Course, StudentPriorities } from '~/server/utils/schemas'
+import { Course, CourseGroup, StudentPriorities } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
@@ -18,9 +18,20 @@ function fileHeaders(): Headers {
   })
 }
 
-export async function uploadTable(file: File): Promise<Response> {
-  const url = new URL(api('/upload-table'))
-  url.search = new URLSearchParams({ name: file.name }).toString()
+type ElectiveType = 'tech' | 'hum'
+
+export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup[]> {
+  const url = new URL(api('/courses-groups/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  return await fetch(url)
+    .then((response) => response.json())
+    .catch((_) => undefined)
+}
+
+export async function uploadTable(file: File, elective: ElectiveType): Promise<Response> {
+  const url = new URL(api('/upload-table/'))
+  url.search = new URLSearchParams({ name: file.name, elective }).toString()
 
   const body = new FormData()
   body.append('file', file)
@@ -32,39 +43,59 @@ export async function uploadTable(file: File): Promise<Response> {
   })
 }
 
-export async function getCourses(): Promise<Course[] | undefined> {
-  return await fetch(api('/courses/'))
-    .then((response) => response.json())
-    .catch((_) => undefined)
-}
+export async function postStudents(
+  student: StudentPriorities,
+  elective: ElectiveType
+): Promise<Response> {
+  const url = new URL(api('/students/'))
+  url.search = new URLSearchParams({ elective }).toString()
 
-export async function newCourse(course: Course): Promise<Response> {
-  return await fetch(api('/courses/'), {
-    method: 'POST',
-    headers: jsonHeaders(),
-    body: JSON.stringify(course)
-  })
-}
-
-export async function editCourse(course: Course): Promise<Response> {
-  return await fetch(api('/courses/'), {
-    method: 'POST',
-    headers: jsonHeaders(),
-    body: JSON.stringify(course)
-  })
-}
-
-export async function getStudents(): Promise<StudentPriorities[] | undefined> {
-  return await fetch(api('/students/'))
-    .then((response) => response.json())
-    .catch((_) => undefined)
-}
-
-export async function postStudent(student: StudentPriorities): Promise<Response> {
-  return await fetch(api('/students/'), {
+  return await fetch(url, {
     method: 'POST',
     headers: jsonHeaders(),
     body: JSON.stringify(student)
+  })
+}
+
+export async function getStudents(
+  elective: ElectiveType
+): Promise<StudentPriorities[] | undefined> {
+  const url = new URL(api('/students/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  return await fetch(url)
+    .then((response) => response.json())
+    .catch((_) => undefined)
+}
+
+export async function postCourses(course: Course, elective: ElectiveType): Promise<Response> {
+  const url = new URL(api('/courses/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  return await fetch(url, {
+    method: 'POST',
+    headers: jsonHeaders(),
+    body: JSON.stringify(course)
+  })
+}
+
+export async function getCourses(elective: ElectiveType): Promise<Course[] | undefined> {
+  const url = new URL(api('/courses/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  return await fetch(url)
+    .then((response) => response.json())
+    .catch((_) => undefined)
+}
+
+export async function distributions(course: Course, elective: ElectiveType): Promise<Response> {
+  const url = new URL(api('/distributions/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  return await fetch(url, {
+    method: 'POST',
+    headers: jsonHeaders(),
+    body: JSON.stringify(course)
   })
 }
 
