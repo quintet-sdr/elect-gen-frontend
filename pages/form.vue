@@ -7,17 +7,18 @@ definePageMeta({ layout: false })
 
 const NUM_OF_COURSES: number = 5
 
-const coursesRaw = ref(await api.getCourses())
+const sortedCourses = ref(
+  (await api.getCourses())?.sort((a, b) => a.short_name.localeCompare(b.short_name))
+)
 
 const courses = computed(() => {
-  if (coursesRaw.value === undefined) {
+  if (sortedCourses.value === undefined) {
     return undefined
   }
 
   const result = []
-  const sorted = coursesRaw.value.sort((a, b) => a.short_name.localeCompare(b.short_name))
 
-  for (const [id, course] of sorted.entries()) {
+  for (const [id, course] of sortedCourses.value.entries()) {
     result.push({
       id,
       ...course
@@ -36,13 +37,14 @@ for (let _ = 0; _ < NUM_OF_COURSES; _ += 1) {
   selected.value.push(undefined)
 }
 
-const enabled = computed(
-  () =>
+function enabled(): boolean {
+  return (
     !selected.value.includes(undefined) &&
     validateEmail() &&
     email.value.length > 0 &&
     typeof gpa.value === 'number'
-)
+  )
+}
 
 function except(it: CourseWithId, i: number): boolean {
   const ids: (number | undefined)[] = []
@@ -186,7 +188,7 @@ onMounted(() => selectTab(0))
 
       <button
         class="w-full rounded-lg bg-color-accent py-1.5 font-medium enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay"
-        :disabled="!enabled"
+        :disabled="!enabled()"
         type="submit"
       >
         Submit
