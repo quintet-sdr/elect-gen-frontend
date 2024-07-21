@@ -1,4 +1,4 @@
-import { CourseNoId, StudentPriorities } from '~/server/utils/schemas'
+import { Course, StudentPriorities } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
@@ -39,7 +39,6 @@ export async function getCourses(): Promise<Course[] | undefined> {
 
   return [
     {
-      id: 0,
       codename: 'fwd-ar',
       type: 'hum',
       groups: [],
@@ -54,7 +53,6 @@ export async function getCourses(): Promise<Course[] | undefined> {
       max_in_group: 30
     },
     {
-      id: 1,
       codename: 'fwd-ar',
       type: 'hum',
       groups: [],
@@ -69,7 +67,6 @@ export async function getCourses(): Promise<Course[] | undefined> {
       max_in_group: 30
     },
     {
-      id: 2,
       codename: 'fwd-ar',
       type: 'hum',
       groups: [],
@@ -84,7 +81,6 @@ export async function getCourses(): Promise<Course[] | undefined> {
       max_in_group: 30
     },
     {
-      id: 3,
       codename: 'fwd-ar',
       type: 'hum',
       groups: [],
@@ -99,7 +95,6 @@ export async function getCourses(): Promise<Course[] | undefined> {
       max_in_group: 30
     },
     {
-      id: 4,
       codename: 'fwd-ar',
       type: 'hum',
       groups: [],
@@ -114,7 +109,6 @@ export async function getCourses(): Promise<Course[] | undefined> {
       max_in_group: 30
     },
     {
-      id: 5,
       codename: 'fwd-ar',
       type: 'hum',
       groups: [],
@@ -131,7 +125,7 @@ export async function getCourses(): Promise<Course[] | undefined> {
   ]
 }
 
-export async function newCourse(course: CourseNoId): Promise<Response> {
+export async function newCourse(course: Course): Promise<Response> {
   return await fetch(api('/courses/'), {
     method: 'POST',
     headers: jsonHeaders(),
