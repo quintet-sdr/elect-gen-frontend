@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Member from '~/components/shared/Member.vue'
 import Header from '~/components/widgets/Header.vue'
-import {teamMembers} from "~/constants/teamMembers";
+import {TEAM_MEMBERS as teamMembers} from "~/constants/teamMembers";
 
 useHead({
   title: 'Elect.Gen - Project contributors',

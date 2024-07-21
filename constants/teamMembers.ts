@@ -7,7 +7,7 @@ import avatar6 from "assets/images/avatar6.jpg";
 import avatar7 from "assets/images/avatar7.jpg";
 import avatar8 from "assets/images/avatar8.jpg";
 
-export const teamMembers = [
+export const TEAM_MEMBERS = [
   {
     image: avatar1,
     alt: 'evgenii-photo',
