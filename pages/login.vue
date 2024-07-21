@@ -13,9 +13,12 @@ const togglePasswordVisibility = () => {
 const router = useRouter()
 
 function navigateToStatistics() {
-  if (email.value === 'a.potyomckin@innopolis.ru') {
+  if (email.value === 'a.potyomckin@innopolis.ru' || email.value.includes('@innopolis.ru')) {
     router.push('/distribute')
+  } else if (email.value.includes('@innopolis.university')) {
+    router.push('/form')
   } else {
+    alert("Your email is not in the system")
     console.log('invalid')
   }
 }
@@ -67,7 +70,7 @@ definePageMeta({
 <style scoped>
 input {
   &::placeholder {
-    transform: translateX(0.5rem);
+    transform: translateX(0.7rem);
     letter-spacing: 1px;
     font-size: 16px;
   }

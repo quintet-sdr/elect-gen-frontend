@@ -72,7 +72,7 @@ onMounted(() => {
         {{ $t('info.database') }}
       </span>
 
-      <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
+      <UButton class="justify-self-center" id="update" @click="updateCount" variant="ghost">
         <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
       </UButton>
     </div>
