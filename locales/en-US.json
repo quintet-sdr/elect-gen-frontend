@@ -19,7 +19,7 @@
     },
     "form": {
       "heading": "Upload a configuration spreadsheet",
-      "wrong-extension-error": "You should choose a spreadsheet file (csv/xlsx).",
+      "wrong-extension-error": "You should choose a spreadsheet file (xlsx/ods).",
       "proceed": "Distribute"
     }
   }
