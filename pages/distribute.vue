@@ -52,8 +52,6 @@ onMounted(() => {
   <NuxtLayout :back="false" name="default">
     <Heading :level="1" :text="$t('app-name')" />
 
-    {{ filepath }}
-
     <div class="grid grid-cols-3">
       <div />
 
