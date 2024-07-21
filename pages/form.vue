@@ -79,6 +79,10 @@ function selectTab(value: number): void {
   router.replace({
     query: { type: items[value].type }
   })
+
+  for (let i = 0; i < NUM_OF_COURSES; i += 1) {
+    selected.value[i] = undefined
+  }
 }
 
 const selectedTab = computed({
