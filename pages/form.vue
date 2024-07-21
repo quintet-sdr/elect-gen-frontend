@@ -151,10 +151,8 @@ async function submit(): Promise<void> {
 onMounted(() => selectTab(0))
 
 useHead({
-  title: 'Elect.Gen - Student prioritization form',
-  meta: [
-    {name: 'description', content: 'Fill out the form with your five priorities'}
-  ]
+  title: 'Select Electives - Elect.Gen',
+  meta: [{ name: 'description', content: 'Fill out the form with your five priorities.' }]
 })
 </script>
 
@@ -216,7 +214,7 @@ useHead({
       <div />
 
       <button
-        class="w-full rounded-lg bg-color-accent py-1.5 font-medium enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay hover:opacity-75"
+        class="w-full rounded-lg bg-color-accent py-1.5 font-medium hover:opacity-75 enabled:text-white disabled:cursor-not-allowed disabled:bg-color-surface disabled:text-color-overlay"
         :disabled="!enabled()"
         type="submit"
       >
