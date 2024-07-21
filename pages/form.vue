@@ -17,9 +17,9 @@ const courses = computed(() => {
   const result = []
   const sorted = coursesRaw.value.sort((a, b) => a.short_name.localeCompare(b.short_name))
 
-  for (const [index, course] of sorted.entries()) {
+  for (const [id, course] of sorted.entries()) {
     result.push({
-      id: index,
+      id,
       ...course
     })
   }
