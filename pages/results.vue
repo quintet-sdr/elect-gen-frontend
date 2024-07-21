@@ -4,6 +4,7 @@
 <script lang="ts" setup>
 import { computed, defineExpose, ref } from 'vue'
 import Header from '~/components/widgets/Header.vue'
+import Heading from "~/components/shared/Text/Heading.vue";
 
 interface JsonData {
   student_email: string
@@ -36,17 +37,16 @@ defineExpose({
 </script>
 
 <template>
-  <Header />
   <main class="flex min-h-screen flex-col items-center justify-center gap-8">
-    <h1 class="primary">We're all done!</h1>
-    <div class="mb-4 w-2/5 rounded-xl bg-black p-4 text-white">
+    <Heading text="We're all done!"/>
+    <div class="mb-4 min-w-1/2 rounded-xl bg-black p-4 text-white">
       <pre>{{ formattedJson }}</pre>
     </div>
     <p class="text-color-darkblue dark:text-color-lightgray mb-4 text-xl font-bold">
       If the download has not started click on the button
     </p>
     <button
-      class="bg-color-inno-green rounded-xl px-4 py-2 text-white hover:bg-green-700"
+      class="bg-color-accent rounded-xl px-4 py-2 text-white hover:opacity-75"
       @click="downloadJson"
     >
       Download table
