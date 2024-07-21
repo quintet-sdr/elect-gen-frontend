@@ -7,18 +7,44 @@ definePageMeta({ layout: false })
 
 const NUM_OF_COURSES: number = 5
 
-const courses = ref(
-  (await api.getCourses())?.sort((a, b) => a.short_name.localeCompare(b.short_name))
-)
+const coursesRaw = ref(await api.getCourses())
 
-const selected = ref<(Course | undefined)[]>([])
+const courses = computed(() => {
+  if (coursesRaw.value === undefined) {
+    return undefined
+  }
+
+  const result = []
+  const sorted = coursesRaw.value.sort((a, b) => a.short_name.localeCompare(b.short_name))
+
+  for (const [index, course] of sorted.entries()) {
+    result.push({
+      id: index,
+      ...course
+    })
+  }
+
+  return result
+})
+
+interface CourseWithId extends Course {
+  id: number
+}
+
+const selected = ref<(CourseWithId | undefined)[]>([])
 for (let _ = 0; _ < NUM_OF_COURSES; _ += 1) {
   selected.value.push(undefined)
 }
 
-const enabled = computed(() => !selected.value.includes(undefined))
+const enabled = computed(
+  () =>
+    !selected.value.includes(undefined) &&
+    validateEmail() &&
+    email.value.length > 0 &&
+    typeof gpa.value === 'number'
+)
 
-function except(it: Course, i: number): boolean {
+function except(it: CourseWithId, i: number): boolean {
   const ids: (number | undefined)[] = []
   for (let n = 0; n < NUM_OF_COURSES; n += 1) {
     if (n === i) {
@@ -30,7 +56,7 @@ function except(it: Course, i: number): boolean {
   return !ids.includes(it.id)
 }
 
-const filteredCourses = ref<ComputedRef<Course[] | undefined>[]>([])
+const filteredCourses = ref<ComputedRef<CourseWithId[] | undefined>[]>([])
 for (let i = 0; i < NUM_OF_COURSES; i += 1) {
   filteredCourses.value.push(computed(() => courses.value?.filter((it) => except(it, i))))
 }
@@ -60,6 +86,43 @@ const selectedTab = computed({
   set: selectTab
 })
 
+function validateEmail(): boolean {
+  if (email.value.length === 0) {
+    return true
+  }
+
+  const validSymbols =
+    "1234567890-+qwfpbjluyarstgmneioxcdvzkh.QWFPBJLUYARSTGMNEIOXCDVZKH!#$%&'*+-/=?^_`{|}~"
+
+  for (const symbol of email.value) {
+    if (!validSymbols.includes(symbol)) {
+      return false
+    }
+  }
+
+  if ([email.value[0], email.value[email.value.length - 1]].includes('.')) {
+    return false
+  }
+
+  if (email.value.includes('..')) {
+    return false
+  }
+
+  return true
+}
+
+function emailColor(): string | undefined {
+  if (validateEmail()) {
+    return undefined
+  } else {
+    return 'red'
+  }
+}
+
+const email = ref('')
+
+const gpa = ref<number>()
+
 async function submit(): Promise<void> {}
 
 onMounted(() => selectTab(0))
@@ -76,6 +139,38 @@ onMounted(() => selectTab(0))
     <div />
 
     <form class="flex w-72 flex-col items-center gap-4" @submit.prevent="submit">
+      <div class="flex w-full flex-col self-start">
+        <UFormGroup label="Email">
+          <div class="flex flex-row items-center gap-1">
+            <UInput
+              class="w-48 min-w-48"
+              v-model="email"
+              :color="emailColor()"
+              placeholder="Local-part"
+            />
+            <span
+              class="font-medium text-color-overlay"
+              v-if="validateEmail() && email.length === 0"
+            >
+              @innopolis.university
+            </span>
+            <span class="font-medium text-color-accent" v-if="validateEmail() && email.length > 0">
+              @innopolis.university
+            </span>
+          </div>
+        </UFormGroup>
+
+        <span class="text-color-error font-medium" v-if="!validateEmail()">
+          Enter a valid local-part.
+        </span>
+      </div>
+
+      <UFormGroup class="w-48 self-start" label="GPA">
+        <UInput v-model="gpa" :max="5.0" :min="2.0" placeholder="Number" step="any" type="number" />
+      </UFormGroup>
+
+      <div />
+
       <UFormGroup class="w-full" v-for="i in 5" :label="`Priority ${i}`" required>
         <USelectMenu
           v-model="selected[i - 1]"
