@@ -1,27 +1,30 @@
 <script lang="ts" setup>
-import {ref, watch} from 'vue'
-import SwitchBox from '~/components/widgets/SwitchBox.vue'
+import { ref, watch } from 'vue'
 import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
-import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
+import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import Heading from '~/components/shared/Text/Heading.vue'
-import * as api from "~/server/utils/api"
+import SwitchBox from '~/components/widgets/SwitchBox.vue'
+import * as api from '~/server/utils/api'
 
-interface ElectiveData {
-  full_name: string
-  short_name: string
-  description: string
-  instructor: string
-  min_overall: number | null
-  max_overall: number | null
-  low_in_group: number | null
-  high_in_group: number | null
-  max_in_group: number | null
-  courseLevel: string
-}
+const form = ref(
+  {} as {
+    codename?: CourseCodename
+    type?: 'tech' | 'hum'
+    full_name?: string
+    short_name?: string
+    description?: string
+    instructor?: string
+    min_overall?: number
+    max_overall?: number
+    low_in_group?: number
+    high_in_group?: number
+    max_in_group?: number
+    groups?: CourseGroup[]
+  }
+)
 
-const currentElective = ref<string | null>(null)
-const electiveData = ref<{ [key: string]: ElectiveData }>({})
+const currentElective = ref<string | undefined>()
 const notificationOkVisible = ref(false)
 const notificationOkMessage = ref('')
 const notificationClearVisible = ref(false)
@@ -38,11 +41,11 @@ const handleElectiveChange = (elective: string) => {
 const full_name = ref('')
 const short_name = ref('')
 const instructor = ref('')
-const min_overall = ref<number | null>(null)
-const max_overall = ref<number | null>(null)
-const low_in_group = ref<number | null>(null)
-const high_in_group = ref<number | null>(null)
-const max_in_group = ref<number | null>(null)
+const min_overall = ref<number | undefined>()
+const max_overall = ref<number | undefined>()
+const low_in_group = ref<number | undefined>()
+const high_in_group = ref<number | undefined>()
+const max_in_group = ref<number | undefined>()
 const description = ref('')
 const courseLevel = ref('')
 
@@ -111,73 +114,40 @@ const handleToggleDeleteMode = (isDeleting: boolean) => {
 }
 
 const uploadCourses = async () => {
-  const defineGroups = (s: string) => {
-    if (s === "First year bachelors") {
-      return ['1']
-    } else if (s === "Second year bachelors") {
-      return ['2']
-    } else {
-      return ['1', '2']
-    }
-  }
-  const courses = Object.values(electiveData.value).map(elective => ({
-    return: {
-      id: 0,
-      codename: elective.short_name,
-      type: 'tech',
-      full_name: elective.full_name,
-      short_name: elective.short_name,
-      description: elective.description,
-      instructor: elective.instructor,
-      min_overall: elective.min_overall,
-      max_overall: elective.max_overall,
-      low_in_group: elective.low_in_group,
-      high_in_group: elective.high_in_group,
-      max_in_group: elective.max_in_group,
-      groups: defineGroups(elective.courseLevel)
-    }
+  api.newCourse(form)
+
+  const courses = computed(() => ({
+    codename: electiveData.value.short_name,
+    type: 'tech',
+    full_name: electiveData.value.full_name,
+    short_name: electiveData.value.short_name,
+    description: electiveData.value.description,
+    instructor: electiveData.value.instructor,
+    min_overall: electiveData.value.min_overall,
+    max_overall: electiveData.value.max_overall,
+    low_in_group: electiveData.value.low_in_group,
+    high_in_group: electiveData.value.high_in_group,
+    max_in_group: electiveData.value.max_in_group,
+    groups: defineGroups(electiveData.value.courseLevel)
   }))
 
   for (const course of courses) {
     try {
-      await api.postCourse(course);
+      await api.newCourse(course)
     } catch (error) {
-      console.error('Failed to upload course:', course, error);
+      console.error('Failed to upload course:', course, error)
     }
   }
 }
 
-watch(currentElective, (newElective) => {
-  if (newElective && electiveData.value[newElective]) {
-    const data = electiveData.value[newElective]
-    full_name.value = data.full_name
-    short_name.value = data.short_name
-    instructor.value = data.instructor
-    min_overall.value = data.min_overall
-    max_overall.value = data.max_overall
-    low_in_group.value = data.low_in_group
-    high_in_group.value = data.high_in_group
-    max_in_group.value = data.max_in_group
-    description.value = data.description
-    courseLevel.value = data.courseLevel
-  } else {
-    full_name.value = ''
-    short_name.value = ''
-    instructor.value = ''
-    min_overall.value = null
-    max_overall.value = null
-    low_in_group.value = null
-    high_in_group.value = null
-    max_in_group.value = null
-    description.value = ''
-    courseLevel.value = ''
-  }
-})
+watch(currentElective, (_) => (form.value = {}))
 </script>
 
 <template>
   <main class="flex min-w-full flex-col items-center gap-12">
-    <Heading text="Electives"/>
+    {{ form }}
+
+    <Heading text="Electives" />
     <div class="flex h-auto w-full flex-row items-center justify-around">
       <div class="flex h-full w-1/2 flex-col items-center self-stretch">
         <SwitchBox
@@ -196,79 +166,66 @@ watch(currentElective, (newElective) => {
             <div class="flex flex-col items-center gap-6">
               <ElectiveInput
                 id="full-name"
-                v-model="full_name"
+                v-model="form.full_name"
                 headerName="Course full name"
                 placeholder="Full name"
               />
               <ElectiveInput
                 id="short-name"
-                v-model="short_name"
+                v-model="form.short_name"
                 headerName="Course short name"
                 placeholder="Short name"
               />
-              <div class="flex flex-col items-start justify-around">
-                <label class="text-xl font-semibold" for="course-level">Course level</label>
-                <select
-                  class="h-14 w-90 rounded-3xl bg-color-surface px-3.5 text-color-dark placeholder:text-gray-100"
-                  id="course-level"
-                  v-model="courseLevel"
-                >
-                  <option class="bg-color-surface" disabled value="">Select course level</option>
-                  <option class="bg-color-surface" value="First year bachelors">
-                    First year bachelors
-                  </option>
-                  <option class="bg-color-surface" value="Second year bachelors">
-                    Second year bachelors
-                  </option>
-                  <option class="bg-color-surface" value="First and Second year bachelors">
-                    First and Second year bachelors
-                  </option>
-                </select>
-              </div>
+              <ElectiveInput
+                id="groups"
+                v-model="form.groups"
+                headerName="Course grous"
+                placeholder="Groups"
+              />
               <ElectiveInput
                 id="instructor-name"
-                v-model="instructor"
+                v-model="form.instructor"
                 headerName="Instructor’s name"
                 placeholder="Instructor’s name"
               />
               <ElectiveInput
                 id="min-overall"
-                v-model="min_overall"
+                v-model="form.min_overall"
                 headerName="Minimum overall students"
                 placeholder="Min overall"
                 type="number"
               />
               <ElectiveInput
                 id="max-overall"
-                v-model="max_overall"
+                v-model="form.max_overall"
                 headerName="Maximum overall students"
                 placeholder="Max overall"
                 type="number"
               />
               <ElectiveInput
                 id="low-group"
-                v-model="low_in_group"
+                v-model="form.low_in_group"
                 headerName="Lower number students in group"
                 placeholder="Low in group"
                 type="number"
               />
               <ElectiveInput
                 id="high-group"
-                v-model="high_in_group"
+                v-model="form.high_in_group"
                 headerName="Higher number students in group"
                 placeholder="High in group"
                 type="number"
               />
               <ElectiveInput
                 id="max-group"
-                v-model="max_in_group"
+                v-model="form.max_in_group"
                 headerName="Maximum students in course"
                 placeholder="Enter maximum"
                 type="number"
               />
             </div>
             <div class="flex min-w-90 flex-col items-center justify-around">
-              <label class="text-xl font-semibold" for="description">Course description</label>
+              <label class="text-xl font-semibold" for="description"> Course description </label>
               <textarea
                 class="placeholder-p-4 placeholder-color-gray h-full w-full resize-none rounded-3xl bg-color-surface p-4 text-color-dark dark:placeholder-color-base"
                 id="description"
@@ -295,15 +252,15 @@ watch(currentElective, (newElective) => {
             </div>
             <button
               class="rounded-xl bg-green-400 px-6 py-2.5 text-lg hover:opacity-75"
-              type="submit"
               @click="uploadCourses"
+              type="submit"
             >
               Upload courses
             </button>
           </div>
         </form>
       </div>
-      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible"/>
+      <SavedNotification :message="notificationOkMessage" :visible="notificationOkVisible" />
       <ClearedNotification
         :message="notificationClearMessage"
         :visible="notificationClearVisible"
