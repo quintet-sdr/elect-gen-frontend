@@ -27,6 +27,7 @@ export default <Partial<Config>>{
     },
     screens: {
       tablet: '360px',
+      laptop: '1024px',
       desktop: '1920px'
     }
   }
