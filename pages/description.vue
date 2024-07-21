@@ -1,5 +1,12 @@
 <script lang="ts" setup>
 import Header from '~/components/widgets/Header.vue'
+
+useHead({
+  title: 'Elective description',
+  meta: [
+    { name: 'description', content: 'Useful information about elective'}
+  ]
+})
 </script>
 
 <template>
