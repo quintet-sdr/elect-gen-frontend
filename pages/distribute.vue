@@ -18,7 +18,7 @@ async function updateCount(): Promise<void> {
 
 const submittedCount = ref<number | undefined>()
 
-const fileExtensions = ['xlsx', 'csv']
+const fileExtensions = ['xlsx', 'ods']
 const extension = ref(fileExtensions[0])
 
 function checkExtension(): boolean {
@@ -107,7 +107,6 @@ onMounted(() => {
         {{ $t('distribute.form.heading') }}
       </h2>
       <div class="flex flex-row gap-16 text-gray-300">
-        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:file-csv" />
         <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:table" />
         <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:file-excel" />
       </div>

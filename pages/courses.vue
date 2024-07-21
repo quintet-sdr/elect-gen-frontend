@@ -4,19 +4,21 @@ import ElectiveInput from '~/components/shared/Elective/ElectiveInput.vue'
 import ClearedNotification from '~/components/shared/Notification/ClearedNotification.vue'
 import SavedNotification from '~/components/shared/Notification/SavedNotification.vue'
 import Heading from '~/components/shared/Text/Heading.vue'
-import SwitchBox from '~/components/widgets/SwitchBox.vue'
+import * as api from '~/server/utils/api'
+import type { CourseCodename } from '~/server/utils/schemas'
 
 interface ElectiveData {
-  courseName: string
-  shortName: string
-  instructorMail: string
-  minOverall: number | null
-  maxOverall: number | null
-  lowGroup: number | null
-  highGroup: number | null
-  maxGroup: number | null
+  codename: CourseCodename
+  full_name: string
+  short_name: string
   description: string
-  courseLevel: string
+  instructor: string
+  min_overall: number
+  max_overall: number
+  low_in_group: number
+  high_in_group: number
+  max_in_group: number
+  groups: string[]
 }
 
 const currentElective = ref<string | null>(null)
@@ -28,37 +30,61 @@ const notificationClearMessage = ref('')
 const notificationDeleteVisible = ref(false)
 
 const switchBoxDisabled = ref(false)
+const currentBlock = ref('block1')
 
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
-  courseName.value = elective
+  full_name.value = elective
+}
+const handleBlockChange = (block: string) => {
+  currentBlock.value = block
 }
 
-const courseName = ref('')
-const shortName = ref('')
-const instructorName = ref('')
-const minOverall = ref<number | null>(null)
-const maxOverall = ref<number | null>(null)
-const lowGroup = ref<number | null>(null)
-const highGroup = ref<number | null>(null)
-const maxGroup = ref<number | null>(null)
+const codename = ref('')
+const full_name = ref('')
+const short_name = ref('')
+const instructor = ref('')
+const min_overall = ref<number>(0)
+const max_overall = ref<number>(0)
+const low_in_group = ref<number>(0)
+const high_in_group = ref<number>(0)
+const max_in_group = ref<number>(0)
 const description = ref('')
-const courseLevel = ref('')
+const groups = ref([''])
 
-const handleSave = () => {
+const handleSave = async () => {
   if (currentElective.value) {
     electiveData.value[currentElective.value] = {
-      courseName: courseName.value,
-      shortName: shortName.value,
-      instructorMail: instructorName.value,
-      minOverall: minOverall.value,
-      maxOverall: maxOverall.value,
-      lowGroup: lowGroup.value,
-      highGroup: highGroup.value,
-      maxGroup: maxGroup.value,
+      codename: codename.value,
+      full_name: full_name.value,
+      short_name: short_name.value,
+      instructor: instructor.value,
+      min_overall: min_overall.value,
+      max_overall: max_overall.value,
+      low_in_group: low_in_group.value,
+      high_in_group: high_in_group.value,
+      max_in_group: max_in_group.value,
       description: description.value,
-      courseLevel: courseLevel.value
+      groups: groups.value
     }
+
+    const type = currentElective.value === 'block1' ? 'tech' : 'hum'
+
+    await api.newCourse({
+      codename: codename.value,
+      type: type,
+      full_name: full_name.value,
+      short_name: short_name.value,
+      instructor: instructor.value,
+      min_overall: min_overall.value,
+      max_overall: max_overall.value,
+      low_in_group: low_in_group.value,
+      high_in_group: high_in_group.value,
+      max_in_group: max_in_group.value,
+      description: description.value,
+      groups: groups.value
+    })
+
     notificationOkMessage.value = 'Saved successfully'
     notificationOkVisible.value = true
     switchBoxDisabled.value = true
@@ -71,28 +97,29 @@ const handleSave = () => {
 
 const handleClear = () => {
   if (currentElective.value) {
-    courseName.value = ''
-    shortName.value = ''
-    instructorName.value = ''
-    minOverall.value = null
-    maxOverall.value = null
-    lowGroup.value = null
-    highGroup.value = null
-    maxGroup.value = null
+    full_name.value = ''
+    short_name.value = ''
+    instructor.value = ''
+    min_overall.value = 0
+    max_overall.value = 0
+    low_in_group.value = 0
+    high_in_group.value = 0
+    max_in_group.value = 0
     description.value = ''
-    courseLevel.value = ''
+    groups.value = ['']
 
     electiveData.value[currentElective.value] = {
-      courseName: '',
-      shortName: '',
-      instructorMail: '',
-      minOverall: 0,
-      maxOverall: 0,
-      lowGroup: 0,
-      highGroup: 0,
-      maxGroup: 0,
+      codename: '',
+      full_name: '',
+      short_name: '',
+      instructor: '',
+      min_overall: 0,
+      max_overall: 0,
+      low_in_group: 0,
+      high_in_group: 0,
+      max_in_group: 0,
       description: '',
-      courseLevel: ''
+      groups: ['']
     }
 
     notificationClearMessage.value = 'Cleared'
@@ -105,7 +132,6 @@ const handleClear = () => {
   }
 }
 
-// Обработчик для переключения режима удаления
 const handleToggleDeleteMode = (isDeleting: boolean) => {
   notificationDeleteVisible.value = isDeleting
 }
@@ -113,27 +139,29 @@ const handleToggleDeleteMode = (isDeleting: boolean) => {
 watch(currentElective, (newElective) => {
   if (newElective && electiveData.value[newElective]) {
     const data = electiveData.value[newElective]
-    courseName.value = data.courseName
-    shortName.value = data.shortName
-    instructorName.value = data.instructorMail
-    minOverall.value = data.minOverall
-    maxOverall.value = data.maxOverall
-    lowGroup.value = data.lowGroup
-    highGroup.value = data.highGroup
-    maxGroup.value = data.maxGroup
+    codename.value = data.codename
+    full_name.value = data.full_name
+    short_name.value = data.short_name
+    instructor.value = data.instructor
+    min_overall.value = data.min_overall
+    max_overall.value = data.max_overall
+    low_in_group.value = data.low_in_group
+    high_in_group.value = data.high_in_group
+    max_in_group.value = data.max_in_group
     description.value = data.description
-    courseLevel.value = data.courseLevel
+    groups.value = data.groups
   } else {
-    courseName.value = ''
-    shortName.value = ''
-    instructorName.value = ''
-    minOverall.value = null
-    maxOverall.value = null
-    lowGroup.value = null
-    highGroup.value = null
-    maxGroup.value = null
+    codename.value = ''
+    full_name.value = ''
+    short_name.value = ''
+    instructor.value = ''
+    min_overall.value = 0
+    max_overall.value = 0
+    low_in_group.value = 0
+    high_in_group.value = 0
+    max_in_group.value = 0
     description.value = ''
-    courseLevel.value = ''
+    groups.value = ['']
   }
 })
 </script>
@@ -147,12 +175,13 @@ watch(currentElective, (newElective) => {
       <div class="flex h-full flex-col items-center self-stretch tablet:w-full laptop:w-1/2">
         <SwitchBox
           :disabled="switchBoxDisabled"
+          @block-change="handleBlockChange"
           @elective-change="handleElectiveChange"
           @toggle-delete-mode="handleToggleDeleteMode"
         />
       </div>
       <div
-        class="flex min-h-full flex-col items-center gap-8 self-start tablet:w-full tablet:pt-10 laptop:w-1/2"
+        class="flex min-h-full flex-col items-center gap-8 self-start tablet:w-full laptop:w-1/2"
       >
         <h2 class="text-3xl font-semibold">Options</h2>
         <form
@@ -162,53 +191,46 @@ watch(currentElective, (newElective) => {
           <div class="flex min-h-full w-full flex-col items-center gap-6 self-stretch">
             <div class="flex flex-col items-center gap-6">
               <ElectiveInput
+                id="codename"
+                v-model="codename"
+                headerName="Course codename"
+                placeholder="Codename"
+              />
+              <ElectiveInput
                 id="full-name"
-                v-model="courseName"
+                v-model="full_name"
                 headerName="Course full name"
                 placeholder="Full name"
               />
               <ElectiveInput
                 id="short-name"
-                v-model="shortName"
+                v-model="short_name"
                 headerName="Course short name"
                 placeholder="Short name"
               />
-              <div class="flex flex-col items-start justify-around">
-                <label class="text-xl font-semibold" for="course-level">Course level</label>
-                <select
-                  class="h-14 rounded-3xl bg-color-surface px-3.5 text-color-dark placeholder:text-gray-100 tablet:w-72 laptop:w-90"
-                  id="course-level"
-                  v-model="courseLevel"
-                >
-                  <option class="bg-color-surface" disabled value="">Select course level</option>
-                  <option class="bg-color-surface" value="First year bachelors">
-                    First year bachelors
-                  </option>
-                  <option class="bg-color-surface" value="Second year bachelors">
-                    Second year bachelors
-                  </option>
-                  <option class="bg-color-surface" value="First and Second year bachelors">
-                    First and Second year bachelors
-                  </option>
-                </select>
-              </div>
+              <ElectiveInput
+                id="group"
+                v-model="groups"
+                headerName="Course groups"
+                placeholder="Codename"
+              />
               <ElectiveInput
                 id="instructor-name"
-                v-model="instructorName"
+                v-model="instructor"
                 autocomplete="email"
                 headerName="Instructor’s name"
                 placeholder="Instructor’s name"
               />
               <ElectiveInput
                 id="min-overall"
-                v-model="minOverall"
+                v-model="min_overall"
                 headerName="Minimum overall students"
                 placeholder="Min overall"
                 type="number"
               />
               <ElectiveInputtablet:max-w-screen-tablet
                 id="max-overall"
-                v-model="maxOverall"
+                v-model="max_overall"
                 headerName="Maximum overall students"
                 desktop:max-w-screen-desktop
                 placeholder="Max overall"
@@ -216,21 +238,21 @@ watch(currentElective, (newElective) => {
               />
               <ElectiveInput
                 id="low-group"
-                v-model="lowGroup"
+                v-model="low_in_group"
                 headerName="Lower number students in group"
                 placeholder="Low in group"
                 type="number"
               />
               <ElectiveInput
                 id="high-group"
-                v-model="highGroup"
+                v-model="high_in_group"
                 headerName="Higher number students in group"
                 placeholder="High in group"
                 type="number"
               />
               <ElectiveInput
                 id="max-group"
-                v-model="maxGroup"
+                v-model="max_in_group"
                 headerName="Maximum students in course"
                 placeholder="Enter maximum"
                 type="number"

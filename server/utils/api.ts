@@ -1,4 +1,4 @@
-import { Student } from '~/server/utils/schemas'
+import { CourseNoId, StudentPriorities } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
@@ -19,7 +19,7 @@ function fileHeaders(): Headers {
 }
 
 export async function uploadTable(file: File): Promise<Response> {
-  const url = new URL(api('/upload'))
+  const url = new URL(api('/upload-table'))
   url.search = new URLSearchParams({ name: file.name }).toString()
 
   const body = new FormData()
@@ -131,7 +131,7 @@ export async function getCourses(): Promise<Course[] | undefined> {
   ]
 }
 
-export async function postCourse(course: Course): Promise<Response> {
+export async function newCourse(course: CourseNoId): Promise<Response> {
   return await fetch(api('/courses/'), {
     method: 'POST',
     headers: jsonHeaders(),
@@ -139,13 +139,21 @@ export async function postCourse(course: Course): Promise<Response> {
   })
 }
 
-export async function getStudents(): Promise<Student[] | undefined> {
+export async function editCourse(course: Course): Promise<Response> {
+  return await fetch(api('/courses/'), {
+    method: 'POST',
+    headers: jsonHeaders(),
+    body: JSON.stringify(course)
+  })
+}
+
+export async function getStudents(): Promise<StudentPriorities[] | undefined> {
   return await fetch(api('/students/'))
     .then((response) => response.json())
     .catch((_) => undefined)
 }
 
-export async function postStudent(student: Student): Promise<Response> {
+export async function postStudent(student: StudentPriorities): Promise<Response> {
   return await fetch(api('/students/'), {
     method: 'POST',
     headers: jsonHeaders(),
