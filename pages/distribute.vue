@@ -56,7 +56,7 @@ onMounted(() => {
       <div />
 
       <span
-        class="min-w-64 justify-self-center text-center tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
+        class="min-w-64 justify-self-center text-center"
         v-if="submittedCount !== undefined"
         @click="clickById('update')"
       >
@@ -68,34 +68,23 @@ onMounted(() => {
         <br />
         <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-2" />
       </span>
-      <span
-        class="min-w-64 text-center tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-        v-else
-      >
+      <span class="min-w-64 text-center" v-else>
         {{ $t('info.database') }}
       </span>
 
-      <UButton
-        class="justify-self-start tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-        id="update"
-        @click="updateCount"
-        variant="ghost"
-      >
-        <Icon
-          class="size-5 text-color-overlay tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-          name="fa6-solid:rotate"
-        />
+      <UButton class="justify-self-start" id="update" @click="updateCount" variant="ghost">
+        <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
       </UButton>
     </div>
 
-    <div class="flex flex-col items-center tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
-      <div class="grid grid-cols-3 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
+    <div class="flex flex-col items-center">
+      <div class="grid grid-cols-3">
         <div />
 
         <UButton :label="$t('distribute.button.download')" />
 
         <USelectMenu
-          class="justify-self-start text-color-overlay tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
+          class="justify-self-start text-color-overlay"
           v-model="extension"
           :arrow="{ placement: 'left-top' }"
           :options="fileExtensions"
@@ -105,16 +94,11 @@ onMounted(() => {
         />
       </div>
 
-      <UButton
-        class="tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-        to="/form"
-        variant="link"
-        >{{ $t('distribute.button.fill') }}
-      </UButton>
+      <UButton to="/form" variant="link">{{ $t('distribute.button.fill') }} </UButton>
     </div>
 
     <UButton
-      class="flex h-90 w-160 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
+      class="flex h-90 flex-col items-center justify-evenly rounded-3xl border-4 border-dashed border-color-accent"
       @click="clickById('browse')"
       @focus="focusById('browse')"
       variant="ghost"
@@ -122,21 +106,10 @@ onMounted(() => {
       <h2 class="text-2xl font-semibold tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
         {{ $t('distribute.form.heading') }}
       </h2>
-      <div
-        class="flex flex-row gap-16 text-gray-300 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-      >
-        <Icon
-          class="size-24 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-          name="fa6-solid:file-csv"
-        />
-        <Icon
-          class="size-24 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-          name="fa6-solid:table"
-        />
-        <Icon
-          class="size-24 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
-          name="fa6-solid:file-excel"
-        />
+      <div class="flex flex-row gap-16 text-gray-300">
+        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:file-csv" />
+        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:table" />
+        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:file-excel" />
       </div>
 
       <UInput
