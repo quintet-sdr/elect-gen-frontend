@@ -2,9 +2,8 @@ export type CourseCodename = string
 export type CourseGroup = string
 
 export interface Course {
-  id: number
   codename: CourseCodename
-  type: 'hum' | 'tech'
+  type: 'tech' | 'hum'
   full_name: string
   short_name: string
   description: string
