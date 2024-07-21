@@ -9,8 +9,8 @@ const props = defineProps<{
 
 <template>
   <transition name="fade">
-    <div class="absolute bottom-4 z-10 w-72 rounded-xl bg-red-500 p-5" v-if="props.visible">
-      <p class="text-color-darkblue font-semibold">{{ props.message }}</p>
+    <div class="flex flex-row items-center justify-center absolute bottom-4 z-10 min-w-72 rounded-xl bg-red-500 p-5" v-if="props.visible">
+      <p class="text-color-text font-semibold">{{ props.message }}</p>
     </div>
   </transition>
 </template>
