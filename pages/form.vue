@@ -7,9 +7,13 @@ definePageMeta({ layout: false })
 
 const NUM_OF_COURSES: number = 5
 
-const sortedCourses = ref(
-  (await api.getCourses())?.sort((a, b) => a.short_name.localeCompare(b.short_name))
-)
+async function getSortedCourses(): Promise<void> {
+  sortedCourses.value = (await api.getCourses())
+    ?.filter((it) => it.type == ['tech', 'hum'][selectedTab.value])
+    .sort((a, b) => a.short_name.localeCompare(b.short_name))
+}
+
+const sortedCourses = ref<Course[]>()
 
 const courses = computed(() => {
   if (sortedCourses.value === undefined) {
@@ -83,6 +87,9 @@ const selectedTab = computed({
     if (index === -1) {
       return 0
     }
+
+    ;(async () => await getSortedCourses())()
+
     return index
   },
   set: selectTab
@@ -125,7 +132,17 @@ const email = ref('')
 
 const gpa = ref<number>()
 
-async function submit(): Promise<void> {}
+async function submit(): Promise<void> {
+  await api.postStudent({
+    email: email.value,
+    gpa: gpa.value!,
+    priority_1: selected.value[0]!.codename,
+    priority_2: selected.value[1]!.codename,
+    priority_3: selected.value[2]!.codename,
+    priority_4: selected.value[3]!.codename,
+    priority_5: selected.value[4]!.codename
+  })
+}
 
 onMounted(() => selectTab(0))
 </script>

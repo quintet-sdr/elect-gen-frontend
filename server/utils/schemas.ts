@@ -16,7 +16,7 @@ export interface Course {
   groups: CourseGroup[]
 }
 
-export interface Student {
+export interface StudentPriorities {
   email: string
   gpa: number
   priority_1: CourseCodename
@@ -24,9 +24,6 @@ export interface Student {
   priority_3: CourseCodename
   priority_4: CourseCodename
   priority_5: CourseCodename
-  group: CourseGroup[]
-  completed: CourseCodename[]
-  available: CourseCodename[]
 }
 
 export default {}
