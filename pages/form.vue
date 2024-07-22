@@ -8,9 +8,9 @@ definePageMeta({ layout: false })
 const NUM_OF_COURSES: number = 5
 
 async function getSortedCourses(): Promise<void> {
-  sortedCourses.value = (await api.getCourses())
-    ?.filter((it) => it.type == ['tech', 'hum'][selectedTab.value])
-    .sort((a, b) => a.short_name.localeCompare(b.short_name))
+  sortedCourses.value = (await api.getCourses(currentElectiveType.value))?.sort((a, b) =>
+    a.short_name.localeCompare(b.short_name)
+  )
 }
 
 const sortedCourses = ref<Course[]>()
@@ -99,6 +99,8 @@ const selectedTab = computed({
   set: selectTab
 })
 
+const currentElectiveType = computed(() => ['tech', 'hum'][selectedTab.value] as 'tech' | 'hum')
+
 function validateEmail(): boolean {
   if (email.value.length === 0) {
     return true
@@ -137,18 +139,24 @@ const email = ref('')
 const gpa = ref<number>()
 
 async function submit(): Promise<void> {
-  await api.postStudents({
-    email: `${email.value}@innopolis.university`,
-    gpa: gpa.value!,
-    priority_1: selected.value[0]!.codename,
-    priority_2: selected.value[1]!.codename,
-    priority_3: selected.value[2]!.codename,
-    priority_4: selected.value[3]!.codename,
-    priority_5: selected.value[4]!.codename
-  })
+  await api.postStudents(
+    {
+      email: `${email.value}@innopolis.university`,
+      gpa: gpa.value!,
+      priority_1: selected.value[0]!.codename,
+      priority_2: selected.value[1]!.codename,
+      priority_3: selected.value[2]!.codename,
+      priority_4: selected.value[3]!.codename,
+      priority_5: selected.value[4]!.codename
+    },
+    currentElectiveType.value
+  )
 }
 
-const courseGroups = (await api.coursesGroups()).sort((a, b) => a.localeCompare(b))
+// FIXME
+const x = await api.coursesGroups(currentElectiveType.value)
+const courseGroups = ref(x !== undefined ? x.sort((a, b) => a.localeCompare(b)) : undefined)
+
 const selectedGroup = ref<CourseGroup>()
 
 onMounted(() => selectTab(0))
