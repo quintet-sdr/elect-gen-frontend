@@ -35,8 +35,9 @@ export async function getCurrentTable(elective: ElectiveType): Promise<void> {
   download(new URL(response.url))
 }
 
-export async function getExampleTable(): Promise<void> {
+export async function getExampleTable(elective: ElectiveType): Promise<void> {
   const url = new URL(api('/get-example-table/'))
+  url.search = new URLSearchParams({ elective }).toString()
 
   const response = await fetch(url)
 
