@@ -71,8 +71,8 @@ function distributeClick() {
       <div class="flex w-full flex-col items-center justify-center gap-16 desktop:w-2/3">
         <div class="flex w-max flex-col items-center gap-4 text-center">
           <h2 class="text-3xl font-semibold">Select an action</h2>
-          <UButton class="w-32" @click="configClick">Configure</UButton>
-          <UButton class="w-32" @click="distributeClick">Distribute</UButton>
+          <UButton class="w-32 justify-center" @click="configClick">Configure</UButton>
+          <UButton class="w-32 justify-center" @click="distributeClick">Distribute</UButton>
         </div>
         <div class="flex flex-col items-center gap-4">
           <h2 class="text-3xl font-semibold">Authors</h2>
