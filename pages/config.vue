@@ -65,7 +65,7 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout :back="false" name="default">
+  <NuxtLayout name="default">
     <Heading :level="2" text="Configure parameters" />
 
     <div class="flex flex-col items-center gap-2">

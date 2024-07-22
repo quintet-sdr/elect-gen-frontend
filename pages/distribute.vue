@@ -68,7 +68,7 @@ useHead({
 </script>
 
 <template>
-  <NuxtLayout :back="false" name="default">
+  <NuxtLayout name="default">
     <Heading :level="2" text="Distribute students" />
 
     <div class="grid grid-cols-5 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
