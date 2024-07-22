@@ -7,6 +7,7 @@ import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
 import type { CourseCodename } from '~/server/utils/schemas'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
+import ElectiveInputDatalist from "~/components/shared/Elective/ElectiveInputDatalist.vue";
 
 interface ElectiveData {
   codename: CourseCodename
@@ -32,6 +33,8 @@ const notificationDeleteVisible = ref(false)
 
 const switchBoxDisabled = ref(false)
 const currentBlock = ref('block1')
+
+const groupTypes = ['First year', 'Second year', 'First & Second years']
 
 const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
@@ -84,7 +87,7 @@ const handleSave = async () => {
       max_in_group: max_in_group.value,
       description: description.value,
       groups: ['']
-    })
+    }, type)
 
     notificationOkMessage.value = 'Saved successfully'
     notificationOkVisible.value = true
@@ -209,11 +212,12 @@ watch(currentElective, (newElective) => {
                 headerName="Course short name"
                 placeholder="Short name"
               />
-              <ElectiveInput
+              <ElectiveInputDatalist
                 id="group"
                 v-model="groups"
                 headerName="Course groups"
                 placeholder="Codename"
+                :options="groupTypes"
               />
               <ElectiveInput
                 id="instructor-name"
