@@ -1,4 +1,4 @@
-import type { Course, CourseGroup, Distribution, Student } from '~/server/utils/schemas'
+import type { Course, CourseGroup, Student } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
@@ -138,11 +138,15 @@ export async function distributions(file: File): Promise<Response> {
   const body = new FormData()
   body.append('file', file)
 
-  return await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: fileHeaders(),
     body
   })
+
+  download(new URL(response.url))
+
+  return response
 }
 
 export default {}

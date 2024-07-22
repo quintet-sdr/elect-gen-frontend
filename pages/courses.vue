@@ -199,7 +199,6 @@ watch(currentElective, (newElective) => {
 })
 </script>
 
-
 <template>
   <main
     class="flex min-w-full flex-col items-center gap-12 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
@@ -210,8 +209,8 @@ watch(currentElective, (newElective) => {
         <SwitchBox
           :disabled="switchBoxDisabled"
           @block-change="handleBlockChange"
-          @elective-change="handleElectiveChange"
           @course-selected="handleCourseSelected"
+          @elective-change="handleElectiveChange"
           @toggle-delete-mode="handleToggleDeleteMode"
         />
       </div>
