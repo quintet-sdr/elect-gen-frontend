@@ -28,7 +28,7 @@ function checkExtension(): boolean {
 
   const types: string[] = [
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    'text/csv'
+    'application/vnd.oasis.opendocument.spreadsheet'
   ] as const
 
   return types.includes(browseButton.value!.files![0].type)
