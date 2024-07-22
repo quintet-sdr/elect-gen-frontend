@@ -2,10 +2,12 @@
 import Header from '~/components/widgets/Header.vue'
 import { TEAM_MEMBERS as teamMembers } from '~/constants/teamMembers'
 
+const store = useStore()
+
 const attrs = useAttrs()
 
 const back = attrs.back !== undefined ? (attrs.back as boolean) : true
-const email = attrs.email !== undefined ? (attrs.email as string) : ''
+const email = store.email || ''
 
 useHead({
   meta: [

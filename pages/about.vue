@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
 import Logo from '~/components/shared/Logo/Logo.vue'
 import Member from '~/components/shared/Member.vue'
 import { TEAM_MEMBERS as teamMembers } from '~/constants/teamMembers'
 
-const router = useRouter()
+const store = useStore()
 
 useHead({
   title: 'Elect.Gen - Project contributors',
@@ -18,6 +17,10 @@ function configClick() {
   navigateTo('/config')
 }
 
+function signIn(): void {
+  navigateTo('/login')
+}
+
 function distributeClick() {
   navigateTo('/distribute')
 }
@@ -25,10 +28,14 @@ function distributeClick() {
 
 <template>
   <div class="flex flex-col gap-8">
-    <header class="h-15 grid w-full grid-cols-3 items-center px-44">
+    <header class="flex h-16 w-full grid-cols-3 items-end justify-between px-44">
       <a class="h-20 w-40 p-4" href="https://innopolis.university/">
         <Logo />
       </a>
+
+      <span>
+        {{ store.email }}
+      </span>
     </header>
     <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row">
       <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
@@ -69,10 +76,22 @@ function distributeClick() {
         </div>
       </div>
       <div class="flex w-full flex-col items-center justify-center gap-16 desktop:w-2/3">
-        <div class="flex w-max flex-col items-center gap-4 text-center">
+        <div
+          class="flex w-max flex-col items-center gap-4 text-center"
+          v-if="store.email?.endsWith('innopolis.ru')"
+        >
           <h2 class="text-3xl font-semibold">Select an action</h2>
           <UButton class="w-32 justify-center" @click="configClick">Configure</UButton>
           <UButton class="w-32 justify-center" @click="distributeClick">Distribute</UButton>
+        </div>
+        <div class="flex flex-col items-center gap-4 font-semibold" v-else>
+          <span>Log in to your account</span>
+          <UButton
+            class="h-12 w-36 justify-center rounded-xl text-2xl font-semibold"
+            @click="signIn"
+          >
+            Sign in
+          </UButton>
         </div>
         <div class="flex flex-col items-center gap-4">
           <h2 class="text-3xl font-semibold">Authors</h2>

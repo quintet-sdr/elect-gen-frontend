@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Logo from '~/components/shared/Logo/Logo.vue'
 
+const store = useStore()
+
 const showPassword = ref(false)
 const email = ref('')
 
@@ -13,11 +15,13 @@ const togglePasswordVisibility = () => {
 const router = useRouter()
 
 function navigateToStatistics() {
-  if (email.value === 'a.potyomckin@innopolis.ru' || email.value.includes('@innopolis.ru')) {
-    router.push('/distribute')
-  } else if (email.value.includes('@innopolis.university')) {
+  store.email = email.value
+  if (email.value.endsWith('@innopolis.ru')) {
+    router.push('/')
+  } else if (email.value.endsWith('@innopolis.university')) {
     router.push('/form')
   } else {
+    store.email = undefined
     alert('Your email is not in the system')
     console.log('invalid')
   }
