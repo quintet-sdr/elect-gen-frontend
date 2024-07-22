@@ -4,6 +4,8 @@ import * as api from '~/server/utils/api'
 
 definePageMeta({ layout: false })
 
+const store = useStore()
+
 function clickById(id: string): void {
   document.getElementById(id)!.click()
 }
@@ -21,7 +23,8 @@ const techCount = ref<number | undefined>()
 const humCount = ref<number | undefined>()
 
 const fileExtensions = ['xlsx', 'ods']
-const extension = ref(fileExtensions[0])
+const extensionTech = ref(fileExtensions[0])
+const extensionHum = ref(fileExtensions[0])
 
 function checkExtension(): boolean {
   if (filepath.value === undefined) {
@@ -36,8 +39,16 @@ function checkExtension(): boolean {
   return types.includes(browseButton.value!.files![0].type)
 }
 
+async function clickTech(): Promise<void> {
+  await api.getCurrentTable('tech', extensionTech.value as 'xlsx' | 'ods')
+}
+
+async function clickHum(): Promise<void> {
+  await api.getCurrentTable('hum', extensionHum.value as 'xlsx' | 'ods')
+}
+
 async function submit(): Promise<void> {
-  await api.uploadTable(browseButton.value!.files![0]).then((response) => response.json())
+  store.distributions = api.distributions(browseButton.value!.files![0])
   navigateTo('/results')
 }
 
@@ -58,7 +69,7 @@ useHead({
 
 <template>
   <NuxtLayout :back="false" name="default">
-    <Heading :level="1" :text="$t('app-name')" />
+    <Heading :level="2" text="Distribute students" />
 
     <div class="grid grid-cols-5 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
       <div />
@@ -83,21 +94,49 @@ useHead({
       </UButton>
     </div>
 
-    <div class="flex flex-col items-center">
-      <div class="grid grid-cols-3">
+    <div class="flex flex-col items-center gap-2">
+      <span class="font-semibold">
+        {{ $t('distribute.button.download') }}
+      </span>
+
+      <div class="flex flex-row justify-center gap-4">
+        <div />
         <div />
 
-        <UButton :label="$t('distribute.button.download')" />
+        <div class="flex flex-row">
+          <UButton
+            class="w-16 justify-center justify-self-center"
+            :label="'Tech'"
+            @click="clickTech"
+          />
 
-        <USelectMenu
-          class="justify-self-start text-color-overlay"
-          v-model="extension"
-          :arrow="{ placement: 'left-top' }"
-          :options="fileExtensions"
-          :ui="{ base: 'hover:cursor-pointer' }"
-          default="xlsx"
-          variant="none"
-        />
+          <USelectMenu
+            class="justify-self-start text-color-overlay"
+            v-model="extensionTech"
+            :arrow="{ placement: 'left-top' }"
+            :options="fileExtensions"
+            :ui="{ base: 'hover:cursor-pointer' }"
+            default="xlsx"
+            variant="none"
+          />
+        </div>
+        <div class="flex flex-row">
+          <UButton
+            class="w-16 justify-center justify-self-center"
+            :label="'Hum'"
+            @click="clickHum"
+          />
+
+          <USelectMenu
+            class="justify-self-start text-color-overlay"
+            v-model="extensionHum"
+            :arrow="{ placement: 'left-top' }"
+            :options="fileExtensions"
+            :ui="{ base: 'hover:cursor-pointer' }"
+            default="xlsx"
+            variant="none"
+          />
+        </div>
       </div>
 
       <UButton to="/student" variant="link">{{ $t('distribute.button.fill') }} </UButton>

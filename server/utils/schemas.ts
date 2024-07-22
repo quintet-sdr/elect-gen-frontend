@@ -1,6 +1,8 @@
 export type CourseCodename = string
 export type CourseGroup = string
 
+export type Distribution = any
+
 export interface Course {
   codename: CourseCodename
   type: 'tech' | 'hum'

@@ -1,7 +1,10 @@
+import type { Distribution } from '~/server/utils/schemas'
+
 export const useStore = defineStore('store', {
   state: () =>
     ({}) as {
-      email: string
+      email?: string
+      distributions?: Promise<Distribution[] | undefined>
     }
 })
 

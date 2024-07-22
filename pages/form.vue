@@ -11,7 +11,7 @@ const student = ref<Student>()
 const coursesRaw = ref<Course[]>()
 
 async function updateStudent(elective: 'tech' | 'hum'): Promise<void> {
-  student.value = await api.getStudent(store.email, elective)
+  student.value = await api.getStudent(store.email!, elective)
   coursesRaw.value = await api.getCourses(elective)
 }
 
@@ -104,7 +104,7 @@ async function submit(): Promise<void> {
     {
       available: student.value!.available,
       completed: student.value!.completed,
-      email: store.email,
+      email: store.email!,
       gpa: student.value!.gpa,
       group: student.value!.group,
       priority_1: selected.value[0]!.codename,
