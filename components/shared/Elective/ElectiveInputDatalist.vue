@@ -52,15 +52,15 @@ const handleInput = (event: Event) => {
       class="placeholder-color-gray-100 h-14 rounded-3xl bg-color-surface px-3.5 text-color-dark tablet:w-72 laptop:w-90 dark:placeholder-color-base"
       :autocomplete="props.autocomplete"
       :id="props.id"
+      :list="'datalist-' + props.id"
       :name="props.id"
       :placeholder="props.placeholder"
       :type="props.type"
       :value="value"
       @input="handleInput"
-      :list="'datalist-' + props.id"
     />
     <datalist :id="'datalist-' + props.id">
-      <option v-for="option in props.options" :value="option" :key="option"/>
+      <option v-for="option in props.options" :key="option" :value="option" />
     </datalist>
   </div>
 </template>

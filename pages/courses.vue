@@ -7,7 +7,7 @@ import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
 import type { CourseCodename } from '~/server/utils/schemas'
 import SwitchBox from '~/components/widgets/SwitchBox.vue'
-import ElectiveInputDatalist from "~/components/shared/Elective/ElectiveInputDatalist.vue";
+import ElectiveInputDatalist from '~/components/shared/Elective/ElectiveInputDatalist.vue'
 
 interface ElectiveData {
   codename: CourseCodename
@@ -47,14 +47,14 @@ const handleBlockChange = (block: string) => {
 const transformGroups = (group: groups.value) => {
   let transformedGroups: string[] = []
 
-    if (groups.value.includes('First')) {
-      transformedGroups.push('year 1')
-    }
-    if (groups.value.includes('Second')) {
-      transformedGroups.push('year 2')
-    }
+  if (groups.value.includes('First')) {
+    transformedGroups.push('year 1')
+  }
+  if (groups.value.includes('Second')) {
+    transformedGroups.push('year 2')
+  }
 
-    return transformedGroups;
+  return transformedGroups
 }
 
 const codename = ref('')
@@ -87,20 +87,23 @@ const handleSave = async () => {
 
     const type = currentBlock.value === 'block1' ? 'tech' : 'hum'
 
-    await api.postCourses({
-      codename: codename.value,
-      type: type,
-      full_name: full_name.value,
-      short_name: short_name.value,
-      instructor: instructor.value,
-      min_overall: min_overall.value,
-      max_overall: max_overall.value,
-      low_in_group: low_in_group.value,
-      high_in_group: high_in_group.value,
-      max_in_group: max_in_group.value,
-      description: description.value,
-      groups: transformGroups(groups.value)
-    }, type)
+    await api.postCourses(
+      {
+        codename: codename.value,
+        type: type,
+        full_name: full_name.value,
+        short_name: short_name.value,
+        instructor: instructor.value,
+        min_overall: min_overall.value,
+        max_overall: max_overall.value,
+        low_in_group: low_in_group.value,
+        high_in_group: high_in_group.value,
+        max_in_group: max_in_group.value,
+        description: description.value,
+        groups: transformGroups(groups.value)
+      },
+      type
+    )
 
     notificationOkMessage.value = 'Saved successfully'
     notificationOkVisible.value = true
@@ -228,9 +231,9 @@ watch(currentElective, (newElective) => {
               <ElectiveInputDatalist
                 id="group"
                 v-model="groups"
+                :options="groupTypes"
                 headerName="Course groups"
                 placeholder="Groups"
-                :options="groupTypes"
               />
               <ElectiveInput
                 id="instructor-name"

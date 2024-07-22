@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, reactive, watch, onMounted } from 'vue'
 import ElectiveButton from '~/components/shared/Elective/ElectiveButton.vue'
-import * as api from "~/server/utils/api"
+import * as api from '~/server/utils/api'
 import type { Course } from '~/server/utils/schemas'
 
 const loadCourses = async () => {
@@ -98,7 +98,6 @@ const toggleDeleteMode = () => {
 onMounted(() => {
   loadCourses()
 })
-
 </script>
 
 <template>
