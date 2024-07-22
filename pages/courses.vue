@@ -85,8 +85,7 @@ const handleSave = async () => {
       groups: groups.value
     }
 
-    const type = currentElective.value === 'block1' ? 'tech' : 'hum'
-    console.log(type)
+    const type = currentBlock.value === 'block1' ? 'tech' : 'hum'
 
     await api.postCourses({
       codename: codename.value,
