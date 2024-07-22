@@ -62,7 +62,7 @@ function distributeClick() {
             allowfullscreen
             frameborder="0"
             height="315"
-            src=""
+            src="https://youtu.be/T26GocF4tPs"
             title="YouTube video player"
             width="560"
           />
