@@ -49,10 +49,10 @@ function distributeClick() {
             allowfullscreen
             frameborder="0"
             height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src=""
             title="YouTube video player"
             width="560"
-          ></iframe>
+          />
         </div>
         <div>
           <h3 class="mb-4 text-3xl font-semibold">Student video</h3>
@@ -62,10 +62,10 @@ function distributeClick() {
             allowfullscreen
             frameborder="0"
             height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src=""
             title="YouTube video player"
             width="560"
-          ></iframe>
+          />
         </div>
       </div>
       <div class="flex w-full flex-col items-center justify-center gap-16 desktop:w-2/3">

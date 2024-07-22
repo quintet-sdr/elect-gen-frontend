@@ -47,6 +47,7 @@ async function clickHum(): Promise<void> {
 
 async function submit(): Promise<void> {
   await api.uploadTable(browseButton.value!.files![0])
+  alert('Operation successful!')
 }
 
 const filepath = ref<string>()
@@ -137,7 +138,7 @@ useHead({
       />
     </UButton>
 
-    <UButton v-if="checkExtension()" @click="submit"> {{ $t('distribute.form.proceed') }}</UButton>
+    <UButton v-if="checkExtension()" @click="submit"> Upload </UButton>
     <span v-else-if="filepath !== undefined">
       {{ $t('distribute.form.wrong-extension-error') }}
     </span>
