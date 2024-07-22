@@ -99,7 +99,7 @@ useHead({
         />
       </div>
 
-      <UButton to="/form" variant="link">{{ $t('distribute.button.fill') }} </UButton>
+      <UButton to="/student" variant="link">{{ $t('distribute.button.fill') }} </UButton>
     </div>
 
     <UButton

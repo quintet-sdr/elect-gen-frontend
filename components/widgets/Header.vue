@@ -1,19 +1,10 @@
 <script lang="ts" setup>
-// const { t } = useI18n({ useScope: 'local' })
-// const store = useStore()
-// const signOut = [[{ label: t('header.account.sign-out') }]]
-
-// function signOutAndNavigate() {
-//   navigateTo('/login')
-// }
-
 interface Props {
   back: boolean
+  email: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  back: false
-})
+const props = defineProps<Props>()
 
 const iconName = props.back ? 'fa-solid:arrow-left' : 'local:innopolis-university'
 
@@ -32,8 +23,8 @@ function navigateToPage() {
       <slot />
     </div>
 
-    <!-- <UDropdown class="justify-self-end" :items="signOut" @click="signOutAndNavigate" mode="hover">
-      {{ store.email }}
-    </UDropdown> -->
+    <div class="text-right">
+      {{ props.email }}
+    </div>
   </header>
 </template>

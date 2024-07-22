@@ -1,9 +1,19 @@
 <script lang="ts" setup>
 import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
-import type { Course, CourseGroup } from '~/server/utils/schemas'
+import type { Course, Student } from '~/server/utils/schemas'
 
 definePageMeta({ layout: false })
+
+const store = useStore()
+
+const student = ref<Student>()
+const coursesRaw = ref<Course[]>()
+
+async function updateStudent(elective: 'tech' | 'hum'): Promise<void> {
+  student.value = await api.getStudent(store.email, elective)
+  coursesRaw.value = await api.getCourses(elective)
+}
 
 useHead({
   title: 'Select Electives - Elect.Gen',
@@ -12,10 +22,10 @@ useHead({
 
 const NUM_OF_COURSES: number = 5
 
-async function setSortedCourses(elective: 'tech' | 'hum'): Promise<void> {
-  sortedCourses.value = (await api.getCourses(elective))?.sort((a, b) =>
-    a.short_name.localeCompare(b.short_name)
-  )
+async function setSortedCourses(): Promise<void> {
+  sortedCourses.value = coursesRaw.value
+    ?.filter((it) => student.value?.available.includes(it.codename))
+    .sort((a, b) => a.short_name.localeCompare(b.short_name))
 }
 
 const sortedCourses = ref<Course[]>()
@@ -47,12 +57,7 @@ for (let _ = 0; _ < NUM_OF_COURSES; _ += 1) {
 }
 
 function enabled(): boolean {
-  return (
-    !selected.value.includes(undefined) &&
-    validateEmail() &&
-    email.value.length > 0 &&
-    typeof gpa.value === 'number'
-  )
+  return !selected.value.includes(undefined)
 }
 
 function except(it: CourseWithId, i: number): boolean {
@@ -87,75 +92,34 @@ const selectedTab = computed({
       return 0
     }
 
-    ;(async () => await setSortedCourses(route.query.type as 'tech' | 'hum'))()
+    ;(async () => await setSortedCourses())()
 
     return index
   },
   set: selectTab
 })
 
-const currentElectiveType = computed(() => ['tech', 'hum'][selectedTab.value] as 'tech' | 'hum')
-
-function validateEmail(): boolean {
-  if (email.value.length === 0) {
-    return true
-  }
-
-  const validSymbols =
-    "1234567890-+qwfpbjluyarstgmneioxcdvzkh.QWFPBJLUYARSTGMNEIOXCDVZKH!#$%&'*+-/=?^_`{|}~"
-
-  for (const symbol of email.value) {
-    if (!validSymbols.includes(symbol)) {
-      return false
-    }
-  }
-
-  if ([email.value[0], email.value[email.value.length - 1]].includes('.')) {
-    return false
-  }
-
-  if (email.value.includes('..')) {
-    return false
-  }
-
-  return true
-}
-
-function emailColor(): string | undefined {
-  if (validateEmail()) {
-    return undefined
-  } else {
-    return 'red'
-  }
-}
-
-const email = ref('')
-
-const gpa = ref<number>()
-
 async function submit(): Promise<void> {
-  await api.postStudents(
+  api.postStudents(
     {
-      email: `${email.value}@innopolis.university`,
-      gpa: gpa.value!,
+      available: student.value!.available,
+      completed: student.value!.completed,
+      email: store.email,
+      gpa: student.value!.gpa,
+      group: student.value!.group,
       priority_1: selected.value[0]!.codename,
       priority_2: selected.value[1]!.codename,
       priority_3: selected.value[2]!.codename,
       priority_4: selected.value[3]!.codename,
       priority_5: selected.value[4]!.codename
     },
-    currentElectiveType.value
+    route.query.type as 'tech' | 'hum'
   )
+
+  for (let i = 0; i < NUM_OF_COURSES; i += 1) {
+    selected.value[i] = undefined
+  }
 }
-
-const courseGroupsRaw = ref<CourseGroup[]>()
-const courseGroupsSorted = computed(() =>
-  courseGroupsRaw !== undefined
-    ? courseGroupsRaw.value?.sort((a, b) => a.localeCompare(b))
-    : undefined
-)
-
-const selectedGroup = ref<CourseGroup>()
 
 function selectTab(value: number): void {
   router.replace({
@@ -166,15 +130,14 @@ function selectTab(value: number): void {
     selected.value[i] = undefined
   }
 
-  ;(async () =>
-    (courseGroupsRaw.value = await api.coursesGroups(items[value].type as 'hum' | 'tech')))()
+  ;(async () => await updateStudent(items[value].type as 'tech' | 'hum'))()
 }
 
 onMounted(() => selectTab(0))
 </script>
 
 <template>
-  <NuxtLayout :back="true" name="default">
+  <NuxtLayout :back="true" :email="store.email" name="default">
     <template #header>
       <UTabs class="w-32" v-model="selectedTab" :items="items" />
     </template>
@@ -184,48 +147,7 @@ onMounted(() => selectTab(0))
     <div />
 
     <form class="flex w-72 flex-col items-center gap-4" @submit.prevent="submit">
-      <div class="flex w-full flex-col self-start">
-        <UFormGroup label="Email" required>
-          <div class="flex flex-row items-center gap-1">
-            <UInput
-              class="w-48 min-w-48"
-              v-model="email"
-              :color="emailColor()"
-              placeholder="Local-part"
-            />
-            <span
-              class="font-medium text-color-overlay"
-              v-if="validateEmail() && email.length === 0"
-            >
-              @innopolis.university
-            </span>
-            <span class="font-medium text-color-accent" v-if="validateEmail() && email.length > 0">
-              @innopolis.university
-            </span>
-          </div>
-        </UFormGroup>
-
-        <span class="font-medium text-color-error" v-if="!validateEmail()">
-          Enter a valid local-part.
-        </span>
-      </div>
-
-      <UFormGroup class="w-48 self-start" label="GPA" required>
-        <UInput v-model="gpa" :max="5.0" :min="2.0" placeholder="Number" step="any" type="number" />
-      </UFormGroup>
-
-      <UFormGroup class="w-48 self-start" label="Course groups" required>
-        <USelectMenu
-          v-model="selectedGroup"
-          :options="courseGroupsSorted"
-          placeholder="Group…"
-          searchable
-        />
-      </UFormGroup>
-
-      <div />
-
-      <div class="flex w-full flex-col gap-4" v-if="selectedGroup !== undefined">
+      <div class="flex w-full flex-col gap-4">
         <UFormGroup class="w-full" v-for="i in 5" :label="`Priority ${i}`" required>
           <USelectMenu
             v-model="selected[i - 1]"

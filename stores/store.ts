@@ -1,13 +1,8 @@
-enum UserType {
-  Student,
-  Administator
-}
-
 export const useStore = defineStore('store', {
-  state: () => ({
-    userType: UserType.Administator,
-    email: 'a.potyomckin@innopolis.ru'
-  })
+  state: () =>
+    ({}) as {
+      email: string
+    }
 })
 
 if (import.meta.hot) {
