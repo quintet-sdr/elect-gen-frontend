@@ -1,7 +1,11 @@
 export type CourseCodename = string
 export type CourseGroup = string
+export type StudentEmail = string
 
-export type Distribution = any
+export type Distribution = {
+  student: StudentEmail
+  cours: CourseCodename
+}
 
 export interface Course {
   codename: CourseCodename
@@ -19,7 +23,7 @@ export interface Course {
 }
 
 export interface Student {
-  email: string
+  email: StudentEmail
   gpa: number
   priority_1: CourseCodename
   priority_2: CourseCodename
