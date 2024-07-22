@@ -29,9 +29,9 @@ export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup
     .catch((_) => undefined)
 }
 
-export async function uploadTable(file: File, elective: ElectiveType): Promise<Response> {
+export async function uploadTable(file: File): Promise<Response> {
   const url = new URL(api('/upload-table/'))
-  url.search = new URLSearchParams({ name: file.name, elective }).toString()
+  url.search = new URLSearchParams({ name: file.name }).toString()
 
   const body = new FormData()
   body.append('file', file)
