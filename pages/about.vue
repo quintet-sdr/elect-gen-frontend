@@ -49,7 +49,7 @@ function distributeClick() {
             allowfullscreen
             frameborder="0"
             height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src=""
             title="YouTube video player"
             width="560"
           />
@@ -62,7 +62,7 @@ function distributeClick() {
             allowfullscreen
             frameborder="0"
             height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src=""
             title="YouTube video player"
             width="560"
           />
