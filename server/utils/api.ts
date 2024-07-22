@@ -124,7 +124,3 @@ export async function distributions(course: Course, elective: ElectiveType): Pro
 }
 
 export default {}
-onMounted(() => {
-  techElectives.push(...techCourses.map((course: Course) => course.full_name))
-  humElectives.push(...humCourses.map((course: Course) => course.full_name))
-})
