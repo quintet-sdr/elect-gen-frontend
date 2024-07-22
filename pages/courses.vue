@@ -206,7 +206,7 @@ watch(currentElective, (newElective) => {
   >
     <Heading text="Electives" />
     <div class="flex h-auto w-full items-center justify-around tablet:flex-col laptop:flex-row">
-      <div class="flex h-full flex-col items-center self-stretch tablet:w-full laptop:w-1/2">
+      <div class="flex flex-col items-center self-stretch tablet:w-full laptop:w-1/2">
         <SwitchBox
           :disabled="switchBoxDisabled"
           @block-change="handleBlockChange"
@@ -220,7 +220,7 @@ watch(currentElective, (newElective) => {
       >
         <h2 class="text-3xl font-semibold">Options</h2>
         <form
-          class="flex min-h-full w-full flex-col items-center gap-4 self-stretch"
+          class="flex h-full w-full flex-col items-center gap-4 self-stretch"
           @submit.prevent="handleSave"
         >
           <div class="flex min-h-full w-full flex-col items-center gap-6 self-stretch">

@@ -129,7 +129,8 @@ watch(
         Hum
       </button>
     </div>
-    <div class="hide-scrollbar flex h-full max-h-[52rem] flex-col items-center justify-center">
+    <div class="hide-scrollbar max-h-screen overflow-y-scroll">
+    <div class="flex flex-col items-center justify-center">
       <div
         class="flex flex-col items-center justify-center gap-8 text-center"
         v-if="currentBlock === 'block1'"
@@ -167,7 +168,8 @@ watch(
         </div>
       </div>
     </div>
-    <div class="sticky flex max-w-90 flex-col items-center justify-center gap-4">
+      </div>
+    <div class="flex max-w-90 flex-col items-center justify-center gap-4">
       <div>
         <template v-if="newElectiveEditing">
           <textarea
@@ -180,7 +182,7 @@ watch(
         </template>
         <template v-else>
           <button
-            class="w-96 rounded-2xl border-2 bg-color-surface text-2xl font-semibold text-color-dark hover:bg-color-accent"
+            class="w-90 rounded-2xl border-2 bg-color-surface text-2xl font-semibold text-color-dark hover:bg-color-accent"
             @click="startEditingNewElective"
           >
             +
@@ -188,7 +190,7 @@ watch(
         </template>
       </div>
       <button
-        class="w-96 rounded-2xl border-2 bg-color-surface text-2xl font-semibold text-color-dark hover:bg-color-accent"
+        class="w-90 rounded-2xl border-2 bg-color-surface text-2xl font-semibold text-color-dark hover:bg-color-accent"
         @click="toggleDeleteMode"
       >
         {{ deletingMode ? 'Cancel' : '-' }}
