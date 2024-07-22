@@ -11,7 +11,9 @@
     "format": "prettier --write .",
     "check": "prettier --check .",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "pre-commit": "bunx lint-staged",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxt/icon": "^1.0.0",
