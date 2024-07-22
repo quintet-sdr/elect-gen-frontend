@@ -4,11 +4,17 @@ import ElectiveButton from '~/components/shared/Elective/ElectiveButton.vue'
 import * as api from "~/server/utils/api"
 import type { Course } from '~/server/utils/schemas'
 
-const getTech = await api.getCourses('tech')
-const getHum = await api.getCourses('hum')
+const loadCourses = async () => {
+  try {
+    const techCourses = await api.getCourses('tech')
+    const humCourses = await api.getCourses('hum')
 
-console.log(getTech)
-console.log(getHum)
+    techElectives.push(...techCourses.map((course: Course) => course.full_name))
+    humElectives.push(...humCourses.map((course: Course) => course.full_name))
+  } catch (error) {
+    console.error('Error loading courses:', error)
+  }
+}
 
 let techElectives = reactive<string[]>([])
 let humElectives = reactive<string[]>([])
@@ -88,6 +94,11 @@ const toggleDeleteMode = () => {
   deletingMode.value = !deletingMode.value
   emit('toggle-delete-mode', deletingMode.value)
 }
+
+onMounted(() => {
+  loadCourses()
+})
+
 </script>
 
 <template>
