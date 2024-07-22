@@ -19,7 +19,7 @@ function navigateToLogin() {
 </script>
 
 <template>
-  <header class="h-15 grid w-full grid-cols-3 items-center px-44 bg-color-base">
+  <header class="h-15 grid w-full grid-cols-3 items-center px-44">
     <a class="h-20 w-40 p-4" href="https://innopolis.university/">
       <Logo />
     </a>
@@ -30,7 +30,7 @@ function navigateToLogin() {
       Login
     </button>
   </header>
-  <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row bg-color-base">
+  <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row">
     <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
       <div>
         <h1 class="mb-4 text-5xl font-semibold">Elect.Gen</h1>
