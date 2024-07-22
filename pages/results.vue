@@ -34,7 +34,7 @@ onMounted(() => {
       ></div>
     </div>
     <div class="flex min-h-screen flex-col items-center justify-center gap-8" v-else>
-      <Heading text="We're all done!" />
+      <Heading text="We’re all done!" />
       <p
         class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold desktop:text-xl"
       >
