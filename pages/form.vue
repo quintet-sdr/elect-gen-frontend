@@ -5,10 +5,15 @@ import type { Course, CourseGroup } from '~/server/utils/schemas'
 
 definePageMeta({ layout: false })
 
+useHead({
+  title: 'Select Electives - Elect.Gen',
+  meta: [{ name: 'description', content: 'Fill out the form with your five priorities.' }]
+})
+
 const NUM_OF_COURSES: number = 5
 
-async function getSortedCourses(): Promise<void> {
-  sortedCourses.value = (await api.getCourses(currentElectiveType.value))?.sort((a, b) =>
+async function setSortedCourses(elective: 'tech' | 'hum'): Promise<void> {
+  sortedCourses.value = (await api.getCourses(elective))?.sort((a, b) =>
     a.short_name.localeCompare(b.short_name)
   )
 }
@@ -75,16 +80,6 @@ const items = [
 const route = useRoute()
 const router = useRouter()
 
-function selectTab(value: number): void {
-  router.replace({
-    query: { type: items[value].type }
-  })
-
-  for (let i = 0; i < NUM_OF_COURSES; i += 1) {
-    selected.value[i] = undefined
-  }
-}
-
 const selectedTab = computed({
   get() {
     const index = items.findIndex((item) => item.type === route.query.type)
@@ -92,7 +87,7 @@ const selectedTab = computed({
       return 0
     }
 
-    ;(async () => await getSortedCourses())()
+    ;(async () => await setSortedCourses(route.query.type as 'tech' | 'hum'))()
 
     return index
   },
@@ -153,18 +148,29 @@ async function submit(): Promise<void> {
   )
 }
 
-// FIXME
-const x = await api.coursesGroups(currentElectiveType.value)
-const courseGroups = ref(x !== undefined ? x.sort((a, b) => a.localeCompare(b)) : undefined)
+const courseGroupsRaw = ref<CourseGroup[]>()
+const courseGroupsSorted = computed(() =>
+  courseGroupsRaw !== undefined
+    ? courseGroupsRaw.value?.sort((a, b) => a.localeCompare(b))
+    : undefined
+)
 
 const selectedGroup = ref<CourseGroup>()
 
-onMounted(() => selectTab(0))
+function selectTab(value: number): void {
+  router.replace({
+    query: { type: items[value].type }
+  })
 
-useHead({
-  title: 'Select Electives - Elect.Gen',
-  meta: [{ name: 'description', content: 'Fill out the form with your five priorities.' }]
-})
+  for (let i = 0; i < NUM_OF_COURSES; i += 1) {
+    selected.value[i] = undefined
+  }
+
+  ;(async () =>
+    (courseGroupsRaw.value = await api.coursesGroups(items[value].type as 'hum' | 'tech')))()
+}
+
+onMounted(() => selectTab(0))
 </script>
 
 <template>
@@ -211,7 +217,7 @@ useHead({
       <UFormGroup class="w-48 self-start" label="Course groups" required>
         <USelectMenu
           v-model="selectedGroup"
-          :options="courseGroups"
+          :options="courseGroupsSorted"
           placeholder="Group…"
           searchable
         />
