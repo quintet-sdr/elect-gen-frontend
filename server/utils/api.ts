@@ -123,14 +123,17 @@ export async function getCourses(elective: ElectiveType): Promise<Course[] | und
     .catch((_) => undefined)
 }
 
-export async function distributions(course: Course, elective: ElectiveType): Promise<Response> {
+export async function distributions(file: File): Promise<Response> {
   const url = new URL(api('/distributions/'))
-  url.search = new URLSearchParams({ elective }).toString()
+  url.search = new URLSearchParams({ name: file.name }).toString()
+
+  const body = new FormData()
+  body.append('file', file)
 
   return await fetch(url, {
     method: 'POST',
-    headers: jsonHeaders(),
-    body: JSON.stringify(course)
+    headers: fileHeaders(),
+    body
   })
 }
 
