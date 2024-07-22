@@ -1,8 +1,20 @@
 <script lang="ts" setup>
-import { ref, reactive, watch, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import ElectiveButton from '~/components/shared/Elective/ElectiveButton.vue'
 import * as api from '~/server/utils/api'
 import type { Course } from '~/server/utils/schemas'
+
+const techElectives = reactive<string[]>([])
+const humElectives = reactive<string[]>([])
+
+const props = defineProps<{ disabled: boolean }>()
+const emit = defineEmits(['elective-change', 'course-selected', 'toggle-delete-mode'])
+
+const currentBlock = ref('block1')
+const activeElective = ref<string | null>(null)
+const deletingMode = ref(false)
+const newElectiveName = ref('')
+const newElectiveEditing = ref(false)
 
 const loadCourses = async () => {
   try {
@@ -16,26 +28,20 @@ const loadCourses = async () => {
   }
 }
 
-let techElectives = reactive<string[]>([])
-let humElectives = reactive<string[]>([])
-
-const props = defineProps<{ disabled: boolean }>()
-const emit = defineEmits(['elective-change', 'toggle-delete-mode'])
-
-const currentBlock = ref('block1')
-const activeElective = ref<string | null>(null)
-
-const newElectiveName = ref('')
-const newElectiveEditing = ref(false)
-
-const deletingMode = ref(false)
-
-const handleElectiveClick = (elective: string) => {
+const handleElectiveClick = async (elective: string) => {
   if (deletingMode.value) {
     deleteElective(elective)
   } else if (!props.disabled) {
     activeElective.value = elective
     emit('elective-change', elective)
+
+    const type = currentBlock.value === 'block1' ? 'tech' : 'hum'
+    const courses = await api.getCourses(type)
+    const course = courses.find(c => c.full_name === elective)
+
+    if (course) {
+      emit('course-selected', course)
+    }
   }
 }
 
@@ -65,6 +71,12 @@ const handleKeyup = (event: KeyboardEvent) => {
   }
 }
 
+const toggleDeleteMode = () => {
+  deletingMode.value = !deletingMode.value
+  emit('toggle-delete-mode', deletingMode.value)
+}
+
+
 const deleteElective = (elective: string) => {
   if (currentBlock.value === 'block1') {
     const index = techElectives.indexOf(elective)
@@ -81,6 +93,10 @@ const deleteElective = (elective: string) => {
   emit('toggle-delete-mode', deletingMode.value)
 }
 
+onMounted(() => {
+  loadCourses()
+})
+
 watch(
   () => props.disabled,
   (newVal) => {
@@ -89,16 +105,7 @@ watch(
     }
   }
 )
-
-const toggleDeleteMode = () => {
-  deletingMode.value = !deletingMode.value
-  emit('toggle-delete-mode', deletingMode.value)
-}
-
-onMounted(() => {
-  loadCourses()
-})
-</script>
+</script>Z
 
 <template>
   <div class="flex min-h-full w-full flex-col items-center gap-4">

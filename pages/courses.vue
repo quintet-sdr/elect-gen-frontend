@@ -40,6 +40,21 @@ const handleElectiveChange = (elective: string) => {
   currentElective.value = elective
   full_name.value = elective
 }
+
+const handleCourseSelected = (course: ElectiveData) => {
+  codename.value = course.codename
+  full_name.value = course.full_name
+  short_name.value = course.short_name
+  instructor.value = course.instructor
+  min_overall.value = course.min_overall
+  max_overall.value = course.max_overall
+  low_in_group.value = course.low_in_group
+  high_in_group.value = course.high_in_group
+  max_in_group.value = course.max_in_group
+  description.value = course.description
+  groups.value = course.groups
+}
+
 const handleBlockChange = (block: string) => {
   currentBlock.value = block
 }
@@ -139,15 +154,13 @@ const handleClear = () => {
       high_in_group: 0,
       max_in_group: 0,
       description: '',
-      groups: ['']
+      groups: []
     }
 
-    notificationClearMessage.value = 'Cleared'
+    notificationClearMessage.value = 'Cleared successfully'
     notificationClearVisible.value = true
-    switchBoxDisabled.value = true
     setTimeout(() => {
       notificationClearVisible.value = false
-      switchBoxDisabled.value = false
     }, 2000)
   }
 }
@@ -186,6 +199,7 @@ watch(currentElective, (newElective) => {
 })
 </script>
 
+
 <template>
   <main
     class="flex min-w-full flex-col items-center gap-12 tablet:max-w-screen-tablet desktop:max-w-screen-desktop"
@@ -197,6 +211,7 @@ watch(currentElective, (newElective) => {
           :disabled="switchBoxDisabled"
           @block-change="handleBlockChange"
           @elective-change="handleElectiveChange"
+          @course-selected="handleCourseSelected"
           @toggle-delete-mode="handleToggleDeleteMode"
         />
       </div>
