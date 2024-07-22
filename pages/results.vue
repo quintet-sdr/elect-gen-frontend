@@ -1,8 +1,6 @@
-// TODO: сделать автозагрузку таблицы при редиректе // TODO: исправить локальную поломку черного
-фона
-
 <script lang="ts" setup>
 import { defineExpose } from 'vue'
+import Heading from "~/components/shared/Text/Heading.vue";
 
 const store = useStore()
 
@@ -46,12 +44,7 @@ useHead({
 
 <template>
   <main class="flex min-h-screen flex-col items-center justify-center gap-8">
-    <text class="text-center font-bold tablet:text-4xl desktop:text-7xl">We're all done!</text>
-    <div class="hidden laptop:block">
-      <div class="min-w-1/2 mb-4 text-wrap rounded-xl bg-black p-4 text-white">
-        <pre>{{ formattedJson }}</pre>
-      </div>
-    </div>
+    <Heading text="We're all done!"/>
     <p
       class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold desktop:text-xl"
     >
