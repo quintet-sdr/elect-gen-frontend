@@ -31,14 +31,42 @@ function navigateToLogin() {
     </button>
   </header>
   <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row">
-    <div class="w-full pr-8 desktop:w-1/3">
-      <h1 class="mb-4 text-5xl font-semibold">Elect.Gen</h1>
-      <p class="text-lg">
-        The Student Course Allocation System is designed to efficiently allocate students to courses
-        based on their preferences and priorities. It supports both a basic allocation algorithm and
-        a more complex genetic algorithm to optimize the distribution of students across available
-        courses.
-      </p>
+    <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
+      <div>
+        <h1 class="mb-4 text-5xl font-semibold">Elect.Gen</h1>
+        <article class="text-lg">
+          The Student Course Allocation System is designed to efficiently allocate students to
+          courses based on their preferences and priorities. It supports both a basic allocation
+          algorithm and a more complex genetic algorithm to optimize the distribution of students
+          across available courses.
+        </article>
+      </div>
+      <div>
+        <h3 class="mb-4 text-4xl font-semibold">Distributor video</h3>
+        <iframe
+          class="mx-auto w-full max-w-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          frameborder="0"
+          height="315"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube video player"
+          width="560"
+        ></iframe>
+      </div>
+      <div>
+        <h3 class="mb-4 text-4xl font-semibold">Student video</h3>
+        <iframe
+          class="mx-auto w-full max-w-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          frameborder="0"
+          height="315"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube video player"
+          width="560"
+        ></iframe>
+      </div>
     </div>
     <div class="flex w-full justify-center desktop:w-2/3">
       <div class="grid grid-cols-1 gap-8 desktop:grid-cols-2">
@@ -105,31 +133,6 @@ function navigateToLogin() {
       </div>
     </div>
   </main>
-  <section class="p-6">
-    <h2 class="mb-4 text-3xl font-semibold">Introduction Videos</h2>
-    <div class="flex flex-col gap-8">
-      <iframe
-        class="mx-auto w-full max-w-lg"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        frameborder="0"
-        height="315"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="YouTube video player"
-        width="560"
-      ></iframe>
-      <iframe
-        class="mx-auto w-full max-w-lg"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        frameborder="0"
-        height="315"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="YouTube video player"
-        width="560"
-      ></iframe>
-    </div>
-  </section>
 </template>
 
 <style scoped>
