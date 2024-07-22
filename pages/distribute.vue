@@ -2,7 +2,7 @@
 import Heading from '~/components/shared/Text/Heading.vue'
 import * as api from '~/server/utils/api'
 
-definePageMeta({ layout: false })
+definePageMeta({layout: false})
 
 const store = useStore()
 
@@ -63,25 +63,25 @@ onMounted(() => {
 
 useHead({
   title: 'Elect.Gen - Distribution page',
-  meta: [{ name: 'description', content: 'Distribution main page' }]
+  meta: [{name: 'description', content: 'Distribution main page'}]
 })
 </script>
 
 <template>
   <NuxtLayout name="default">
-    <Heading :level="2" text="Distribute students" />
+    <Heading :level="2" text="Distribute students"/>
 
     <div class="grid grid-cols-5 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
-      <div />
+      <div/>
 
       <div class="col-span-3 w-64 justify-self-center text-center">
         <div v-if="![techCount, humCount].includes(undefined)">
           <span class="font-medium">
-            {{ $t('distribute.submitted.tech', { count: techCount }) }}
+            {{ $t('distribute.submitted.tech', {count: techCount}) }}
           </span>
-          <br />
+          <br/>
           <span class="font-medium">
-            {{ $t('distribute.submitted.hum', { count: humCount }) }}
+            {{ $t('distribute.submitted.hum', {count: humCount}) }}
           </span>
         </div>
         <span v-else>
@@ -90,7 +90,7 @@ useHead({
       </div>
 
       <UButton class="justify-self-center" id="update" @click="updateCount" variant="ghost">
-        <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
+        <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate"/>
       </UButton>
     </div>
 
@@ -100,8 +100,8 @@ useHead({
       </span>
 
       <div class="flex flex-row justify-center gap-4">
-        <div />
-        <div />
+        <div/>
+        <div/>
 
         <div class="flex flex-row">
           <UButton
@@ -139,7 +139,11 @@ useHead({
         </div>
       </div>
 
-      <UButton to="/student" variant="link"> {{ $t('distribute.button.fill') }} </UButton>
+      <UButton to="/student" variant="link"> {{ $t('distribute.button.fill') }}</UButton>
+
+      <UButton to="/courses">
+        Setup courses
+      </UButton>
     </div>
 
     <UButton
@@ -152,8 +156,8 @@ useHead({
         {{ $t('distribute.form.heading') }}
       </h2>
       <div class="flex flex-row gap-16 text-gray-300">
-        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:table" />
-        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:file-excel" />
+        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:table"/>
+        <Icon class="tablet:size-16 desktop:size-24" name="fa6-solid:file-excel"/>
       </div>
 
       <UInput
