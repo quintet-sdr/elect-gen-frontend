@@ -4,8 +4,6 @@ import * as api from '~/server/utils/api'
 
 definePageMeta({ layout: false })
 
-const store = useStore()
-
 function clickById(id: string): void {
   document.getElementById(id)!.click()
 }
@@ -40,16 +38,15 @@ function checkExtension(): boolean {
 }
 
 async function clickTech(): Promise<void> {
-  await api.getCurrentTable('tech', extensionTech.value as 'xlsx' | 'ods')
+  await api.getExampleTable('tech', extensionTech.value as 'xlsx' | 'ods')
 }
 
 async function clickHum(): Promise<void> {
-  await api.getCurrentTable('hum', extensionHum.value as 'xlsx' | 'ods')
+  await api.getExampleTable('hum', extensionHum.value as 'xlsx' | 'ods')
 }
 
-function submit(): void {
-  store.distributions = api.distributions(browseButton.value!.files![0])
-  navigateTo('/results')
+async function submit(): Promise<void> {
+  await api.uploadTable(browseButton.value!.files![0])
 }
 
 const filepath = ref<string>()
@@ -69,35 +66,10 @@ useHead({
 
 <template>
   <NuxtLayout name="default">
-    <Heading :level="2" text="Distribute students" />
-
-    <div class="grid grid-cols-5 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
-      <div />
-
-      <div class="col-span-3 w-64 justify-self-center text-center">
-        <div v-if="![techCount, humCount].includes(undefined)">
-          <span class="font-medium">
-            {{ $t('distribute.submitted.tech', { count: techCount }) }}
-          </span>
-          <br />
-          <span class="font-medium">
-            {{ $t('distribute.submitted.hum', { count: humCount }) }}
-          </span>
-        </div>
-        <span v-else>
-          {{ $t('info.database') }}
-        </span>
-      </div>
-
-      <UButton class="justify-self-center" id="update" @click="updateCount" variant="ghost">
-        <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />
-      </UButton>
-    </div>
+    <Heading :level="2" text="Configure parameters" />
 
     <div class="flex flex-col items-center gap-2">
-      <span class="font-semibold">
-        {{ $t('distribute.button.download') }}
-      </span>
+      <span class="font-semibold"> Download a template configuration </span>
 
       <div class="flex flex-row justify-center gap-4">
         <div />
@@ -139,7 +111,7 @@ useHead({
         </div>
       </div>
 
-      <UButton to="/student" variant="link"> {{ $t('distribute.button.fill') }} </UButton>
+      <UButton to="/courses" variant="link"> Edit course information here </UButton>
     </div>
 
     <UButton

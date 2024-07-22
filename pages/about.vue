@@ -34,12 +34,12 @@ function distributeClick() {
       <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
         <article>
           <h1 class="mb-4 text-5xl font-bold">Elect.Gen</h1>
-          <p class="text-lg">
+          <!-- <p class="text-lg">
             The Student Course Allocation System is designed to efficiently allocate students to
             courses based on their preferences and priorities. It supports both a basic allocation
             algorithm and a more complex genetic algorithm to optimize the distribution of students
             across available courses.
-          </p>
+          </p> -->
         </article>
         <div>
           <h3 class="mb-4 text-3xl font-semibold">Distributor video</h3>
@@ -71,8 +71,8 @@ function distributeClick() {
       <div class="flex w-full flex-col items-center justify-center gap-16 desktop:w-2/3">
         <div class="flex w-max flex-col items-center gap-4 text-center">
           <h2 class="text-3xl font-semibold">Select an action</h2>
-          <UButton class="w-32" @click="configClick">Configure</UButton>
-          <UButton class="w-32" @click="distributeClick">Distribute</UButton>
+          <UButton class="w-32 justify-center" @click="configClick">Configure</UButton>
+          <UButton class="w-32 justify-center" @click="distributeClick">Distribute</UButton>
         </div>
         <div class="flex flex-col items-center gap-4">
           <h2 class="text-3xl font-semibold">Authors</h2>
