@@ -1,12 +1,4 @@
 <script lang="ts" setup>
-// const { t } = useI18n({ useScope: 'local' })
-// const store = useStore()
-// const signOut = [[{ label: t('header.account.sign-out') }]]
-
-// function signOutAndNavigate() {
-//   navigateTo('/login')
-// }
-
 interface Props {
   back: boolean
   email: string
@@ -34,9 +26,5 @@ function navigateToPage() {
     <div class="text-right">
       {{ props.email }}
     </div>
-
-    <!-- <UDropdown class="justify-self-end" :items="signOut" @click="signOutAndNavigate" mode="hover">
-      {{ store.email }}
-    </UDropdown> -->
   </header>
 </template>
