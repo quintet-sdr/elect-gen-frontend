@@ -1,4 +1,4 @@
-import { Course, CourseGroup, StudentPriorities } from '~/server/utils/schemas'
+import type { Course, CourseGroup, Student } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
@@ -26,22 +26,38 @@ function download(url: URL): void {
   link.click()
 }
 
-export async function getCurrentTable(elective: ElectiveType): Promise<void> {
+export async function getCurrentTable(elective: ElectiveType): Promise<Response> {
   const url = new URL(api('/get-current-table/'))
   url.search = new URLSearchParams({ elective }).toString()
 
   const response = await fetch(url)
 
   download(new URL(response.url))
+
+  return response
 }
 
-export async function getExampleTable(elective: ElectiveType): Promise<void> {
+export async function getExampleTable(elective: ElectiveType): Promise<Response> {
   const url = new URL(api('/get-example-table/'))
   url.search = new URLSearchParams({ elective }).toString()
 
   const response = await fetch(url)
 
   download(new URL(response.url))
+
+  return response
+}
+
+export async function getStudent(
+  email: string,
+  elective: ElectiveType
+): Promise<Student | undefined> {
+  const url = new URL(api('/get-student/'))
+  url.search = new URLSearchParams({ email, elective }).toString()
+
+  return await fetch(url)
+    .then((response) => response.json())
+    .catch((_) => undefined)
 }
 
 export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup[] | undefined> {
@@ -67,10 +83,7 @@ export async function uploadTable(file: File): Promise<Response> {
   })
 }
 
-export async function postStudents(
-  student: StudentPriorities,
-  elective: ElectiveType
-): Promise<Response> {
+export async function postStudents(student: Student, elective: ElectiveType): Promise<Response> {
   const url = new URL(api('/students/'))
   url.search = new URLSearchParams({ elective }).toString()
 
@@ -81,9 +94,7 @@ export async function postStudents(
   })
 }
 
-export async function getStudents(
-  elective: ElectiveType
-): Promise<StudentPriorities[] | undefined> {
+export async function getStudents(elective: ElectiveType): Promise<Student[] | undefined> {
   const url = new URL(api('/students/'))
   url.search = new URLSearchParams({ elective }).toString()
 
