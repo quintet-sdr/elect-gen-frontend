@@ -3,12 +3,14 @@ import { ref, onMounted } from 'vue'
 import Heading from "~/components/shared/Text/Heading.vue"
 import * as api from "~/server/utils/api"
 
+const store = useStore()
+
 const isLoading = ref(true)
 const downloadAnchorRef = ref<HTMLAnchorElement | null>(null)
 
 const fetchDistributions = async () => {
   try {
-    const response = await api.distributions(/* Ваши параметры здесь */)
+    const response = await store.distributions
     if (response.ok) {
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
