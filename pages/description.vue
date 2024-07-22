@@ -16,7 +16,7 @@ useHead({
       <div
         class="placeholder-p-4 bg-color-lightgray text-color-darkblue placeholder-color-gray w-full overflow-y-scroll rounded-3xl px-4 py-4 tablet:h-full laptop:h-80"
       >
-        <!-- an example -->
+        <!-- an example  f-->
         <p>
           This course aims to provide students with an introduction to the essential principles of
           contemporary front-end web development, alongside a brief overview of its historical
