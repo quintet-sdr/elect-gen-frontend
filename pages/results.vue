@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import Heading from "~/components/shared/Text/Heading.vue"
-import * as api from "~/server/utils/api"
 
 const store = useStore()
 
@@ -11,17 +10,6 @@ const downloadAnchorRef = ref<HTMLAnchorElement | null>(null)
 const fetchDistributions = async () => {
   try {
     const response = await store.distributions
-    if (response.ok) {
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
-      if (downloadAnchorRef.value) {
-        downloadAnchorRef.value.href = url
-        downloadAnchorRef.value.download = 'distributions.xlsx'
-        downloadAnchorRef.value.click()
-      }
-    } else {
-      console.error('Ошибка при получении данных', response.statusText)
-    }
   } catch (error) {
     console.error('Ошибка при выполнении запроса', error)
   } finally {

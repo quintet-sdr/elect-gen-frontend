@@ -2,11 +2,6 @@ export type CourseCodename = string
 export type CourseGroup = string
 export type StudentEmail = string
 
-export type Distribution = {
-  student: StudentEmail
-  cours: CourseCodename
-}
-
 export interface Course {
   codename: CourseCodename
   type: 'tech' | 'hum'

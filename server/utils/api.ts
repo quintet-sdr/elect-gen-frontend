@@ -131,7 +131,7 @@ export async function getCourses(elective: ElectiveType): Promise<Course[] | und
     .catch((_) => undefined)
 }
 
-export async function distributions(file: File): Promise<Distribution[] | undefined> {
+export async function distributions(file: File): Promise<Response> {
   const url = new URL(api('/distributions/'))
   url.search = new URLSearchParams({ name: file.name }).toString()
 
@@ -143,8 +143,6 @@ export async function distributions(file: File): Promise<Distribution[] | undefi
     headers: fileHeaders(),
     body
   })
-    .then((response) => response.json())
-    .catch((_) => undefined)
 }
 
 export default {}
