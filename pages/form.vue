@@ -115,6 +115,10 @@ async function submit(): Promise<void> {
     },
     route.query.type as 'tech' | 'hum'
   )
+
+  for (let i = 0; i < NUM_OF_COURSES; i += 1) {
+    selected.value[i] = undefined
+  }
 }
 
 function selectTab(value: number): void {
