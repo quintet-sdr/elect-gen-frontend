@@ -1,17 +1,36 @@
 <script lang="ts" setup>
+import { useRouter } from 'vue-router'
+import Logo from '~/components/shared/Logo/Logo.vue'
 import Member from '~/components/shared/Member.vue'
-import Header from '~/components/widgets/Header.vue'
 import { TEAM_MEMBERS as teamMembers } from '~/constants/teamMembers'
+
+const router = useRouter()
 
 useHead({
   title: 'Elect.Gen - Project contributors',
   meta: [{ name: 'description', content: 'Here you can view contributors of the project' }]
 })
+definePageMeta({
+  layout: false
+})
+function navigateToLogin() {
+  router.push('/login')
+}
 </script>
 
 <template>
-  <Header />
-  <main class="flex flex-col p-8 desktop:flex-row">
+  <header class="h-30 h-25 grid w-40 w-full grid-cols-3 items-center p-6">
+    <a class="h-20 w-40 p-8" href="https://innopolis.university/">
+      <Logo />
+    </a>
+    <button
+      class="bg-accent-500 hover:bg-accent-600 absolute right-6 top-20 rounded rounded-xl bg-color-accent p-8 px-4 py-2 text-white transition duration-300 hover:opacity-75"
+      @click="navigateToLogin"
+    >
+      Login
+    </button>
+  </header>
+  <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row">
     <div class="w-full pr-8 desktop:w-1/3">
       <h1 class="mb-4 text-5xl font-semibold">Elect.Gen</h1>
       <p class="text-lg">
@@ -24,7 +43,6 @@ useHead({
     <div class="flex w-full justify-center desktop:w-2/3">
       <div class="grid grid-cols-1 gap-8 desktop:grid-cols-2">
         <div class="flex flex-col items-center space-y-8">
-          <h1 class="mb-4 text-5xl font-semibold">Contributors</h1>
           <Member
             :alt="teamMembers[3].alt"
             :image="teamMembers[3].image"
@@ -105,6 +123,9 @@ useHead({
   }
   .desktop\:pt-28 {
     padding-top: 7rem;
+  }
+  .desktop\:mx-8 {
+    margin-left: 15rem;
   }
 }
 </style>
