@@ -2,7 +2,9 @@
 фона
 
 <script lang="ts" setup>
-import { computed, defineExpose, ref } from 'vue'
+import { defineExpose } from 'vue'
+
+const store = useStore()
 
 interface JsonData {
   student_email: string

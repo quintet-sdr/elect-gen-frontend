@@ -5,5 +5,5 @@ await callOnce(async () => {
 })
 
 const localePath = useLocalePath()
-navigateTo(localePath('/distribute'))
+navigateTo(localePath('/about'))
 </script>
