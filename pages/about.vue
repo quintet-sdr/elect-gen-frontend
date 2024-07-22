@@ -34,12 +34,12 @@ function distributeClick() {
       <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
         <article>
           <h1 class="mb-4 text-5xl font-bold">Elect.Gen</h1>
-          <!-- <p class="text-lg">
+          <p class="text-lg">
             The Student Course Allocation System is designed to efficiently allocate students to
             courses based on their preferences and priorities. It supports both a basic allocation
             algorithm and a more complex genetic algorithm to optimize the distribution of students
             across available courses.
-          </p> -->
+          </p>
         </article>
         <div>
           <h3 class="mb-4 text-3xl font-semibold">Distributor video</h3>

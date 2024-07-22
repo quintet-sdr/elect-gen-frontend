@@ -1,4 +1,5 @@
 <template>
+  <button>
   <a
     class="flex flex-col items-center transition duration-200 ease-in-out hover:text-green-500"
     :href="link"
@@ -11,6 +12,7 @@
     <p class="text-center font-bold">{{ name }}</p>
     <p class="text-center">{{ role }}</p>
   </a>
+    </button>
 </template>
 
 <script lang="ts" setup>
