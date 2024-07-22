@@ -136,7 +136,7 @@ onMounted(() => {
             :name="elective"
             @click="handleElectiveClick(elective)"
           />
-          <div v-if="!getTech">
+          <div v-if="techElectives.length === 0">
             <p>Connecting to database...</p>
           </div>
         </div>
@@ -154,7 +154,7 @@ onMounted(() => {
             :name="elective"
             @click="handleElectiveClick(elective)"
           />
-          <div v-if="!getHum">
+          <div v-if="humElectives.length === 0">
             <p>Connecting to database...</p>
           </div>
         </div>
