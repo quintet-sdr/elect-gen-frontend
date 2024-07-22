@@ -38,6 +38,7 @@ function checkExtension(): boolean {
 
 async function submit(): Promise<void> {
   await api.uploadTable(browseButton.value!.files![0]).then((response) => response.json())
+  navigateTo('/results')
 }
 
 const filepath = ref<string>()

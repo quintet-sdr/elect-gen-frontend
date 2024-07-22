@@ -13,126 +13,137 @@ useHead({
 definePageMeta({
   layout: false
 })
-function navigateToLogin() {
-  router.push('/login')
+
+function configClick() {
+  navigateTo('/config')
+}
+
+function distributeClick() {
+  navigateTo('/distribute')
 }
 </script>
 
 <template>
-  <header class="h-15 grid w-full grid-cols-3 items-center px-44">
-    <a class="h-20 w-40 p-4" href="https://innopolis.university/">
-      <Logo />
-    </a>
-    <button
-      class="bg-accent-100 hover:bg-accent-600 absolute right-40 top-11 rounded-xl bg-color-accent px-8 py-2 text-white duration-300 hover:opacity-75"
-      @click="navigateToLogin"
-    >
-      Login
-    </button>
-  </header>
-  <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row">
-    <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
-      <div>
-        <h1 class="mb-4 text-5xl font-semibold">Elect.Gen</h1>
-        <article class="text-lg">
-          The Student Course Allocation System is designed to efficiently allocate students to
-          courses based on their preferences and priorities. It supports both a basic allocation
-          algorithm and a more complex genetic algorithm to optimize the distribution of students
-          across available courses.
+  <div class="flex flex-col gap-8">
+    <header class="h-15 grid w-full grid-cols-3 items-center px-44">
+      <a class="h-20 w-40 p-4" href="https://innopolis.university/">
+        <Logo />
+      </a>
+    </header>
+    <main class="flex flex-col p-6 desktop:mx-8 desktop:flex-row">
+      <div class="flex w-full flex-col gap-8 pr-8 desktop:w-1/3">
+        <article>
+          <h1 class="mb-4 text-5xl font-bold">Elect.Gen</h1>
+          <p class="text-lg">
+            The Student Course Allocation System is designed to efficiently allocate students to
+            courses based on their preferences and priorities. It supports both a basic allocation
+            algorithm and a more complex genetic algorithm to optimize the distribution of students
+            across available courses.
+          </p>
         </article>
-      </div>
-      <div>
-        <h3 class="mb-4 text-4xl font-semibold">Distributor video</h3>
-        <iframe
-          class="mx-auto w-full max-w-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          frameborder="0"
-          height="315"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          title="YouTube video player"
-          width="560"
-        ></iframe>
-      </div>
-      <div>
-        <h3 class="mb-4 text-4xl font-semibold">Student video</h3>
-        <iframe
-          class="mx-auto w-full max-w-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          frameborder="0"
-          height="315"
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          title="YouTube video player"
-          width="560"
-        ></iframe>
-      </div>
-    </div>
-    <div class="flex w-full justify-center desktop:w-2/3">
-      <div class="grid grid-cols-1 gap-8 desktop:grid-cols-2">
-        <div class="flex flex-col items-center space-y-8">
-          <Member
-            :alt="teamMembers[3].alt"
-            :image="teamMembers[3].image"
-            :link="teamMembers[3].link"
-            :name="teamMembers[3].name"
-            :role="teamMembers[3].role"
-          />
-          <Member
-            :alt="teamMembers[4].alt"
-            :image="teamMembers[4].image"
-            :link="teamMembers[4].link"
-            :name="teamMembers[4].name"
-            :role="teamMembers[4].role"
-          />
-          <Member
-            :alt="teamMembers[0].alt"
-            :image="teamMembers[0].image"
-            :link="teamMembers[0].link"
-            :name="teamMembers[0].name"
-            :role="teamMembers[0].role"
-          />
-          <Member
-            :alt="teamMembers[2].alt"
-            :image="teamMembers[2].image"
-            :link="teamMembers[2].link"
-            :name="teamMembers[2].name"
-            :role="teamMembers[2].role"
-          />
+        <div>
+          <h3 class="mb-4 text-3xl font-semibold">Distributor video</h3>
+          <iframe
+            class="mx-auto w-full max-w-lg rounded-2xl"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            frameborder="0"
+            height="315"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video player"
+            width="560"
+          ></iframe>
         </div>
-        <div class="flex flex-col items-center space-y-8 desktop:pt-28">
-          <Member
-            :alt="teamMembers[5].alt"
-            :image="teamMembers[5].image"
-            :link="teamMembers[5].link"
-            :name="teamMembers[5].name"
-            :role="teamMembers[5].role"
-          />
-          <Member
-            :alt="teamMembers[6].alt"
-            :image="teamMembers[6].image"
-            :link="teamMembers[6].link"
-            :name="teamMembers[6].name"
-            :role="teamMembers[6].role"
-          />
-          <Member
-            :alt="teamMembers[7].alt"
-            :image="teamMembers[7].image"
-            :link="teamMembers[7].link"
-            :name="teamMembers[7].name"
-            :role="teamMembers[7].role"
-          />
-          <Member
-            :alt="teamMembers[1].alt"
-            :image="teamMembers[1].image"
-            :link="teamMembers[1].link"
-            :name="teamMembers[1].name"
-            :role="teamMembers[1].role"
-          />
+        <div>
+          <h3 class="mb-4 text-3xl font-semibold">Student video</h3>
+          <iframe
+            class="mx-auto w-full max-w-lg rounded-2xl"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            frameborder="0"
+            height="315"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video player"
+            width="560"
+          ></iframe>
         </div>
       </div>
-    </div>
-  </main>
+      <div class="flex w-full flex-col items-center justify-center gap-16 desktop:w-2/3">
+        <div class="flex w-max flex-col items-center gap-4 text-center">
+          <h2 class="text-3xl font-semibold">Select an action</h2>
+          <UButton class="w-32" @click="configClick">Configure</UButton>
+          <UButton class="w-32" @click="distributeClick">Distribute</UButton>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <h2 class="text-3xl font-semibold">Authors</h2>
+          <div class="flex w-full flex-row justify-center">
+            <div class="grid grid-cols-1 gap-8 desktop:grid-cols-2">
+              <div class="flex flex-col items-center space-y-8">
+                <Member
+                  :alt="teamMembers[3].alt"
+                  :image="teamMembers[3].image"
+                  :link="teamMembers[3].link"
+                  :name="teamMembers[3].name"
+                  :role="teamMembers[3].role"
+                />
+                <Member
+                  :alt="teamMembers[4].alt"
+                  :image="teamMembers[4].image"
+                  :link="teamMembers[4].link"
+                  :name="teamMembers[4].name"
+                  :role="teamMembers[4].role"
+                />
+                <Member
+                  :alt="teamMembers[0].alt"
+                  :image="teamMembers[0].image"
+                  :link="teamMembers[0].link"
+                  :name="teamMembers[0].name"
+                  :role="teamMembers[0].role"
+                />
+                <Member
+                  :alt="teamMembers[2].alt"
+                  :image="teamMembers[2].image"
+                  :link="teamMembers[2].link"
+                  :name="teamMembers[2].name"
+                  :role="teamMembers[2].role"
+                />
+              </div>
+              <div class="flex flex-col items-center space-y-8 desktop:pt-28">
+                <Member
+                  :alt="teamMembers[5].alt"
+                  :image="teamMembers[5].image"
+                  :link="teamMembers[5].link"
+                  :name="teamMembers[5].name"
+                  :role="teamMembers[5].role"
+                />
+                <Member
+                  :alt="teamMembers[6].alt"
+                  :image="teamMembers[6].image"
+                  :link="teamMembers[6].link"
+                  :name="teamMembers[6].name"
+                  :role="teamMembers[6].role"
+                />
+                <Member
+                  :alt="teamMembers[7].alt"
+                  :image="teamMembers[7].image"
+                  :link="teamMembers[7].link"
+                  :name="teamMembers[7].name"
+                  :role="teamMembers[7].role"
+                />
+                <Member
+                  :alt="teamMembers[1].alt"
+                  :image="teamMembers[1].image"
+                  :link="teamMembers[1].link"
+                  :name="teamMembers[1].name"
+                  :role="teamMembers[1].role"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style scoped>
