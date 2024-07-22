@@ -19,12 +19,12 @@ function navigateToLogin() {
 </script>
 
 <template>
-  <header class="h-30 h-25 grid w-40 w-full grid-cols-3 items-center p-6">
-    <a class="h-20 w-40 p-8" href="https://innopolis.university/">
+  <header class="h-15 grid w-10 w-full grid-cols-3 items-center px-44">
+    <a class="h-20 w-40 p-4" href="https://innopolis.university/">
       <Logo />
     </a>
     <button
-      class="bg-accent-500 hover:bg-accent-600 absolute right-6 top-20 rounded rounded-xl bg-color-accent p-8 px-4 py-2 text-white transition duration-300 hover:opacity-75"
+      class="bg-accent-100 hover:bg-accent-600 absolute right-40 top-11 rounded rounded-xl bg-color-accent px-8 py-2 text-white duration-300 hover:opacity-75"
       @click="navigateToLogin"
     >
       Login
@@ -125,7 +125,13 @@ function navigateToLogin() {
     padding-top: 7rem;
   }
   .desktop\:mx-8 {
-    margin-left: 15rem;
+    margin-left: 10rem;
+  }
+  .desktop\:mx-7 {
+    margin-right: 25rem;
+  }
+  .desktop\:mx-9 {
+    margin-left: 100rem;
   }
 }
 </style>
