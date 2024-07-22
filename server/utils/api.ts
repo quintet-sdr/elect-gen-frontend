@@ -1,4 +1,4 @@
-import type { Course, CourseGroup, Distribution, Student } from '~/server/utils/schemas'
+import type { Course, CourseGroup, Student } from '~/server/utils/schemas'
 
 function api(route: string): string {
   const config = useRuntimeConfig()
