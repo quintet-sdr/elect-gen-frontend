@@ -7,8 +7,8 @@ import type { Course } from '~/server/utils/schemas'
 const getTech = await api.getCourses('tech')
 const getHum = await api.getCourses('hum')
 
-// console.log(getTech)
-// console.log(getHum)
+console.log(getTech)
+console.log(getHum)
 
 let techElectives = reactive<string[]>([])
 let humElectives = reactive<string[]>([])
@@ -118,17 +118,15 @@ const toggleDeleteMode = () => {
         v-if="currentBlock === 'block1'"
       >
         <div class="flex flex-col items-center justify-around gap-4">
+          <ElectiveButton
+            v-for="elective in techElectives"
+            :active="elective === activeElective"
+            :disabled="props.disabled"
+            :key="elective"
+            :name="elective"
+            @click="handleElectiveClick(elective)"
+          />
           <div v-if="!getTech">
-            <ElectiveButton
-              v-for="elective in techElectives"
-              :active="elective === activeElective"
-              :disabled="props.disabled"
-              :key="elective"
-              :name="elective"
-              @click="handleElectiveClick(elective)"
-            />
-          </div>
-          <div v-else>
             <p>Connecting to database...</p>
           </div>
         </div>
@@ -147,8 +145,6 @@ const toggleDeleteMode = () => {
             @click="handleElectiveClick(elective)"
           />
           <div v-if="!getHum">
-          </div>
-          <div v-else>
             <p>Connecting to database...</p>
           </div>
         </div>
