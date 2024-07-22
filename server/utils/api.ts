@@ -18,7 +18,9 @@ function fileHeaders(): Headers {
   })
 }
 
-type ElectiveType = 'tech' | 'hum'
+export type ElectiveType = 'tech' | 'hum'
+
+export type FileExtension = 'xlsx' | 'ods'
 
 function download(url: URL): void {
   const link = document.createElement('a')
@@ -26,9 +28,12 @@ function download(url: URL): void {
   link.click()
 }
 
-export async function getCurrentTable(elective: ElectiveType): Promise<Response> {
+export async function getCurrentTable(
+  elective: ElectiveType,
+  extension: FileExtension
+): Promise<Response> {
   const url = new URL(api('/get-current-table/'))
-  url.search = new URLSearchParams({ elective }).toString()
+  url.search = new URLSearchParams({ elective, extension }).toString()
 
   const response = await fetch(url)
 
@@ -37,9 +42,12 @@ export async function getCurrentTable(elective: ElectiveType): Promise<Response>
   return response
 }
 
-export async function getExampleTable(elective: ElectiveType): Promise<Response> {
+export async function getExampleTable(
+  elective: ElectiveType,
+  extension: FileExtension
+): Promise<Response> {
   const url = new URL(api('/get-example-table/'))
-  url.search = new URLSearchParams({ elective }).toString()
+  url.search = new URLSearchParams({ elective, extension }).toString()
 
   const response = await fetch(url)
 
