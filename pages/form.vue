@@ -137,7 +137,7 @@ onMounted(() => selectTab(0))
 </script>
 
 <template>
-  <NuxtLayout :back="true" name="default">
+  <NuxtLayout :back="true" :email="store.email" name="default">
     <template #header>
       <UTabs class="w-32" v-model="selectedTab" :items="items" />
     </template>

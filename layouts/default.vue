@@ -5,6 +5,7 @@ import { TEAM_MEMBERS as teamMembers } from '~/constants/teamMembers'
 const attrs = useAttrs()
 
 const back = attrs.back !== undefined ? (attrs.back as boolean) : true
+const email = attrs.email !== undefined ? (attrs.email as string) : ''
 
 useHead({
   meta: [
@@ -28,7 +29,7 @@ useHead({
 
 <template>
   <div class="mx-32 flex flex-col gap-4">
-    <Header :back="back">
+    <Header :back="back" :email="email">
       <slot name="header" />
     </Header>
 

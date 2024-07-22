@@ -9,11 +9,10 @@
 
 interface Props {
   back: boolean
+  email: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  back: false
-})
+const props = defineProps<Props>()
 
 const iconName = props.back ? 'fa-solid:arrow-left' : 'local:innopolis-university'
 
@@ -30,6 +29,10 @@ function navigateToPage() {
 
     <div class="justify-self-center">
       <slot />
+    </div>
+
+    <div class="text-right">
+      {{ props.email }}
     </div>
 
     <!-- <UDropdown class="justify-self-end" :items="signOut" @click="signOutAndNavigate" mode="hover">
