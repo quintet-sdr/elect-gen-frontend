@@ -20,6 +20,38 @@ function fileHeaders(): Headers {
 
 type ElectiveType = 'tech' | 'hum'
 
+function download(url: URL): void {
+  const link = document.createElement('a')
+  link.href = url.toString()
+  link.click()
+}
+
+export async function getCurrentTable(elective: ElectiveType): Promise<void> {
+  const url = new URL(api('/get-current-table/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  const response = await fetch(url)
+
+  download(new URL(response.url))
+}
+
+export async function getExampleTable(elective: ElectiveType): Promise<void> {
+  const url = new URL(api('/get-example-table/'))
+  url.search = new URLSearchParams({ elective }).toString()
+
+  const response = await fetch(url)
+
+  download(new URL(response.url))
+}
+
+export async function studentsSubmitted(): Promise<number | undefined> {
+  const url = new URL(api('/students-submitted/'))
+
+  return await fetch(url)
+    .then((response) => response.json())
+    .catch((_) => undefined)
+}
+
 export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup[] | undefined> {
   const url = new URL(api('/courses-groups/'))
   url.search = new URLSearchParams({ elective }).toString()
