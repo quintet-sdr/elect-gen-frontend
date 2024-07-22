@@ -37,7 +37,7 @@ const handleElectiveClick = async (elective: string) => {
 
     const type = currentBlock.value === 'block1' ? 'tech' : 'hum'
     const courses = await api.getCourses(type)
-    const course = courses.find(c => c.full_name === elective)
+    const course = courses.find((c) => c.full_name === elective)
 
     if (course) {
       emit('course-selected', course)
@@ -76,7 +76,6 @@ const toggleDeleteMode = () => {
   emit('toggle-delete-mode', deletingMode.value)
 }
 
-
 const deleteElective = (elective: string) => {
   if (currentBlock.value === 'block1') {
     const index = techElectives.indexOf(elective)
@@ -105,7 +104,8 @@ watch(
     }
   }
 )
-</script>Z
+</script>
+Z
 
 <template>
   <div class="flex min-h-full w-full flex-col items-center gap-4">
@@ -130,45 +130,45 @@ watch(
       </button>
     </div>
     <div class="hide-scrollbar max-h-screen overflow-y-scroll">
-    <div class="flex flex-col items-center justify-center">
-      <div
-        class="flex flex-col items-center justify-center gap-8 text-center"
-        v-if="currentBlock === 'block1'"
-      >
-        <div class="flex flex-col items-center justify-around gap-4">
-          <ElectiveButton
-            v-for="elective in techElectives"
-            :active="elective === activeElective"
-            :disabled="props.disabled"
-            :key="elective"
-            :name="elective"
-            @click="handleElectiveClick(elective)"
-          />
-          <div v-if="techElectives.length === 0">
-            <p>Connecting to database...</p>
+      <div class="flex flex-col items-center justify-center">
+        <div
+          class="flex flex-col items-center justify-center gap-8 text-center"
+          v-if="currentBlock === 'block1'"
+        >
+          <div class="flex flex-col items-center justify-around gap-4">
+            <ElectiveButton
+              v-for="elective in techElectives"
+              :active="elective === activeElective"
+              :disabled="props.disabled"
+              :key="elective"
+              :name="elective"
+              @click="handleElectiveClick(elective)"
+            />
+            <div v-if="techElectives.length === 0">
+              <p>Connecting to database...</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        class="flex flex-col items-center justify-center gap-8 text-center"
-        v-if="currentBlock === 'block2'"
-      >
-        <div class="flex flex-col items-center justify-around gap-4">
-          <ElectiveButton
-            v-for="elective in humElectives"
-            :active="elective === activeElective"
-            :disabled="props.disabled"
-            :key="elective"
-            :name="elective"
-            @click="handleElectiveClick(elective)"
-          />
-          <div v-if="humElectives.length === 0">
-            <p>Connecting to database...</p>
+        <div
+          class="flex flex-col items-center justify-center gap-8 text-center"
+          v-if="currentBlock === 'block2'"
+        >
+          <div class="flex flex-col items-center justify-around gap-4">
+            <ElectiveButton
+              v-for="elective in humElectives"
+              :active="elective === activeElective"
+              :disabled="props.disabled"
+              :key="elective"
+              :name="elective"
+              @click="handleElectiveClick(elective)"
+            />
+            <div v-if="humElectives.length === 0">
+              <p>Connecting to database...</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-      </div>
     <div class="flex max-w-90 flex-col items-center justify-center gap-4">
       <div>
         <template v-if="newElectiveEditing">

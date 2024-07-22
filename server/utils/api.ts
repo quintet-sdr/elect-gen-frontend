@@ -138,11 +138,15 @@ export async function distributions(file: File): Promise<Response> {
   const body = new FormData()
   body.append('file', file)
 
-  return await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: fileHeaders(),
     body
   })
+
+  download(new URL(response.url))
+
+  return response
 }
 
 export default {}
