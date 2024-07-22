@@ -105,6 +105,31 @@ function navigateToLogin() {
       </div>
     </div>
   </main>
+  <section class="p-6">
+    <h2 class="mb-4 text-3xl font-semibold">Introduction Videos</h2>
+    <div class="flex flex-col gap-8">
+      <iframe
+        class="mx-auto w-full max-w-lg"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        frameborder="0"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        width="560"
+      ></iframe>
+      <iframe
+        class="mx-auto w-full max-w-lg"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        frameborder="0"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video player"
+        width="560"
+      ></iframe>
+    </div>
+  </section>
 </template>
 
 <style scoped>
