@@ -3,39 +3,12 @@ import { ref, reactive, watch, onMounted } from 'vue'
 import ElectiveButton from '~/components/shared/Elective/ElectiveButton.vue'
 import * as api from "~/server/utils/api"
 import type { Course } from '~/server/utils/schemas'
-import Heading from "~/components/shared/Text/Heading.vue"
 
-// Создаем реактивное свойство для курсов
-const COURSES = ref<Course[] | null>(null)
+const getTech = await api.getCourses('tech')
+const getHum = await api.getCourses('hum')
 
-const getCourses = async () => {
-  try {
-    const courses = await api.getCourses()
-    COURSES.value = courses || null
-  } catch (error) {
-    console.error('Failed to fetch courses:', error)
-    COURSES.value = null
-  }
-}
-
-const getCourseByType = (type: 'hum' | 'tech') => {
-  if (COURSES.value) {
-    return COURSES.value.filter(course => course.type === type).map(course => course.full_name)
-  }
-  return []
-}
-
-const initializeElectives = () => {
-  const techCourses = getCourseByType('tech')
-  const humCourses = getCourseByType('hum')
-  techCourses.forEach(course => techElectives.push(course))
-  humCourses.forEach(course => techElectives.push(course))
-}
-
-onMounted(async () => {
-  await getCourses()
-  initializeElectives()
-})
+console.log(getTech)
+console.log(getHum)
 
 let techElectives = reactive<string[]>([])
 
@@ -158,7 +131,7 @@ const toggleDeleteMode = () => {
         v-if="currentBlock === 'block1'"
       >
         <div class="flex flex-col items-center justify-around gap-4">
-          <div v-if="!COURSES">
+          <div v-if="!getTech">
             <ElectiveButton
               v-for="elective in techElectives"
               :active="elective === activeElective"
@@ -178,7 +151,7 @@ const toggleDeleteMode = () => {
         v-if="currentBlock === 'block2'"
       >
         <div class="flex flex-col items-center justify-around gap-4">
-          <div v-if="!COURSES">
+          <div v-if="!getHum">
             <ElectiveButton
               v-for="elective in humElectives"
               :active="elective === activeElective"
