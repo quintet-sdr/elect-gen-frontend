@@ -13,7 +13,7 @@ function focusById(id: string): void {
 }
 
 async function updateCount(): Promise<void> {
-  submittedCount.value = (await api.getStudents())?.length
+  submittedCount.value = await api.studentsSubmitted()
 }
 
 const submittedCount = ref<number | undefined>()
@@ -34,8 +34,8 @@ function checkExtension(): boolean {
   return types.includes(browseButton.value!.files![0].type)
 }
 
-async function submitHum(): Promise<void> {
-  await api.uploadTable(browseButton.value!.files![0], 'hum').then((response) => response.json())
+async function submit(): Promise<void> {
+  await api.uploadTable(browseButton.value!.files![0]).then((response) => response.json())
 }
 
 const filepath = ref<string>()
@@ -125,9 +125,7 @@ useHead({
       />
     </UButton>
 
-    <UButton v-if="checkExtension()" @click="submitHum">
-      {{ $t('distribute.form.proceed') }}</UButton
-    >
+    <UButton v-if="checkExtension()" @click="submit"> {{ $t('distribute.form.proceed') }}</UButton>
     <span v-else-if="filepath !== undefined">
       {{ $t('distribute.form.wrong-extension-error') }}
     </span>
