@@ -1,61 +1,55 @@
 <script lang="ts" setup>
-import { defineExpose } from 'vue'
-import Heading from "~/components/shared/Text/Heading.vue";
+import { ref, onMounted } from 'vue'
+import Heading from "~/components/shared/Text/Heading.vue"
+import * as api from "~/server/utils/api"
 
-const store = useStore()
-
-interface JsonData {
-  student_email: string
-  id: number
-  course_codename: string
-}
-
-const jsonData = ref<JsonData>({
-  student_email: 'i.nguen@innopolis.university',
-  id: 1,
-  course_codename: 'Front-end Web Development'
-})
-
-const formattedJson = computed(() => JSON.stringify(jsonData.value, null, 2))
-
-const downloadUrl = ref('')
+const isLoading = ref(true)
 const downloadAnchorRef = ref<HTMLAnchorElement | null>(null)
 
-function downloadJson(): void {
-  downloadUrl.value =
-    'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(jsonData.value))
-  if (downloadAnchorRef.value) {
-    downloadAnchorRef.value.click()
+const fetchDistributions = async () => {
+  try {
+    const response = await api.distributions(/* Ваши параметры здесь */)
+    if (response.ok) {
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      if (downloadAnchorRef.value) {
+        downloadAnchorRef.value.href = url
+        downloadAnchorRef.value.download = 'distributions.xlsx'
+        downloadAnchorRef.value.click()
+      }
+    } else {
+      console.error('Ошибка при получении данных', response.statusText)
+    }
+  } catch (error) {
+    console.error('Ошибка при выполнении запроса', error)
+  } finally {
+    isLoading.value = false
   }
 }
 
-defineExpose({
-  downloadJson
-})
-
-useHead({
-  title: 'Elect.Gen - Algorithm finished',
-  meta: [
-    { name: 'description', content: 'Algorithm finished work, take your distributions!' },
-    { name: 'keywords', content: 'distribution, Excel, algorithms, students distribution' }
-  ]
+onMounted(() => {
+  fetchDistributions()
 })
 </script>
 
 <template>
-  <main class="flex min-h-screen flex-col items-center justify-center gap-8">
-    <Heading text="We're all done!"/>
-    <p
-      class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold desktop:text-xl"
-    >
-      If the download has not started, click on the button
-    </p>
-    <button
-      class="rounded-xl bg-color-accent px-4 py-2 text-white hover:opacity-75"
-      @click="downloadJson"
-    >
-      Download table
-    </button>
-    <a :href="downloadUrl" download="data.json" ref="downloadAnchorRef" style="display: none"></a>
+  <main class="flex">
+    <div v-if="isLoading" class="flex-col gap-6 fixed inset-0 flex items-center justify-center bg-color-base bg-opacity-80 z-50">
+      <Heading text="Loading..." :level="2"/>
+      <div class="w-12 h-12 border-8 border-t-8 border-gray-200 border-t-color-accent rounded-full animate-spin"></div>
+    </div>
+    <div v-else class="flex min-h-screen flex-col items-center justify-center gap-8">
+      <Heading text="We're all done!"/>
+      <p class="text-color-darkblue dark:text-color-lightgray tablet:text-m mb-4 text-center font-bold desktop:text-xl">
+        If the download has not started, click on the button
+      </p>
+      <button class="rounded-xl bg-color-accent px-4 py-2 text-white hover:opacity-75" @click="fetchDistributions">
+        Download table
+      </button>
+      <a download="data.json" ref="downloadAnchorRef" class="hidden"></a>
+    </div>
   </main>
 </template>
+
+<style scoped>
+</style>
