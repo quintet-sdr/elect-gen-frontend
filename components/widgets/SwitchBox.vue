@@ -7,24 +7,11 @@ import type { Course } from '~/server/utils/schemas'
 const getTech = await api.getCourses('tech')
 const getHum = await api.getCourses('hum')
 
-console.log(getTech)
-console.log(getHum)
+// console.log(getTech)
+// console.log(getHum)
 
 let techElectives = reactive<string[]>([])
-
-let humElectives = reactive([
-  'Personal Efficiency skills',
-  'Psychology of IT-specialist',
-  'Introduction to Career Development for IT-specialist',
-  'UX/UI Design',
-  'Public Speaking in Business',
-  'Reading skills for IT specialist',
-  'Career and Leadership',
-  'Applied Economics: Introduction to IT Entrepreneurship',
-  'Tech Startup Design',
-  'Basics of Product management',
-  'Design Thinking for IT-specialist'
-])
+let humElectives = reactive<string[]>([])
 
 const props = defineProps<{ disabled: boolean }>()
 const emit = defineEmits(['elective-change', 'toggle-delete-mode'])
@@ -151,15 +138,15 @@ const toggleDeleteMode = () => {
         v-if="currentBlock === 'block2'"
       >
         <div class="flex flex-col items-center justify-around gap-4">
+          <ElectiveButton
+            v-for="elective in humElectives"
+            :active="elective === activeElective"
+            :disabled="props.disabled"
+            :key="elective"
+            :name="elective"
+            @click="handleElectiveClick(elective)"
+          />
           <div v-if="!getHum">
-            <ElectiveButton
-              v-for="elective in humElectives"
-              :active="elective === activeElective"
-              :disabled="props.disabled"
-              :key="elective"
-              :name="elective"
-              @click="handleElectiveClick(elective)"
-            />
           </div>
           <div v-else>
             <p>Connecting to database...</p>

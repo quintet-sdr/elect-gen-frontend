@@ -44,6 +44,19 @@ const handleBlockChange = (block: string) => {
   currentBlock.value = block
 }
 
+const transformGroups = (group: groups.value) => {
+  let transformedGroups: string[] = []
+
+    if (groups.value.includes('First')) {
+      transformedGroups.push('year 1')
+    }
+    if (groups.value.includes('Second')) {
+      transformedGroups.push('year 2')
+    }
+
+    return transformedGroups;
+}
+
 const codename = ref('')
 const full_name = ref('')
 const short_name = ref('')
@@ -86,7 +99,7 @@ const handleSave = async () => {
       high_in_group: high_in_group.value,
       max_in_group: max_in_group.value,
       description: description.value,
-      groups: ['']
+      groups: transformGroups(groups.value)
     }, type)
 
     notificationOkMessage.value = 'Saved successfully'
@@ -216,7 +229,7 @@ watch(currentElective, (newElective) => {
                 id="group"
                 v-model="groups"
                 headerName="Course groups"
-                placeholder="Codename"
+                placeholder="Groups"
                 :options="groupTypes"
               />
               <ElectiveInput
