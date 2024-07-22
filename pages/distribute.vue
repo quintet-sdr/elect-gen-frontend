@@ -13,10 +13,12 @@ function focusById(id: string): void {
 }
 
 async function updateCount(): Promise<void> {
-  submittedCount.value = await api.studentsSubmitted()
+  techCount.value = (await api.getStudents('tech'))?.length
+  humCount.value = (await api.getStudents('hum'))?.length
 }
 
-const submittedCount = ref<number | undefined>()
+const techCount = ref<number | undefined>()
+const humCount = ref<number | undefined>()
 
 const fileExtensions = ['xlsx', 'ods']
 const extension = ref(fileExtensions[0])
@@ -57,25 +59,23 @@ useHead({
   <NuxtLayout :back="false" name="default">
     <Heading :level="1" :text="$t('app-name')" />
 
-    <div class="grid grid-cols-3 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
+    <div class="grid grid-cols-5 tablet:max-w-screen-tablet desktop:max-w-screen-desktop">
       <div />
 
-      <span
-        class="min-w-64 justify-self-center text-center"
-        v-if="submittedCount !== undefined"
-        @click="clickById('update')"
-      >
-        <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-1">
-          <template #count>
-            <b class="font-semibold">{{ submittedCount }}</b>
-          </template>
-        </i18n-t>
-        <br />
-        <i18n-t :plural="submittedCount" keypath="distribute.submitted.line-2" />
-      </span>
-      <span class="min-w-70 text-center" v-else>
-        {{ $t('info.database') }}
-      </span>
+      <div class="col-span-3 w-64 justify-self-center text-center">
+        <div v-if="![techCount, humCount].includes(undefined)">
+          <span class="font-medium">
+            {{ $t('distribute.submitted.tech', { count: techCount }) }}
+          </span>
+          <br />
+          <span class="font-medium">
+            {{ $t('distribute.submitted.hum', { count: humCount }) }}
+          </span>
+        </div>
+        <span v-else>
+          {{ $t('info.database') }}
+        </span>
+      </div>
 
       <UButton class="justify-self-center" id="update" @click="updateCount" variant="ghost">
         <Icon class="size-5 text-color-overlay" name="fa6-solid:rotate" />

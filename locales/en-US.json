@@ -10,8 +10,8 @@
   },
   "distribute": {
     "submitted": {
-      "line-1": "For now, {count} student | For now, {count} students",
-      "line-2": "submitted their form | submitted their forms"
+      "tech": "Tech submissions: {count}",
+      "hum": "Hum submissions: {count}"
     },
     "button": {
       "download": "Download the current configuration",

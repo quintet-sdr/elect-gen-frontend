@@ -44,14 +44,6 @@ export async function getExampleTable(elective: ElectiveType): Promise<void> {
   download(new URL(response.url))
 }
 
-export async function studentsSubmitted(): Promise<number | undefined> {
-  const url = new URL(api('/students-submitted/'))
-
-  return await fetch(url)
-    .then((response) => response.json())
-    .catch((_) => undefined)
-}
-
 export async function coursesGroups(elective: ElectiveType): Promise<CourseGroup[] | undefined> {
   const url = new URL(api('/courses-groups/'))
   url.search = new URLSearchParams({ elective }).toString()
